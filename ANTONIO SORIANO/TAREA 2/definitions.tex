@@ -1,0 +1,230 @@
+%\setlength{\textwidth}{17.2cm} % was 18.2
+%\setlength{\textheight}{23cm} % was 23
+%\setlength{\topmargin}{-1cm} % was 0
+%\setlength{\oddsidemargin}{-0.6cm}
+%\setlength{\evensidemargin}{-0.6cm}
+
+%\setlength{\textwidth}{18.9cm} % was 18.2
+%\setlength{\textheight}{26.73cm} % was 23
+%\setlength{\topmargin}{1cm} % was 0
+%\setlength{\oddsidemargin}{0cm} %
+%\setlength{\evensidemargin}{.8cm}
+%% Arreglar pues ahora utilizas papel A4.
+
+%Operadores
+
+\DeclareMathOperator{\ivp}{IVP} %
+\DeclareMathOperator{\sgn}{sgn} %
+\DeclareMathOperator{\md}{mod}
+\DeclareMathOperator{\ima}{Im}%
+\DeclareMathOperator{\id}{Id} %
+\DeclareMathOperator{\homo}{Hom} %
+\DeclareMathOperator{\inter}{Int}
+\DeclareMathOperator*{\Lim}{lim}
+\DeclareMathOperator*{\Limsup}{lim\ sup}
+\DeclareMathOperator*{\Liminf}{lim\ inf}
+\DeclareMathOperator*{\Min}{m\text{\ii}n}
+\DeclareMathOperator{\Aff}{Aff}
+\DeclareMathOperator{\Affb}{\overline{\Aff}}
+\DeclareMathOperator{\sdfd}{dfd}
+\DeclareMathOperator{\scdfd}{dfd}
+\DeclareMathOperator{\Beta}{B}
+\DeclareMathOperator{\pd}{PD}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\diam}{diam}
+\newcommand{\ind}{\operatornamewithlimits{\perp}}
+\DeclareMathOperator{\av}{Abs}
+\DeclareMathOperator{\cb}{CB}
+\DeclareMathOperator{\cbi}{CBI}
+\DeclareMathOperator{\gwi}{GWI}
+\DeclareMathOperator{\gw}{GW}
+\newcommand{\rtree}{$\re$\nbd tree}
+\newcommand{\leb}{\text{Leb}}
+%Notaci?n
+
+
+
+%Delimitadores
+\newcommand{\ceil}[1]{\ensuremath{\lceil #1 \rceil}}
+%\renewcommand{\floor}[1]{\ensuremath{\lfloor #1 \rfloor}}
+
+%Formato
+\newcommand{\defin}[1]{{\bf #1}}
+\newcommand{\mc}[1]{\ensuremath{\mathscr{#1}}}
+\newcommand{\bb}[1]{\mathbb{#1}}
+
+
+%Notation
+
+\newcommand{\card}[1]{\ensuremath{\left| #1 \right|}}
+\newcommand{\lccb}{LCCB}
+\newcommand{\pss}{S}
+\newcommand{\compact}{K}
+\newcommand{\psm}{\rho}
+\newcommand{\ps}{\paren{\pss,\psm}}
+\newcommand{\pse}{x}
+\newcommand{\psep}{y}
+\newcommand{\psepp}{z}
+\newcommand{\saps}{\B_{\pss}}
+\newcommand{\bre}{\B_{\re}}
+\newcommand{\sko}{D}
+\newcommand{\trees}{T}
+\newcommand{\C}{C}
+\newcommand{\refm}{\mu}
+\newcommand{\den}{p}
+\newcommand{\psd}[1]{\mc{P}_{#1}}
+\newcommand{\s}{\ensuremath{\sigma}}
+\newcommand{\bden}{M}
+\newcommand{\hh}[1]{{\bf H#1}}
+\newcommand{\ball}[2]{\imf{B_{#1}}{#2}}
+\newcommand{\mmc}[1]{\imf{\tilde\omega}{#1}}
+\newcommand{\rg}[1]{\ensuremath{\imf{\mathbb{G}}{#1}}}
+
+
+
+
+\newcommand{\dfd}{\ensuremath{\stackrel{\sdfd}{=}}}
+\newcommand{\deq}{\ensuremath{\stackrel{d}{=}}}
+
+\newcommand{\ley}[2]{\ensuremath{\imf{\mc{L}^{#2}}{#1}}}
+\newcommand{\leyc}[3]{\ensuremath{\imf{\mc{L}^{#3}}{#1\left|#2\right.}}}
+\newcommand{\cond}[2]{\left.\vphantom{#2}#1\ \right| #2}
+
+\newcommand{\e}{\ensuremath{\mathbf{e}}}
+\newcommand{\esf}{\ensuremath{\mc{S}^{\downarrow}}}
+%\newcommand{\ps}[1]{\mathscr{P}\paren{#1}}
+\newcommand{\fun}[3]{\ensuremath{#1:#2\to #3}}
+\newcommand{\fund}[3]{\ensuremath{#1:#2\mapsto #3}}
+\newcommand{\set}[1]{\ensuremath{\left\{ #1\right\} }}
+\newcommand{\sets}[1]{\ensuremath{{\mathbf #1}}}
+\newcommand{\paren}[1]{\ensuremath{\left( #1\right) }}
+\newcommand{\bra}[1]{\ensuremath{\left[ #1\right] }}
+\newcommand{\seq}[1]{\ensuremath{ #1 _1,\ldots ,#1 _n }}
+\newcommand{\sm}[3]{\left[ #1\right]_{#2}^{#3}}
+\newcommand{\cde}{\Rightarrow}
+\newcommand{\cdfd}{\ensuremath{\stackrel{\scdfd}{\cde}}}
+\newcommand{\convo}[2]{\ensuremath{#2^{\!* #1}}}
+
+\newcommand{\tl}[1]{\ensuremath{\hat{#1}}}
+
+\newcommand{\matt}[3]{#1_{#2\, #3}}
+\newcommand{\sip}{\bb{P}}
+\newcommand{\jump}[2]{\ensuremath{\Delta #1_{#2}}}
+\newcommand{\cadlag}{c\`adl\`ag}
+\newcommand{\se}{\ensuremath{\bb{E}}}
+\newcommand{\ssa}{\ensuremath{\mathscr{F}}}
+\newcommand{\si}{{\ensuremath{\bf{1}}}}
+\newcommand{\sbr}{\ensuremath{\mc{B}_{\re}}}
+%\newcommand{\siind}{\ensuremath{\perp}}
+\newcommand{\sigam}{\ensuremath{\Gamma}}
+\newcommand{\smc}{\ensuremath{m}}
+\newcommand{\sfleche}{S^{\downarrow}_f}
+
+\newcommand{\gafun}[1]{\sigam \paren{#1}}
+\newcommand{\poi}[1]{\ensuremath{\mc{P}\!_{#1}}}
+\newcommand{\ber}[1]{\ensuremath{\mc{B}\!_{#1}}}
+\newcommand{\fcpoi}[1]{\ensuremath{\hat{\mc{P}}\!_{#1}}}
+%\newcommand{\ind}{\siind}
+\newcommand{\condind}[3]{\ensuremath{#1\ind_{#3}#2}}
+\newcommand{\sig}[1]{$\sigma$-\nobreakdash #1}
+\newcommand{\sa}{\ensuremath{\sigma}\nbd field}
+\newcommand{\realtree}{\ensuremath{\re}\nbd tree}
+\newcommand{\eps}{\ensuremath{ \varepsilon}}
+\newcommand{\na}{\ensuremath{\mathbb{N}}}
+\newcommand{\en}{\ensuremath{\mathbb{Z}_+}}
+\newcommand{\eti}{\ensuremath{\mc{U}}}
+\newcommand{\etic}{\ensuremath{\mathbb{U}}}
+\newcommand{\z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\re}{\ensuremath{\mathbb{R}}}
+\newcommand{\ra}{\ensuremath{\mathbb{Q}}}
+\newcommand{\com}{\ensuremath{\mathbb{C}}}
+\newcommand{\con}[1]{\ensuremath{\overline{#1}}}
+\newcommand{\proba}[1]{\ensuremath{\sip\! \left( #1 \right)}}
+\newcommand{\probas}[2]{\ensuremath{#1\! \left( #2 \right)}}
+\newcommand{\probac}[2]{\ensuremath{\sip\! \left( #1 \, | #2 \right)}}
+\newcommand{\esp}[1]{\ensuremath{\se\! \left( #1 \right)}}
+%\newcommand{\espc}[2]{\ensuremath{\se\! \left( #1 | #2 \right)}}
+\newcommand{\espc}[2]{\ensuremath{\imf{\se}{\cond{#1}{#2}}}}
+\newcommand{\var}[1]{\ensuremath{\text{Var}\! \left( #1 \right)}}
+\newcommand{\cov}[1]{\ensuremath{Cov\! \left( #1 \right)}}
+\newcommand{\abs}[1]{\hspace{.25mm}\left|#1\right|\hspace{.25mm}}
+\newcommand{\ila}[2]{\ensuremath{\int #1\, d#2}}
+\newcommand{\ilas}[3]{\ensuremath{\int_{#1} #2\, d#3}}
+\newcommand{\il}[3]{\ensuremath{\int #1\, \imf{#2}{d#3}}}
+\newcommand{\is}[4]{\ensuremath{\int_{#1} #2\, \imf{#3}{d#4}}}
+\newcommand{\lp}[2]{\ensuremath{\mc{L}_#1\!\paren{#2} }}
+\newcommand{\lpc}[4]{\ensuremath{\mc{L}_#1\!\paren{ #2 , #3 , #4 }}}
+\newcommand{\ip}[1]{\ensuremath{\int #1\, d\sip }}
+\newcommand{\ips}[2]{\ensuremath{\int_{#1} #2\, d\sip}}
+\newcommand{\F}{\ssa}
+\newcommand{\uF}{\ssa^u}
+\newcommand{\G}{\ensuremath{\mc{G}}}
+\newcommand{\h}{\ensuremath{\mc{H}}}
+\newcommand{\B}{\ensuremath{\mc{B}}}
+\newcommand{\f}[1]{\ssa_{#1}}
+\newcommand{\fx}[2]{\ssa_{#1}^{#2}}
+\newcommand{\indi}[1]{\si_{#1}}
+\newcommand{\imi}[2]{#2^{-1}\!\paren{#1}}
+\newcommand{\ooo}{\ensuremath{ \omega  } }
+\newcommand{\oo}{\ensuremath{ \Omega  } }
+\newcommand{\p}{\ensuremath{ \sip  } }
+\newcommand{\q}{\ensuremath{ \bb{Q}  } }
+\newcommand{\ofp}{\ensuremath{ \paren{ \Omega ,\F ,\p } } }
+\newcommand{\med}[2]{\ensuremath{\paren{#1}{#2}}-medible}
+\newcommand{\vat}{\ensuremath{\fun{X}{\oo}{\re}}\ }
+\newcommand{\pix}[1]{\ensuremath{\sip}_{\! #1}}
+\newcommand{\px}[2]{\ensuremath{\sip_{\! #1}\!\paren{#2}}}
+\newcommand{\pxc}[3]{\ensuremath{\sip_{\! #1}\!\left( #2 | #3 \right)}  }
+\newcommand{\br}{\sbr}
+\newcommand{\sag}[1]{\sigma\!\paren{#1}}
+\newcommand{\cs}[1]{\ensuremath{#1}-p.s.}
+\newcommand{\ore}{ \ensuremath{\overline{\re}}}
+\newcommand{\fungen}[1]{\ensuremath{\varphi_{#1}}}%Comando para la notación de función generadora.
+\newcommand{\cbin}[2]{\ensuremath{\paren{\begin{array}{c}#1\\#2\end{array}}}}
+\newcommand{\fa}[2]{\ensuremath{{#1}^{\paren{#2}}}}
+\newcommand{\dnor}[2]{\ensuremath{N(#1,#2)}}
+\newcommand{\mb}{movimiento browniano}
+\newcommand{\moc}[3]{\smc^{#3}(#1,#2)}
+\newcommand{\clo}[1]{\ensuremath{\overline{#1}}}
+\newcommand{\inte}[1]{\ensuremath{\inter #1}}
+\newcommand{\fro}[1]{\ensuremath{\partial\paren{ #1}}}
+\newcommand{\cd}[2]{\ensuremath{#1\stackrel{\mc{D}}{\to}#2}}
+\newcommand{\pr}[3]{\ensuremath{#1_{#2}\!\paren{#3}}}
+\newcommand{\oi}[1]{\ensuremath{\mc{O}\paren{#1}}}
+\newcommand{\mw}{\ensuremath{\mathbb{P}}}
+\newcommand{\me}{\ensuremath{\pi}}
+
+
+\newcommand{\nbd}{\nobreakdash -}
+\newcommand{\ii}{\'{\i}}
+\newcommand{\n}{\~n}
+\newcommand{\imf}[2]{\ensuremath{#1\!\paren{#2}}}
+\newcommand{\floor}[1]{\ensuremath{\lfloor #1\rfloor}}
+\newcommand{\proint}[2]{\ensuremath{\langle #1,#2\rangle}}
+\newcommand{\vp}{\ensuremath{\varphi}}
+\newcommand{\noru}[1]{\ensuremath{\|#1\|}}
+\newcommand{\gen}[1]{\ensuremath{|#1 |}}
+\newcommand{\vc}[1]{\ensuremath{\langle #1\rangle}}
+\newcommand{\pc}[2]{\ensuremath{\langle#1,#2\rangle}}
+\newcommand{\vcd}[1]{\ensuremath{\left[#1\right]}}
+
+\newcommand{\sml}{\ensuremath{\nu}}
+\newcommand{\ml}[1]{\ensuremath{\imf{\sml}{#1}}}
+\newcommand{\va}[2]{\ensuremath{\imf{V_{#1}}{#2}}}
+\newcommand{\clase}[1]{\ensuremath{\mc{C}^{#1}}}
+\newcommand{\marte}[2]{\ensuremath{\imf{\mc{E}^{#2}}{#1}}}
+
+\newcommand{\dencero}[1]{\ensuremath{\left. \frac{\partial }{\partial #1}\right|_{#1=0} }}
+%\newcommand{\premin}[1]{\ensuremath{\stackrel{\leftarrow}{#1}}}
+%\newcommand{\postmin}[1]{\ensuremath{\stackrel{\rightarrow}{#1}}}
+\newcommand{\premin}[1]{\ensuremath{{#1}^{\leftarrow}}}
+\newcommand{\postmin}[1]{\ensuremath{{#1}^{\rightarrow}}}
+
+
+
+%Ambientes (Environments)
+
+\newenvironment{esn}{\begin{equation*}}{\end{equation*}}
+\newenvironment{ecn}{\begin{equation}}{\end{equation}}
+\newenvironment{listeo}{\begin{list}{\alph{enumi})}{\usecounter{enumi}}}{\end{list}}
+\newenvironment{numerai}{\begin{list}{\roman{enumi})}{\usecounter{enumi}}}{\end{list}}
