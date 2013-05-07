@@ -1,0 +1,806 @@
+\documentclass[a5paper,oneside]{amsart}
+\usepackage[scale={.9,.9}]{geometry}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\theoremstyle{plain}
+\usepackage{graphicx}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{problema}{Problema}
+\newtheorem{ejercicio}{Ejercicio}
+\newtheorem*{definition}{Definition}
+\newtheorem*{remark}{Remark}
+\usepackage{listings}
+\lstset{
+language=R,
+basicstyle=\scriptsize
+\ttfamily,
+commentstyle=\ttfamily\color{gray},
+numbers=none,
+numberstyle=\ttfamily\color{gray}\footnotesize,
+stepnumber=1,
+numbersep=5pt,
+backgroundcolor=\color{white},
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+frame=none,
+tabsize=4,
+captionpos=b,
+breaklines=true,
+breakatwhitespace=false,
+title=\lstname,
+escapeinside={},
+keywordstyle={},
+morekeywords={}
+}
+\title[Problemas de Procesos I]{Problemas de Procesos Estoc\'asticos I\\ Semestre 2013-II\\ Posgrado en Ciencias Matem\'aticas\\ Universidad Nacional Aut\'onoma de M\'exico\\TAREA 4}
+\author{Antonio Soriano Flores}
+\address{}
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+\input{definitions.tex}
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+\begin{document}
+\maketitle
+\begin{problema}
+Sean $\F_1,\F_2,\ldots $ y $\G$ sub\sa s de $\F$. Decimos que $\F_1,\F_2,\ldots$ son condicionalmente independientes dada $\G$ si para cualquier $H_i$ que sea $\F_i$ medible y acotada se tiene que\begin{esn}
+\espc{H_1\cdots H_n}{\G}=\espc{H_1}{\G}\cdots \espc{H_n}{\G}.
+\end{esn}
+\begin{enumerate}
+\item ?`Qu\'e quiere decir la independencia condicional cuando $\G=\set{\oo,\emptyset}$?\\
+\defin{Soluci\'on}:  Cuando $\G=\set{\oo,\emptyset}$ la esperanza condicional es igual a la esperanza no condicional de la variable esto es $\espc{X}{\G}=\esp{X}$. En este caso obtenemos la independencia  no condicional:
+$$
+\esp{H_1\cdots H_n}=\esp{H_1}\cdots \esp{H_n}
+$$
+De hecho esto es un resultado que es usado en los cursos de probabilidad b\'asico. 
+\item Pruebe que $\F_1$ y $\F_2$ son condicionalmente independientes dada $\G$ (denotado $\condind{\F_1}{\F_2}{\G}$) si y s\'olo si para cualquier $H$ que sea $\F_1$-medible y acotada se tiene que\begin{esn}
+\espc{H}{\F_2,\G}=\espc{H}{\G}.
+\end{esn}
+\begin{proof}
+$\Rightarrow $:) Supongamos que  $\condind{\F_1}{\F_2}{\G}$, por demostrar que  para cualquier $H$ que sea $\F_1$-medible y acotada se tiene que $\espc{H}{\F_2,\G}=\espc{H}{\G}.$
+Sea $Y=\espc{H}{\G}$   (una versi\'on de la esperanza condicional).  entonces $Y$ es $\G$-medible. Queremos probar que  $\espc{H}{\F_2,\G}=Y$ como $Y$ es $\G$-medible entonces solo falta probar que para toda $A \in  \sigma(\F_2 \cup \G)$ se tiene que:
+$$
+\esp{H\mathds{1}_{A}}=\esp{Y\mathds{1}_A}
+$$
+Sea $$\ensuremath{\mc{L}} = \set{A \in  \sigma(\F_2 \cup \G) : \esp{H\mathds{1}_{A}}=\esp{Y\mathds{1}_A} }$$ Probar\'emos que $ \ensuremath{\mc{L}} \supseteq \sigma(\F_2 \cup \G)$ por medio del lema de clases monotonas. Definimos $$\ensuremath{\mc{C}}:=\set{A \in\sigma(\F_2 \cup \G) : A=A_2 \cap B  : A_2 \in \F_2 , B \in \G}$$
+\defin{Afirmaci\'on:}  $\ensuremath{\mc{C}}$ es un $\pi$-sistema que cumple con la propiedad  $\esp{H\mathds{1}_{A}}=\esp{Y\mathds{1}_A}$. En efecto pues sea $C_1,C_2 \in \ensuremath{\mc{C}}$ entonces:
+$$
+C_1\cap C_2 = \paren{A_2^{(1)} \cap B^{(1)}}\cap \paren{A_2^{(2)}\cap B^{(2)}}=\paren{A_2^{(1)} \cap A_2^{(2)} }\cap \paren{ B^{(1)} \cap  B^{(2)} }
+$$  
+Como $A_2^{(1)},A_2^{(2)} \in \F_2$ y   $B^{(1)}, B^{(2)} \in \G$ entonces se sigue que $\paren{A_2^{(1)} \cap A_2^{(2)} } \in \F_2$ y que $\paren{ B^{(1)} \cap  B^{(2)} } \in \G$ por lo tanto se concluye que $C_1\cap C_2 \in \ensuremath{\mc{C}}$ y por tanto cumple con ser $\pi$-sistema. Ahora verificamos que cumple con la propiedad.\\
+Sea $C \in  \ensuremath{\mc{C}}$  entonces:
+$$
+\esp{H\mathds{1}_C}=\esp{H\mathds{1}_{A_2}\mathds{1}_{B}}=\esp{\espc{H\mathds{1}_{A_2}\mathds{1}_{B}}{\G}}=\esp{\mathds{1}_{B}\espc{H\mathds{1}_{A_2}}{\G}}
+$$
+Pero por hip\'otesis  $\condind{\F_1}{\F_2}{\G}$ y dado que $\mathds{1}_{A_2}$ es $\F_2$-medible  y $H$ es $\F_1$-medible,  entonces:  $$\espc{H\mathds{1}_{A_2}}{\G}=\espc{H}{\G}\espc{\mathds{1}_{A_2}}{\G}$$
+Sustituyendo este resultado:
+$$
+\esp{H\mathds{1}_C}=\esp{\mathds{1}_{B}\espc{H}{\G}\espc{\mathds{1}_{A_2}}{\G}}
+$$
+Pero $Y=\espc{H}{\G}$ y es $\G$-medible entonces
+$$
+\esp{H\mathds{1}_C}=\esp{\mathds{1}_{B}Y\espc{\mathds{1}_{A_2}}{\G}}=\esp{\espc{Y\mathds{1}_{B}\mathds{1}_{A_2}}{\G}}=\esp{Y\mathds{1}_{B}\mathds{1}_{A_2}}=\esp{Y\mathds{1}_{C}}
+$$
+Por lo tanto cumple con la propiedad y por tanto $\ensuremath{\mc{C}}$ es un $\pi$-sistema que cumple con la propiedad  $\esp{H\mathds{1}_{C}}=\esp{Y\mathds{1}_C}$\\
+Finalmente para terminar con la prueba hay que verificar que $\ensuremath{\mc{L}}$ es un $\lambda$-sistema.
+\begin{itemize}
+ \item $\Omega \in \ensuremath{\mc{L}}$ pues $Y=\espc{H}{\G}$ entonces tomando esperanza de ambos lados $\esp{Y\mathds{1}_{\Omega}}=\esp{H\mathds{1}_{\Omega}}$
+ \item Sea $A,B \in  \ensuremath{\mc{L}}$ tal que $B \subset A$ P.D. $A-B \in \ensuremath{\mc{L}}$. Lo que hay que probar es que $\esp{H\mathds{1}_{A-B}}=\esp{Y\mathds{1}_{A-B}}$. Tenemos lo siguiente:
+ $$
+ \esp{H\mathds{1}_{A-B}}=\esp{H\paren{\mathds{1}_A-\mathds{1}_B}}=\esp{H\mathds{1}_A}-\esp{H\mathds{1}_B} 
+ $$
+ $$
+ =\esp{Y\mathds{1}_A}-\esp{Y\mathds{1}_B}=\esp{Y\paren{\mathds{1}_A-\mathds{1}_B}}= \esp{Y\mathds{1}_{A-B}}
+ $$
+ De donde se concluye que $A-B \in \ensuremath{\mc{L}}$.
+ \item Sea $(A_i)$ una sucesi\'on creciente de elementos de $\ensuremath{\mc{L}}$, P.D.  $\bigcup_{i=1}^{\infty}A_i \in \ensuremath{\mc{L}}$. Como la sucesi\'on es creciente  entonces $\mathds{1}_{A_n}$ es una sucesi\'on de funciones creciente que converge puntualmente a  $\mathds{1}_{\bigcup_{i=1}^{\infty}A_i}$  de donde concluimos que                     $H\mathds{1}_{A_n} \uparrow H\mathds{1}_{\bigcup_{i=1}^{\infty}A_i}$, por lo que usando el teorema de la convergencia monotona: 
+ $$
+  \esp{H\mathds{1}_{\bigcup_{i=1}^{\infty}A_i}}=\lim_{n \rightarrow \infty}\esp{H\mathds{1}_{A_n}}=\lim_{n \rightarrow \infty}\esp{Y\mathds{1}_{A_n}}=\esp{Y\mathds{1}_{\bigcup_{i=1}^{\infty}A_i}}
+ $$
+ Por lo tanto   $\bigcup_{i=1}^{\infty}A_i \in \ensuremath{\mc{L}}$.
+ \end{itemize}
+ De los tres puntos anteriores se concluye que $\ensuremath{\mc{L}}$ es un $\lambda$-sistema que contiene a $\ensuremath{\mc{C}}$ un $\pi$-sistema. Por lo tanto usando lema de clases mon\'otonas se concluye que   $\ensuremath{\mc{L}} \supseteq \sigma(\F_2 \cup \G)$ . Por lo tanto  $\esp{H\mathds{1}_A}=\esp{Y\mathds{1}_A}$ para toda $A \in \sigma(\F_2 \cup \G)$ de donde por definici\'on se concluye $Y=\espc{H}{\G}$ es una versi\'on de la esperanza condicional $\espc{H}{\F_2,\G}$ es decir:
+ $$
+ \espc{H}{\F_2,\G}=\espc{H}{\G}
+ $$
+$\Leftarrow $:) Ahora supongamos que  $\espc{H_1}{\F_2,\G}=\espc{H_1}{\G}$ con $H_1$ una funci\'on $\F_1$-medible  P.D.  $\espc{H_1H_2}{\G}=\espc{H_1}{\G}\espc{H_2}{\G}$ donde $H_i$ es $\F_i$-medible y acotada  $(i=1,2)$. Definamos $Z=\espc{H_1}{\G}\espc{H_2}{\G}$  entonces $Z$ es $\G$-medible por lo que solo hay que probar que para toda $A \in \G$ se tiene que $\esp{H_1H_2\mathds{1}_A}=\esp{Z\mathds{1}_A}$. Como:
+$$
+\esp{H_1H_2\mathds{1}_A}=\esp{\espc{H_1H_2\mathds{1}_A}{\sigma(\F_2 \cup \G)}}=\esp{H_2\mathds{1}_A\espc{H_1}{\sigma(\F_2 \cup \G)}}
+$$
+Usando la hip\'otesis  $\espc{H_1}{\sigma(\F_2  \cup \G)}=\espc{H_1}{\G}$ y condicionando respecto a $\G$. 
+$$
+=\esp{H_2\mathds{1}_A\espc{H_1}{\G}}=\esp{\espc{H_2\mathds{1}_A\espc{H_1}{\G}}{\G}}
+$$
+$$
+=\esp{\espc{H_2}{\G}\espc{H_1}{\G}\mathds{1}_{A}}=\esp{Z\mathds{1}_{A}}
+$$
+Por lo tanto $\esp{H_1H_2\mathds{1}_A}=\esp{Z\mathds{1}_{A}}$ de donde se concluye el resultado.
+\end{proof}
+
+\item Pruebe que $\F_1,\F_2,\ldots, $ son condicionalmente independientes dada $\G$ si y s\'olo si para cada $n\geq 1$, $\F_{n+1}$ es condicionalmente independiente de $\F_1,\ldots, \F_n$ dada $\G$. 
+\end{enumerate}
+\begin{proof}
+$\Rightarrow $:)  Supongamos que $\F_1,\F_2,\ldots, $ son condicionalmente independientes dada $\G$ y demostraremos que $\condind{\F_{n+1}}{\sigma(\F_1 \cup \ldots \cup \F_n)}{\G}$. Por el ejercicio anterior s\'olo tendr\'emos que probar que  para  $H_{n+1}$ que sea $\F_{n+1}$-medible y acotada se tiene que:
+$$
+\espc{H_{n+1}}{\sigma(\F_1 \cup \ldots \cup \F_n \cup \G)}=\espc{H_{n+1}}{\G}
+$$
+La demostraci\'on de este \'ultimo hecho se har\'a por medio del lema de clases mon\'otonas. Definamos lo siguiente:
+$$
+Y:=\espc{H_{n+1}}{\G} \text{ una version de la esperanza condicional}
+$$
+$$
+\ensuremath{\mc{L}}:=\set{A \in\sigma(\F_1 \cup \ldots \cup \F_n \cup \G): \esp{H_{n+1}\mathds{1}_{A}}=\esp{Y\mathds{1}_{A}}}
+$$
+$$
+\ensuremath{\mc{C}}:=\set{A \in\sigma(\F_1 \cup \ldots \cup \F_n \cup \G) : A=A_1 \cap A_2 \ldots \cap A_n \cap B , A_i \in \F_i, B \in \G}
+$$
+Nuevamente el objetivo es probar que $\ensuremath{\mc{L}}  \supseteq \sigma(\F_1 \cup \ldots \cup \F_n \cup \G)$ lo que concluir\'ia por definici\'on de esperanza condicional que   $\espc{H_{n+1}}{\sigma(\F_1 \cup \ldots \cup \F_n \cup \G)}=\espc{H_{n+1}}{\G}$. \\
+Por definici\'on es f\'acil ver que $\ensuremath{\mc{C}}$ es un  $\pi$-sistema, por lo que solo verificaremos que $\ensuremath{\mc{C}}\subseteq \ensuremath{\mc{L}}$. Sea $C \in \ensuremath{\mc{C}}$ entonces:
+$$
+\esp{H_{n+1}\mathds{1}_{C}}=\esp{H_{n+1}\mathds{1}_{A_1}...\mathds{1}_{A_n}\mathds{1}_{B}}=\esp{\mathds{1}_{B} \espc{H_{n+1}\mathds{1}_{A_1}...\mathds{1}_{A_n}}{\G}}
+$$
+Pero por hip\'otesis tenemos que  $\F_1,\F_2,\ldots, $ son condicionalmente independientes dada $\G$  entonces:
+$$
+\espc{H_{n+1}\mathds{1}_{A_1}...\mathds{1}_{A_n}}{\G}=Y\espc{\mathds{1}_{A_1}\ldots\mathds{1}_{A_n}}{\G}
+$$
+Y como $Y$ y $\mathds{1}_{B}$  son $\G$-medibles  entonces
+$$
+\esp{\mathds{1}_{B} \espc{H_{n+1}\mathds{1}_{A_1}...\mathds{1}_{A_n}}{\G}}=\esp{\espc{\mathds{1}_{B}Y\mathds{1}_{A_1}\ldots\mathds{1}_{A_n}}{\G} }=\esp{Y\mathds{1}_C}
+$$
+Entonces $C \in  \ensuremath{\mc{L}}$.
+Finalmente la prueba de que $\ensuremath{\mc{L}}$ es $\lambda$-sistema  es similar a la prueba del inciso anterior. Por lo tanto usando el lema de clases mon\'otonas se prueba que   $\ensuremath{\mc{L}} \supseteq \sigma(\F_1 \cup \ldots \cup \F_n \cup \G)$, de donde obtenemos que:
+$$
+\esp{H_{n+1}\mathds{1}_{C}}=\esp{Y\mathds{1}_C} \text{ para todo } C \in  \sigma(\F_1 \cup \ldots \cup \F_n \cup \G)
+$$
+$\Leftarrow $:)  Demostraremos por inducci\'on. Para $n=1$ se cumple pues se tiene que $\F_1$ es  condicionalmente independiente de $\F_2$ dado $\G$. Supongamos entonces que la propiedad es v\'alida para $n$ y demostraremos que es v\'alida para $n+1$\\
+Entonces supongamos que $\condind{\F_{n+1}}{\sigma(\F_1 \cup \ldots \cup \F_n)}{\G}$, por ejercicio anterior tendr\'iamos que para toda $H_{n+1}$  que sea $\F_{n+1}$- medible y acotada se tiene que:
+$$
+\espc{H_{n+1}}{\sigma(\F_1 \cup \ldots \cup \F_n \cup \G)}=\espc{H_{n+1}}{\G}
+$$ 
+Queremos probar que : $\espc{H_1\ldots H_nH_{n+1}}{\G}=\espc{H_1}{\G}\ldots\espc{H_n}{\G}\espc{H_{n+1}}{\G}$. Entonces tomamos $A \in \G$ y definamos $Z=\espc{H_1}{\G}\ldots\espc{H_n}{\G}\espc{H_{n+1}}{\G}$
+$$
+\esp{H_1\ldots H_nH_{n+1}\mathds{1}_{A}}=\esp{\espc{H_1\ldots H_nH_{n+1}\mathds{1}_{A}}{\sigma(\F_1 \cup \ldots \cup \F_n \cup \G)}}
+$$
+$$
+=\esp{H_1\ldots H_n\mathds{1}_{A}\espc{H_{n+1}}{\sigma(\F_1 \cup \ldots \cup \F_n \cup \G)}}=\esp{H_1\ldots H_n\mathds{1}_{A}\espc{H_{n+1}}{\G}}
+$$
+Condicionando sobre $\G$
+$$
+\esp{\espc{H_1\ldots H_n\mathds{1}_{A}\espc{H_{n+1}}{\G}}{\G}}=\esp{\mathds{1}_{A}\espc{H_{n+1}}{\G}\espc{H_1\ldots H_n}{\G}}
+$$
+Pero por hip\'otesis de inducci\'on $\espc{H_1\ldots H_n}{\G}=\espc{H_1}{\G}\ldots\espc{H_n}{\G}$. Entonces:
+$$
+\esp{H_1\ldots H_nH_{n+1}\mathds{1}_{A}}=\esp{\mathds{1}_{A}\espc{H_{n+1}}{\G}\espc{H_1}{\G}\ldots\espc{H_n}{\G}}=\esp{Z\mathds{1}_{A}}
+$$
+Por lo tanto se tiene que: $\espc{H_1\ldots H_nH_{n+1}}{\G}=\espc{H_1}{\G}\ldots\espc{H_n}{\G}\espc{H_{n+1}}{\G}$ lo que prueba la independecia condicional.
+\end{proof}
+
+\defin{Categor\'ias: } Esperanza condicional, Independencia condicional.
+\end{problema}
+
+\begin{problema}
+Sea $\mu$ una distribuci\'on de progenie y defina $\tilde \mu_j=\mu_{j+1}$. Sea $S=\paren{S_n}$ una caminata aleatoria con distribuci\'on de salto $\tilde\mu$. Sea $k$ un entero no-negativo y defina recursivamente\begin{esn}
+Z_0=k=C_0,\quad Z_{n+1}=k+S_{C_n}\quad\text{ y } C_{n+1}=C_n+Z_{n+1}.
+\end{esn}
+\begin{enumerate}
+\item Pruebe que $Z_n\geq 0$ para toda $n$ y que si $Z_n=0$ entonces $Z_{n+1}=0$.
+\begin{proof}
+Sea $S_n=\sum_{i}^n\tilde\xi_i$ la caminata aleatoria planteada con distribuci\'on de salto $\tilde\mu$ con valores en $\set{-1,0,1,2,....}$. Primero probaremos que si $Z_n=0$ entonces $Z_{n+1}=0$. Como $Z_n=0$ entonces $0=k+S_{C_{n-1}}$  de donde $S_{C_{n-1}}=-k$ luego  tambi\'en tendr\'iamos que $C_n:=C_{n-1}+Z_n=C_{n-1}+0$ por lo tanto $C_n=C_{n-1}$ por lo tanto:
+$$
+Z_{n+1}:=k+S_{C_n}=k+S_{C_{n-1}}=k-k=0
+$$
+Ahora probaremos por inducci\'on que $Z_n \geq 0$ para toda $n$.
+Para $n=0$ tenemos que $Z_0=K\geq 0$\\
+Supongamos entonces que $Z_n \geq 0$ y demostraremos que $Z_{n+1} \geq 0$. Si $Z_n =  0$ entonces por lo anterior  $Z_{n+1} =  0$ por lo tanto se cumple que $Z_{n+1} \geq  0$. Supongamos entonces que  $Z_{n} > 0$. Entonces de la definici\'on de $Z_{n+1}$ y de $C_n$ tenemos que:
+$$
+Z_{n+1}=k+S_{C_n}=k+S_{C_{n-1}+Z_n}=k+S_{C_{n-1}}+\sum_{i={C_{n-1}}+1}^{C_{n-1}+Z_n}\tilde\xi_i=Z_n+\sum_{i={C_{n-1}}+1}^{C_{n-1}+Z_n}\tilde\xi_i
+$$
+Como  $S$ tiene distribuci\'on de salto  $\tilde\mu$ entonces $\tilde\xi_i\geq -1$ por lo tanto
+$$
+\sum_{i={C_{n-1}}+1}^{C_{n-1}+Z_n}\tilde\xi_i\geq \sum_{i={C_{n-1}}+1}^{C_{n-1}+Z_n}-1=Z_n
+$$
+Por lo tanto:
+$$
+Z_{n+1}=Z_n+\sum_{i={C_{n-1}}+1}^{C_{n-1}+Z_n}\tilde\xi_i\geq Z_n-Z_n=0
+$$
+\end{proof}
+\item Pruebe que $C_n$ es un tiempo de paro para la filtraci\'on can\'onica asociada a $S$.
+\begin{proof}
+Primero notemos que que:  $C_n:=C_{n-1}+Z_n$ pero sustituyendo $C_{n-1}:=C_{n-2}+Z_{n-1}$ tendriamos que:
+$$
+C_{n}=C_{n-2}+Z_{n-1}+Z_n
+$$
+Siguiendo de manera recursiva obtenemos que:
+$$
+C_{n}=k+Z_1+Z_2+\ldots+Z_{n-1}+Z_n=k+\sum_{i=1}^{n}Z_i
+$$
+Lo anterior implica que el proceso $C_{n}$ es un proceso no decreciente (pues $Z_i\geq 0$), luego para probar que es tiempo de paro tenemos que verificar que el evento $\set{C_n=m}$ pertenece a $\F_m$ donde $\F_m =\sigma(\tilde\xi_1,\tilde\xi_2,\ldots,\tilde\xi_m)$ . Sea entonces $n$ arbitrario, y $m \in \mathds{N}$ . Si $m < k$ entonces el evento $\set{C_n=m}=\set{k+\sum_{i=1}^{n}Z_i=m}=\emptyset \in \F_m$ (pues recordemos que $Z_i\geq 0$ para toda $i$, por lo tanto $C_n\geq k$). Supongamos entonces que $m\geq k$ por demostrar que $\set{C_n=m} \in \F_m$.  \\
+Como suponemos que $C_n=m$ entonces por ser $C_n$ no decreciente tenemos que $C_i\leq m$ para  $0\leq i \leq n$ ¡. Luego entonces :
+$$
+S_{C_i}:=\sum_{i=1}^{C_i}\tilde\xi_i  \text{ es } \F_m-\text{medible para } 0\leq i\leq n
+$$ 
+Lo anterior implica que $Z_i:=k+S_{C_{i-1}}$  es $\F_m$-medible para $0\leq i\leq n$ y  por tanto  
+$$
+\set{C_n=m}=\set{k+\sum_{i=1}^{n}Z_i=m} \in \F_m
+$$
+Por lo que tenemos que $C_n$ es tiempo de paro.
+\end{proof}
+\item Pruebe que $Z$ es un proceso de Galton-Watson con ley de progenie $\mu$. 
+\begin{proof}
+En clase vimos que $X=(X_n)$ es un proceso de Galtson-Watson si X cumple con la siguiente definici\'on  recursiva:
+$$
+X_0=k \text{ y } X_{n+1}=\sum_{i=1}^{X_n}\xi_{i,n}
+$$
+Donde la colecci\'on $(\xi_{i,n})$ son variables aleatorias con distribuci\'on $\mu$  y la interpretaci\'on que le damos a $\xi_{i,n}$ es la cantidad de hijos que tiene el i-\'esimo individuo de la generac\'on $n$ (si es que existe).\\
+En nuestro caso tenemos el proceso $Z_n$ que por definici\'on ya cumple con la primera parte, es decir $Z_0=k >0$. Por otro lado vimos que por la definici\'on recursiva de $Z_n$ tenemos:
+$$
+Z_{n+1}=k+S_{C_n}+\sum_{i=C_{n-1}+1}^{C_{n-1}+Z_n}\tilde\xi_i=Z_{n}+\sum_{i=C_{n-1}+1}^{C_{n-1}+Z_n}\tilde\xi_i
+$$
+Pero recordemos que $\tilde\xi_i$ tiene distribuci\'on $\tilde\mu$ por lo que $\tilde\xi_i=\xi_i-1$ con $\xi_i$ variables aleatorias con distribuci\'on $\mu$ y valores en $\set{0,1,2,\ldots} $ por lo tanto sustituyendo  el valor de $\tilde\xi_i$:
+$$
+Z_{n+1}=Z_{n}+\sum_{i=C_{n-1}+1}^{C_{n-1}+Z_n}(\xi_i-1)=Z_{n}+\paren{\sum_{i=C_{n-1}+1}^{C_{n-1}+Z_n}\xi_i}-Z_n
+$$
+Pero definiendo $\xi_{i,n}=\xi_{i+C_{n-1}}$ tenemos que:
+$$
+Z_{n+1}=\sum_{i=1}^{Z_n}\xi_{i,n}
+$$
+Lo que prueba que en efecto, $Z=(Z_n)$ es un proceso de Galton-Watson con distribuci\'on de progenie $\mu$. 
+Observacion: Dado que $C_n=k+\sum_{i=1}^{n}Z_i$, entonces el proceso $C=(C_n)$ es un proceso que nos va contanto el numero total de inviduos que se han acumulado hasta la generaci\'on $n$, por lo que cuando la poblaci\'on se extingue $C_n$ permanece constante y nos indica el  numero total de individuos que participaron en el proceso.
+\end{proof}
+\item Pruebe que si $S$ alcanza $-1$ entonces existe $n$ tal que $Z_n=0$. Deduzca que si la media de $\mu$ es $1$ entonces $Z$ se extingue. (Sugerencia: utilice un ejercicio anterior sobre martingalas con saltos acotados hacia abajo.) 
+\begin{proof}
+Si suponemos que $\mu=1$ entonces $\esp{\xi_i}=1$ entonces $\esp{\tilde\xi_i+1}=1$ lo que implica que $\esp{\tilde\xi_i}=0$ luego entonces, $S_n=\sum_{i=1}^{n}\tilde\xi_i$ es una caminata aleatoria no trivial  con media cero y saltos integrables  por lo que aplicando el ejercicio 2 de la tercer tarea  sabemos que dicha caminata oscila, en particular sabemos que $\liminf S_n=-\infty$ por lo tanto sabemos que existe $n$ tal que $S_{C_n}=-k$ y por tanto seg\'un la definici\'on  de $Z_{n+1}$ tendr\'iamos que $Z_{n+1}=k+S_{C_n}=k-k=0$ y por tanto se demuestra que en el  caso cr\'tico, el proceso Galto-Watson se extingue.
+\end{proof}
+\end{enumerate}
+
+\defin{Categor\'ias: } Caminatas aleatorias, Procesos de Galton-Watson, Propiedad de Markov fuerte.
+\end{problema}
+
+\begin{problema}
+El objetivo de este ejercicio es ver ejemplos de cadenas de Markov $X$ y de funciones $f$ tales que $\imf{f}{X}=\paren{\imf{f}{X_n},n\in\na}$ sean o no cadenas de Markov.
+\begin{enumerate}
+\item Considere el hipercubo $n$-dimensional $E=\set{0,1}^n$. A $E$ lo pensaremos como la composici\'on de la primera de dos urnas que tienen en total $n$ bolas etiquetadas del $1$ al $n$. Si $x=\paren{x_1,\ldots, x_n}\in E$, interpretaremos $x_i=1$ como que la bola $i$ est\'a en la urna $1$. Considere el siguiente experimento aleatorio: inicialmente la composici\'on de las urnas est\'a dada por $x$ y a cada instante de tiempo escogemos una bola al azar y la cambiamos de urna. Modele esta situaci\'on por medio de una cadena de Markov $X$ en $E$. Sea $\fun{f}{E}{\set{0,\ldots, n}}$ dada por $\imf{f}{x}=\sum_i x_i$. Pruebe que $\imf{f}{X}=\paren{\imf{f}{X_n},n\in\na}$ es una cadena de Markov cuya matriz de transici\'on determinar\'a.
+\begin {proof}
+En este caso nuestro espacio de estados $E$ est\'a formado por vectores en $\re^n$ donde cada entrada s\'olo admite dos posibles valores $\set{0,1}$. Entonces la cardinalidad de $E$ es $2^n$. Luego, seg\'un la definici\'on del experimento, la urna cambia de configuraci\'on solo en una bola cada tiempo, por lo tanto estando en el estado-vector $i\in E$ solo tenemos $n$ posibles estados a donde podemos llegar en un paso con la misma probabilidad cada uno, es decir con probabilidad $1/n$. Es por  lo anterior entonces que el valor de la variable  en el paso $n+1$ depende s\'olo del  paso inmediato anterior. Con esto en mente definamos la siguiente matriz 
+$$p_{i,j} = \left\{
+\begin{array}{c l}
+\frac{1}{n} &\text { si } \abs{i-j}^*= \tilde e_k  \text{ donde } i,j \in E \text{ y } k\in \set{1,2,\ldots,n}\\
+\text{ } \\
+0 &  \text{ en cualquier otro caso }
+\end{array}
+\right.
+$$
+*En este caso  $\abs{i-j}$ se refiere a tomar valor absoluto en cada entrada.\\
+Donde  $\tilde e_k \in \re^n$ y es tal que tiene un 1 en la k-\'esima entrada y 0 en las restantes. Aqu\'i hay que notar que la matriz solo toma el valor $1/n$ cuando el vector $i$ difiere del vector $j$ en una unidad  en una sola  entrada. \\
+Por ejemplo con $n=3$ el estado $(1,0,0)$  puede cambiar a los siguientes estados:
+$$
+(1,0,0) \rightarrow (0,0,0) \quad (1,0,0)\rightarrow (1,1,0) \quad  (1,0,0)\rightarrow (1,0,1)
+$$
+Notemos entonces que en todos los casos arriba mencionados se tiene que $\abs{i-j}=\tilde e_k$. Existen otros tres casos en donde tambi\'en se cumple que  la diferencia absoluta sea un vector $\tilde e_k$:
+$$
+(1,0,0) \rightarrow (2,0,0) \quad (1,0,0)\rightarrow (1,-1,0) \quad  (1,0,0)\rightarrow (1,0,-1)
+$$
+Sin embargo  estos tres casos quedan descartados de nuestro modelo  pues se llega a vectores que no est\'an en el espacio de estados definido. Es claro entonces que  como $i,j \in E$, entonces dejando $i$ fijo, s\'olo hay $n$ posibles vectores  $j$ en $E$ tal que $\abs{i-j}=\tilde e_k$  de donde concluimos que se cumple que:
+$$
+P=(P)_{i,j}=p_{i,j}\geq0 \quad \sum_{j \in E}p_{i,j}=1
+$$   
+Por otro lado, como el proceso empieza en un estado inicial $X_0=x_0$ (configuraci\'on inicial de las bolas) entonces la distribuci\'on inicial esta dada por:
+$$
+p_j=\mathds{1}_{\set{j=x_0}}
+$$
+Bajo lo anterior P nos est\'a modelando las probabilidades de transici\'on entre los estados de $E$ seg\'un el experimento de escoger al alzar una bola y cambiarla de urna. Entonces  usando el teorema de existencia de kolmogorov sabemos que existe   $X=(X_n)$ una cadena de Markov con matriz  de transici\'on P  y es tal que $X_n:\Omega \rightarrow E$ nos modela la configuraci\'on de la urna al tiempo $n$. \\
+Ahora aplicaremos una funci\'on $f:\re^n\rightarrow \set{0,1,\ldots,n}=E^{'}$  al proceso anterior tal que $f(x_1,x_2,\ldots,x_n)=\sum_{i=1}^{n}x_i$. Entonces definamos al proceso $Y$ como:
+$$
+Y=(Y_n):=(f(X_n)) 
+$$
+Entonces $(Y_n)$  es un proceso que toma valores en $E^{'}$ y $Y_n$ mide el n\'umero total de bolas en la urna  1 al tiempo $n$. Es claro notar que  dada la naturaleza del experimento que el n\'umero total de bolas en la urna 1 depende s\'olo del n\'umero de bolas que hab\'ia en el tiempo inmediato anterior. Estos es:
+$$
+\probac{Y_{n+1}=i_{n+1}}{Y_0=i_0,Y_1=i_1,\ldots,Y_n=i_n}=\probac{Y_{n+1}=i_{n+1}}{Y_n=i_n}
+$$
+Siempre y cuando $\p(Y_0=i_0,Y_1=i_1,\ldots,Y_n=i_n)>0$  por lo que se sigue que $Y_n$ es una cadena de markov con espacio de estados en $\set{0,1,\ldots,n}$. Luego para el c\'alculo  de la matriz de transici\'on tenemos que dado que estamos en un estado  con $i$ bolas en la urna con  $i \notin \set{0,n}$   entonces  el proceso $X$ tiene $n$ posibles estados de llegada de los cuales en $n-i$ aumentamos el n\'umero de bolas en la urna y en $i$ disminuimos la cantidad de bolas. Por otro lado si estamos en en  el estado en que $X$ toma el vector 0, entonces  sabemos que con probabilidad 1 aumentaremos en una unidad las bolas y de la misma forma, si estamos en el estado en que  $X$ toma el vector de puros 1's entonces con probabilidad 1 disminuiremos la cantidad de bolas. Resumiendo lo anterior la  matriz de transici\'on de la cadena Y que se obtiene de aplicar $f$ a $X$ es:
+\begin{itemize}
+\item Si $i\notin {0,1}$ entonces:
+$$p_{i,j} = \left\{
+\begin{array}{c l}
+\frac{n-i}{n} &\text { si } j=i+1\\
+\text{ } \\
+\frac{i}{n} &  \text{ si } j=i-1
+\end{array}
+\right.
+$$
+\item Si $i=0$ entonces $p_{0,1}=1$
+\item Si $i=n$ entonces $p_{n,n-1}=1$
+\end{itemize}
+\end{proof}
+\item Sea $\paren{S_n}_{n\in\na}$ una cadena de Markov con espacio de estados $\z$ y matriz de transici\'on\begin{esn}
+P_{i,i+1}=p\quad P_{i,i-1}=1-p
+\end{esn}donde $p\in [0,1]$. D\'e una condici\'on necesaria y suficiente para que $\paren{\abs{S_n},n\in\na}$ sea una cadena de Markov.
+\begin{proof}
+Primero calcularemos las probabilidades de transici\'on a un paso y verificaremos bajo qu\'e condiciones dichas probabilidades no dependen de $n$.
+Primero notemos que $\paren{\abs{S_n}}$ es un proceso   que toma valores \'unicamente en lo enteros no negativos. Adem\'as es claro que por ser $S_n$ una caminata aleatoria entonces la probabilidad de que el proceso  $\paren{\abs{S_n}}$ pase del estado 0 al estado 1 es:
+$$
+p_{0,1}=\probac{\abs{S_{n+1}}=1}{\abs{S_{n}}=0}=1 \text{ lo cual no depende de $n$}
+$$
+Ahora procederemos a calcular $p_{i,i+1}=\probac{\abs{S_{n+1}}=i+1}{\abs{S_{n}}=i}$.
+$$
+\probac{\abs{S_{n+1}}=i+1}{\abs{S_{n}}=i}
+$$
+\begin{equation}
+=\probac{S_{n+1}=i+1}{\abs{S_{n}}=i}+\probac{S_{n+1}=-i-1}{\abs{S_{n}}=i}
+\end{equation}
+Pero:
+$$
+\probac{S_{n+1}=i+1}{\abs{S_{n}}=i}=\frac{\p(S_{n+1}=i+1,\abs{S_{n}}=i)}{\p(\abs{S_{n}}=i)}
+$$
+$$
+=\frac{\p(S_{n+1}=i+1,S_{n}=i)+\p(S_{n+1}=i+1,S_{n}=-i)}{\p(\abs{S_{n}}=i)}
+$$
+$$
+=\frac{\probac{S_{n+1}=i+1}{S_{n}=i}\p(S_{n}=i)}{\p(\abs{S_{n}}=i)}=\frac{p\p(S_{n}=i)}{\p(\abs{S_{n}}=i)}
+$$
+De forma an\'aloga se muestra que:
+$$
+\probac{S_{n+1}=-i-1}{\abs{S_{n}}=i}=\frac{(1-p)\p(S_{n}=-i)}{\p(\abs{S_{n}}=i)}
+$$
+Sustituyendo estos \'ultimos resultados en la ecuaci\'on (1) obtenemos que:
+\begin{equation}
+\probac{\abs{S_{n+1}}=i+1}{\abs{S_{n}}=i}=\frac{p\p(S_{n}=i)+(1-p)\p(S_{n}=-i)}{\p(\abs{S_{n}}=i)}
+\end{equation}
+El ejercicio no indica  donde empieza la caminata aleatoria por lo que supondremos que $S_0=x_0 \in \z$.  En los siguientes c\'alculos utilizaremos la Proposici\'on 2.3 del libro "introducci\'on a los procesos estoc\'astocos" de Luis Rincon que nos dice lo siguiente:
+\defin{Proposici\'on: } Si los n\'umeros $n$ y $i-x_0$ son ambos pares o ambos impares, entonces para $-n\leq i - x_0 \leq n$  se tiene que:
+$$
+\probac{S_n=i}{S_0=x_0}={n \choose \frac{1}{2}(n+i-x_0)}p^{\frac{1}{2}(n+i-x_0)}(1-p)^{\frac{1}{2}(n-i+x_0)}
+$$
+Como $\p(S_{n}=i)=\probac{S_n=i}{S_0=x_0}$ (Suponiendo que la caminata empez\'o en $x_0$, de hecho la forma correcta de escribirlo es utilizar la medida $\p_{x_0}$  y decir que : $\p_{x_0}(S_{n}=i)=\probac{S_n=i}{S_0=x_0}$ ), entonces sustituyendo el resultado de la proposici\'on  en la ecuaci\'on (2), tenemos que la probabilidad de transici\'on $\probac{\abs{S_{n+1}}=i+1}{\abs{S_{n}}=i}$  es igual a:
+$$
+=\frac{p{n \choose \frac{1}{2}(n+i-x_0)}p^{\frac{1}{2}(n+i-x_0)}(1-p)^{\frac{1}{2}(n-i+x_0)}}{\p(\abs{S_{n}}=i)}+
+$$
+$$
+\frac{(1-p){n \choose \frac{1}{2}(n-i-x_0)}p^{\frac{1}{2}(n-i-x_0)}(1-p)^{\frac{1}{2}(n+i+x_0)}}{\p(\abs{S_{n}}=i)}
+$$
+Como $\p(\abs{S_{n}}=i)=\p(S_n=i)+\p(S_n=-i)$ entonces  sustituyendo esto \'ultimo seg\'un lo que dice la proposici\'on y factorizando  la cantidad  $p^{\frac{1}{2}(n-x_0)}(1-p)^{\frac{1}{2}(n-x_0)} $  obtenemos que la probabilidad de transici\'on toma la forma:
+$$
+\probac{\abs{S_{n+1}}=i+1}{\abs{S_{n}}=i}=\frac{{n \choose \frac{1}{2}(n+i-x_0)}p^{\frac{1}{2}i+1}q^{-\frac{1}{2}i}+{n \choose \frac{1}{2}(n-i-x_0)}p^{-\frac{1}{2}i}q^{\frac{1}{2}i+1}}{{n \choose \frac{1}{2}(n+i-x_0)}p^{\frac{1}{2}i}q^{-\frac{1}{2}i}+{n \choose \frac{1}{2}(n-i-x_0)}p^{-\frac{1}{2}i}q^{\frac{1}{2}i}}
+$$
+Donde $q=1-p$. Pero como:
+$$
+\frac{{n \choose \frac{1}{2}(n-i-x_0)}}{{n \choose \frac{1}{2}(n+i-x_0)}}=\frac{\paren{n- \frac{1}{2}(n+i-x_0)}!\paren{\frac{1}{2}(n+i-x_0)}!}{\paren{n- \frac{1}{2}(n-i-x_0)}!\paren{\frac{1}{2}(n-i-x_0)}!}
+$$
+$$
+=\frac{\paren{\frac{1}{2}(n-i+x_0)}!\paren{\frac{1}{2}(n+i-x_0}!}{\paren{\frac{1}{2}(n+i+x_0)}!\paren{\frac{1}{2}(n-i-x_0)}!}
+$$
+De donde queda claro que si $x_0$=0 entonces la anterior ecuaci\'on toma el valor de $1$ y que si $x_0 \neq 0$ entonces dicha expresi\'on queda en t\'erminos de $n$. Luego entonces si suponemos que la caminata comienza en el 0 tendr\'iamos que la probabilidad de transici\'on es:
+$$
+\probac{\abs{S_{n+1}}=i+1}{\abs{S_{n}}=i}=\frac{p^{\frac{1}{2}i+1}q^{-\frac{1}{2}i}+p^{-\frac{1}{2}i}q^{\frac{1}{2}i+1}}{p^{\frac{1}{2}i}q^{-\frac{1}{2}i}+p^{-\frac{1}{2}i}q^{\frac{1}{2}i}}
+$$
+De esta \'ultima expresi\'on si multiplicamos por un 1 conveniente  $$1=\frac{p^{\frac{1}{2}i}q^{\frac{1}{2}i}}{p^{\frac{1}{2}i}q^{\frac{1}{2}i}}$$Entonces: 
+$$
+\probac{\abs{S_{n+1}}=i+1}{\abs{S_{n}}=i}=\frac{p^{i+1}+q^{i+1}}{p^i+q^i}
+$$
+En resumen, si la caminata comienza en 0 $(x_0=0)$ entonces el proceso $\abs{S_n}$ es una cadena de markov con  matriz de transici\'on :
+$$p_{i,j} = \left\{
+\begin{array}{c l}
+1 &\text { si } i=0  \text{ y }  j=1\\
+\frac{p^{i+1}+q^{i+1}}{p^i+q^i}  &  \text{ si } j=i+1 \text{ con }  i \neq 0\\
+1-\frac{p^{i+1}+q^{i+1}}{p^i+q^i}  &  \text{ si } j=i-1 \text{ con }  i \neq 0\\
+0 & \text {e.o.c}
+\end{array}
+\right.
+$$
+Si la caminata no comienza en 0, entonces las probabilidades de transici\'on dependen de $n$ y por tanto no seria una cadena homog\'enea
+\end{proof}
+\end{enumerate}
+\defin{Categor\'ias: proyecciones de cadenas de Markov}
+\end{problema}
+\begin{problema}
+Sean $\p$ y $\q$ dos medidas de probabilidad en el espacio can\'onico $E^\na$ para sucesiones con valores en un conjunto a lo m\'as numerable $E$. Decimos que $\q$ es \defin{localmente absolutamente continua} respecto de $\p$ si para cada $n\in\na$, $\q|_{\F_n}\ll\p|_{\F_n}$. Sea\begin{esn}
+D_n=\frac{d \q|_{\F_n}}{d \p|_{\F_n}}.
+\end{esn}
+\begin{enumerate}
+\item Pruebe que $D$ es una martingala bajo $\p$. Pruebe que si $D$ es uniformemente integrable entonces $\q\ll\p$.
+\begin{proof}
+En este ejercicio utilizar\'e el siguiente resultado:
+\begin{theorem} Si g es una funci\'on $\F_n$-medible  e integrable con respecto a   $\p|_{\F_n}$ entonces, $g$ es integrable con respecto a $\p$:
+$$
+\int_{\Omega}gd\p=\int_{\Omega}gd\p|_{\F_n}
+$$
+\end{theorem}
+\begin{proof}
+Primero notemos que la propiedad es v\'alida si $g=\mathds{1}_{A}$ con $A\in \F_n$, pues:
+$$
+\int_{\Omega}gd\p|_{\F_n}=\int_{\Omega}\mathds{1}_{A}d\p|_{\F_n}=\p|_{\F_n}(A)=\p(A)=\int_{\Omega}\mathds{1}_{A}d\p=\int_{\Omega}gd\p
+$$
+Luego, como funciona para indicadoras de conjuntos en $\F_n$, entonces el resultado tambi\'en ser\'a valido para funciones $\F_n$-simples, en efecto  sea:
+$$ \varphi:=\sum_{i=1}^{n}\alpha_i\mathds{1}_{A_i}$$ una funci\'on   $\F_n$-simple, entonces:
+$$
+\int_{\Omega}\varphi d\p|_{\F_n}=\sum_{i=1}^{n}\alpha_i\int_{\Omega}\mathds{1}_{A_i}d\p|_{\F_n}=\sum_{i=1}^{n}\alpha_i\int_{\Omega}\mathds{1}_{A_i}d\p=\int_{\Omega}\varphi d\p
+$$
+Se ahora $g$ una funci\'on $\F_n$-medible positiva integrable , entonces sabemos existe $(\varphi_n)$ una suseci\'on de funciones simples $\F_n$-medibles tales que $\varphi_n   \uparrow g$, entonces por teorema de convergencia mon\'otona:
+$$
+\int_{\Omega}gd\p|_{\F_n}=\int_{\Omega}\lim_{n \rightarrow \infty}\varphi_nd\p|_{\F_n}=\lim_{n \rightarrow \infty}\int_{\Omega}\varphi_nd\p|_{\F_n}=\lim_{n \rightarrow \infty}\int_{\Omega}\varphi_nd\p
+$$
+$$
+=\int_{\Omega}\lim_{n \rightarrow \infty}\varphi_nd\p=\int_{\Omega}gd\p
+$$
+Finalmente si $g$  $\F_n$-medible  e integrable  (no necesariamente positiva) entonces $g=g^+-g^-$ con $g^{+},g^{-}$ funciones positivas e integrables entonces:
+$$
+\int_{\Omega}gd\p|_{\F_n}=\int_{\Omega}g^+d\p|_{\F_n}-\int_{\Omega}g^-d\p|_{\F_n}=\int_{\Omega}g^+d\p-\int_{\Omega}g^-d\p=\int_{\Omega}gd\p
+$$
+\end{proof}
+Demostraremos que $D_n$ es una martingala bajo $\p$. Para ello mostraremos las tres condiciones para ser martingala:\\
+\begin{itemize}
+\item Primero notemos que por teorema de Radon–Nikodym $D_n$ cumple con ser $\F_n$ medible y tomar valores en $[0,\infty)$ y ademas:
+$$
+\q|_{\F_n}(A)=\int_{A}D_n\p|_{\F_n}
+$$
+Para todo $A \in \F_n$  \\
+Luego entonces $D_n$ es $\F_n$ medible al ser la derivada de Radon–Nikodym y ademas es integrable con respecto  a $\p|_{\F_n}$ pues:
+$$
+1=\q|_{\F_n}(\Omega)=\int_{\Omega}D_n\p|_{\F_n}
+$$
+\item Como $D_n$ es no negativa , $\F_n$ medible  e integrable con respecto a $\F_n$ entonces:
+$$
+\esp{\abs{D_n}}=\esp{D_n}=\int_{\Omega}D_ndP=\int_{\Omega}D_nd\p|_{\F_n}=\q|_{\F_n}(\Omega)=1 < \infty
+$$
+\item Finalmente probaremos que $\espc{D_{n+1}}{\F_n}=D_n$. \\ Como $D_n$ es $\F_n$-medible entonces solo falta probar que para toda $A \in \F_n$ se cumple con que $\esp{D_{n+1}\mathds{1}_A}=\esp{D_n\mathds{1}_A}$.\\
+Sea $A \in \F_n$, como $\F_n$ es filtraci\'on entonces  $\F_n \subset \F_{n+1}$  y por lo tanto $\mathds{1}_A$ es $\F_n$-medible  y tambi\'en$\F_{n+1}$-medible. Entonces:
+$$
+\q(A)=\q|_{\F_{n+1}}(\Omega)=\int_{\Omega}D_{n+1}\mathds{1}_A\p|_{\F_{n+1}}=\int_{\Omega}D_{n+1}\mathds{1}_A\p=\esp{D_{n+1}\mathds{1}_A}
+$$ 
+y por otro lado usando ahora que  $\mathds{1}_A$ es $\F_n$-medible se tiene
+$$
+\q(A)=\q|_{\F_{n}}(\Omega)=\int_{\Omega}D_{n}\mathds{1}_A\p|_{\F_{n}}=\int_{\Omega}D_{n}\mathds{1}_A\p=\esp{D_{n}\mathds{1}_A}
+$$
+De donde juntando ambos resultados obtenemos que:
+$$
+\esp{D_{n}\mathds{1}_A}=\q(A)=\esp{D_{n+1}\mathds{1}_A}
+$$
+\end{itemize}
+Por lo tanto $D_n$ es martingala. \\
+Ahora supongamos $D_n$ es uniformemente integrable entonces $D_n$ converge a $D_\infty$ casi seguramente y en $L_1$ y adem\'as se tiene que $D_n$ es una martingala cerrada, es decir $D_n=\espc{D_\infty}{\F_n}$. Bajo esta hip\'otesis afirmamos que:
+$$
+\q(A)=\int_AD_\infty d\p \quad \forall A \in \F=\sigma\paren{\bigcup_{i=1}^{\infty}\F_i}
+$$
+Es decir si la afirmaci\'on es v\'alida se sigue que $\q  \ll \p$ y adem\'as se tendr\'ia que la martingala converge a $D_\infty=\frac{d \q}{d \p}$. Probaremos entonces la afirmaci\'on usando lema de clases mon\'otonas. Definamos entonces.
+$$
+\ensuremath{\mc{L}}:=\set{A \in \F=\sigma\paren{\bigcup_{i=1}^{\infty}\F_i} : \q(A)=\int_{A}D_\infty d\p}
+$$
+$$
+\ensuremath{\mc{C}}:=\set{A \in \F=\sigma\paren{\bigcup_{i=1}^{\infty}\F_i} : A \in \bigcup_{i=1}^{\infty}\F_i}
+$$
+Primero $\ensuremath{\mc{L}}$ es $\lambda$-sistema pues:
+\begin{itemize}
+\item $\Omega \in \ensuremath{\mc{L}}$. Como $D_n$ converge en $L_1$ a $D_\infty$  y dado que $\esp{D_n}=1$ para toda $n$ entonces $\esp{D_\infty}=1$ y por lo tanto $\int_{\Omega}D_\infty d\p$=1. Por otro lado $\q$ al ser medida de probabilidad se tiene que $\q(\Omega)=1$, por lo tanto se obtiene que $$\q(\Omega)=1=\int_{\Omega}D_\infty d\p$$De donde se sigue que $\Omega \in \ensuremath{\mc{L}}$
+\item Supongamos $A,B \in \ensuremath{\mc{L}}$ tal que $A \subseteq B$. Entonces tenemos lo siguiente:
+$$
+\q(B\backslash A)=\q(B)-\q(A)=\int_AD_\infty d \p- \int_{B}D_\infty d \p=\int_{B\backslash A}D_\infty d \p
+$$
+De donde se concluye que $B\backslash A \in  \ensuremath{\mc{L}}$.
+\item Supongamos que $A_n \in  \ensuremath{\mc{L}}$ para todo $n$ tal que $A_{n} \subseteq A_{n+1}$ entonces se sigue que  $\mathds{1}_{A_n} \uparrow \mathds{1}_{\bigcup_{n=1}^{\infty}A_n}$. Por lo tanto $D_\infty\mathds{1}_{A_n} \uparrow D_\infty\mathds{1}_{\bigcup_{n=1}^{\infty}A_n}$.\\Luego usando teorema de la convergencia monotona tenemos:
+$$
+\int  D_\infty\mathds{1}_{\bigcup_{n=1}^{\infty}A_n}d \p=\lim_{n \rightarrow \infty}\int  D_\infty\mathds{1}_{A_n}d \p=\lim_{n \rightarrow \infty}\q(A_n)
+$$
+Pero por continuidad de la medida  de  probabilidad sabemos que $$\lim_{n \rightarrow \infty}\q(A_n)=\q(\bigcup_{n=1}^{\infty}A_n)$$ por lo tanto
+$$
+\int _{\bigcup_{n=1}^{\infty}A_n} D_\infty d \p=\int  D_\infty\mathds{1}_{\bigcup_{n=1}^{\infty}A_n}d \p=\q(\bigcup_{n=1}^{\infty}A_n)
+$$
+De donde se sigue entonces que $\bigcup_{n=1}^{\infty}A_n \in \ensuremath{\mc{L}}$
+Por los tres puntos anteriores se concluye que $\ensuremath{\mc{L}}$ es $\lambda$-sistema. 
+\end{itemize}
+Segundo, $\ensuremath{\mc{C}}$  es $\pi$-sistema y es tal que $\ensuremath{\mc{C}}\subset \ensuremath{\mc{L}}$.
+\begin{itemize}
+\item Sea $A, B \in \ensuremath{\mc{C}}$ entonces sabemos existen $n,m $ tal que $A \in \F_n$ y  $B \in \F_m$. Sin perdida de generalidad supongamos $n \leq m$. Entonces tendr\'iamos que $A\in \F_n \subset \F_m$  y como $B\in\F_m$ entonces se sigue que $A\cap B \in \F_m$ por lo tanto  $A\cap B  \in  \bigcup_{i=1}^{\infty}\F_i$ de donde se concluye que $A \cap B \in  \ensuremath{\mc{C}}$  y por tanto  $\ensuremath{\mc{C}}$ es $\pi$-sistema
+\item Sea $A\in \ensuremath{\mc{C}}$ entonces $A \in  \bigcup_{i=1}^{\infty}\F_i$ entonces existe $n$ tal que $A\in \F_n$. Pero como $D_n$ es uniformemente integrable se sigue que $D_n=\espc{D_\infty}{\F_n}$ y como $A  \in \F_n$ entonces:
+$$
+\esp{D_n\mathds{1}_A}=\esp{D_\infty\mathds{1}_A}
+$$
+Por lo tanto:
+$$
+\q(A)=\q|_{\F_{n}}(A)=\int_{A}D_nd \p|_{\F_{n}}=\int_{A}D_nd\p=\int_{A}D_\infty d\p
+$$
+Por lo tanto $A  \in \ensuremath{\mc{L}}$
+\end{itemize} 
+Finalmente por lema de clases mon\'otonas se concluye que $\ensuremath{\mc{L}}=\F$ y por tanto para toda $A\in \F$ se tiene que:
+$$
+\q(A)=\int_{A}D_\infty d\p
+$$
+Lo que demuestra que en efecto $\q  \ll \p$
+\end{proof} 
+
+\item Pruebe que si $T$ es un tiempo de paro finito entonces $\q|_{\F_T}\ll\p|_{\F_T}$. 
+\begin{proof}
+Sabemos que $\F_T:=\set{A \in \mathds{E}: A \cap \set{T=n} \in \F_n \forall n}$  adem\'as al ser $T$ tiempo de paro finito se sigue que $D_T$ es $\F_T$ medible. Con esto primero demostraremos  que para toda $A \in \F_T$ se tiene que:
+$$
+\q|_{\F_T}(A)=\int_AD_Td\p|_{\F_T}
+$$
+Primero como $D_T$ es $\F_T$ medible tenemos que;
+$$
+\int_A D_Td\p|_{F_T}=\int_A D_Td\p
+$$
+Pero $D_T=\sum_{n=0}^{\infty}D_n\mathds{1}_{T=n}$  y como $D_n$ es no negativo para todo $n$ entonces  usando Teorema de la convergencia monotona obtenemos:
+$$
+\int_A D_Td\p=\int_A \sum_{n=0}^{\infty}D_n\mathds{1}_{T=n} d\p=\sum_{n=0}^{\infty} \int_{\Omega} D_n\mathds{1}_{\set{T=n} \cap A } d\p
+$$
+Pero por hip\'otesis $A\in \F_T$, entonces $\set{T=n} \cap A \in \F_n$  luego entonces:
+$$
+ \int_{\Omega} D_n\mathds{1}_{\set{T=n} \cap A } d\p =  \int_{\set{T=n} \cap A } D_nd\p|_{\F_n}=\q|_{\F_n}\paren{\set{T=n} \cap A}=\q\paren{\set{T=n} \cap A}
+$$ 
+Por lo tanto sustituyendo esto \'ultimo obtenemos que;
+$$
+\sum_{n=0}^{\infty} \int_{\Omega} D_n\mathds{1}_{\set{T=n} \cap A } d\p=\sum_{n=0}^{\infty} \q\paren{\set{T=n} \cap A}=\q\paren{\bigcup_{n=0}^{\infty}\set{T=n} \cap A}
+$$
+Por lo tanto hemos probado que:
+$$
+\int_A D_Td\p|_{\F_T}=\q\paren{\bigcup_{n=0}^{\infty}\set{T=n} \cap A}=\q(A)=\q|_{\F_T}(A)
+$$
+Por lo tanto obtenemos que:
+$$
+\q|_{\F_T}(A)=\int_A D_Td\p|_{\F_T} \quad \forall A\in\F_T
+$$
+Por lo tanto  $\q|_{\F_T}\ll\p|_{\F_T}$. 
+\end{proof}
+\item Sea $\p^p$ la distribuci\'on de una caminata aleatoria simple que comienza en $0$ y va de $k$ a $k+1$ con probabilidad $p$, donde $p\in (0,1)$. Pruebe que $\p^p$ es localmente absolutamente continua respecto de $\p^{1/2}$ y encuentre la martingala $D_n$ asociada.
+\begin{proof}
+Tenemos dos medidas de probabilidad $\p^p$ y $\p^{\frac{1}{2}}$.  Definamos al evento $$A=\set{X_1=x_1,\ldots, X_n=x_n} \in \F_n$$ Entonces bajo $\p^p$ tenemos que:
+$$
+\p^p(A)=\p^p\paren{X_1=x_1,\ldots X_n=x_n}=p^kq^{n-k}
+$$
+Donde $q=1-p$ , $k=$n\'umero de saltos hacia arriba, adem\'as esta probabilidad es v\'alida cuando $x_i-x_{i-1}\in \set{-1,1}$.
+De la misma  manera y bajo las mismas condiciones  tenemos que bajo $\p^{\frac{1}{2}}$, se tiene que:
+$$
+\p^{\frac{1}{2}}(A)=\p^{\frac{1}{2}}\paren{X_1=x_1,\ldots X_n=x_n}=\frac{1}{2^n}
+$$
+Entonces  podemos re-expresar de la siguiente forma:
+$$
+\p^p(A)=q^n\paren{\frac{p}{q}}^k=(2q)^n\paren{\frac{p}{q}}^k\frac{1}{2^n}
+$$
+Pero  $k$ es igual al n\'umero de saltos hacia arriba y como se trata de una caminata simple con saltos en $\set{-1,1}$ y dado  que $X_n$ nos dice la posici\'on de la caminata en el tiempo $n$, entonces $k=\frac{x_n+n}{2}$ por lo que sustituyendo esto ultimo.
+$$
+\p^p(A)=(2q)^n\paren{\frac{p}{q}}^{\frac{x_n+n}{2}}\frac{1}{2^n}=\mathds{E}^{\frac{1}{2}}\paren{(2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2}\mathds{1}_{\set{X_1=x_1,\ldots, X_n=x_n}}}
+$$
+Donde $\mathds{E}^{\frac{1}{2}}$ se refiere a la esperanza con respecto a la medida $\p^{\frac{1}{2}}$ luego entonces en t\'erminos de integral hemos probado que:
+$$
+\p^p(A)=\p^p|_{\F_n}(A)=\int_A (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2} d\p^{\frac{1}{2}}=\int_A (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2} d\p^{\frac{1}{2}}|_{\F_n}
+$$
+La \'ultima igualdad es v\'alida porque $(2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2}$ es $\F_n$-medible. Hay que notar adem\'as que  lo anterior fue demostrado  v\'alido para $A\in \F_n$ que son de la forma $\set{X_1=x_1,\ldots, X_n=x_n} $ sin embargo usando Lema de clases mon\'otonas se mostrar\'a que lo \'ultimo es valido para todo $A \in \F_n$. Definamos entonces:
+$$
+\ensuremath{\mc{L}}:=\set{A \in \F_n:\p^p|_{\F_n}(A)=\int_A (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2} d\p^{\frac{1}{2}}|_{\F_n}}
+$$
+$$
+\ensuremath{\mc{C}}:=\set{A \in \F_n : A=\set{X_1=x_1,\ldots, X_n=x_n}}
+$$
+Por lo que ya probamos arriba, es claro que $\ensuremath{\mc{C}}\subset\ensuremath{\mc{L}}$ y adem\'as es un $\pi$-sistema pues la intersecci\'on de cilindros finito dimensionales es otro cilindro finito dimensional. Entonces solo basta probar que $\ensuremath{\mc{L}}$ es un $\lambda$-sistema.
+\begin{itemize}
+\item $\Omega \in \ensuremath{\mc{L}}$ pues:
+$$
+\int_\Omega (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2} d\p^{\frac{1}{2}}|_{\F_n}=\mathds{E}^{\frac{1}{2}}\paren{(2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2}}=(2q)^n\paren{\frac{p}{q}}^{\frac{n}{2}}\mathds{E}^{\frac{1}{2}}\paren{\frac{p}{q}^{\frac{X_n}{2}}}
+$$
+Pero $X_n=S_n=\sum_{i=1}^{n}\xi_i$ con $\xi_i$ variables aleatorias independientes  con valores en $\set{-1,1}$ los cuales toma con probabilidad $\frac{1}{2}$ bajo $\p^{\frac{1}{2}}$
+$$
+\mathds{E}^{\frac{1}{2}}\paren{\frac{p}{q}^{\frac{X_n}{2}}}=\prod_{i=1}^{n}\mathds{E}^{\frac{1}{2}}\paren{\frac{p}{q}^{\frac{\xi_1}{2}}}=\frac{1}{2^n}\prod_{i=1}^{n}\frac{1}{(pq)^{\frac{1}{2}}}=\frac{1}{2^n}(pq)^{-\frac{n}{2}}
+$$
+Sustituyendo esto \'ultimo obtenemos que:
+$$
+\int_\Omega (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2} d\p^{\frac{1}{2}}|_{\F_n}=(2q)^n\paren{\frac{p}{q}}^{\frac{n}{2}}\frac{1}{2^n}(pq)^{-\frac{n}{2}}=1
+$$
+Por otro lado al ser $\p^p$ medida de probabilidad entonces $\p^p|_{\F_n}(\Omega)=1$ por lo tanto se tiene la igualdad:
+$$
+\p^p|_{\F_n}(\Omega)=1=\int_\Omega (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2} d\p^{\frac{1}{2}}|_{\F_n}
+$$
+Por lo tanto $\Omega \in \ensuremath{\mc{L}}$
+\item Supongamos $A,B \in \ensuremath{\mc{L}}$ tal que $A \subseteq B$. Entonces tenemos lo siguiente:
+$$
+\p^p|_{\F_n}(B\backslash A)=\p^p|_{\F_n}(B)-\p^p|_{\F_n}(A)
+$$
+$$
+=\int_B (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2} d\p^{\frac{1}{2}}|_{\F_n}-\int_A(2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2} d\p^{\frac{1}{2}}|_{\F_n}
+$$
+$$
+=\int_{B\backslash A} (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2} d\p^{\frac{1}{2}}|_{\F_n}
+$$
+De donde se concluye que $B\backslash A \in  \ensuremath{\mc{L}}$.
+\item Supongamos que $A_k \in  \ensuremath{\mc{L}}$ para todo $k$ tal que $A_{k} \subseteq A_{k+1}$ entonces se sigue que  $\mathds{1}_{A_k} \uparrow \mathds{1}_{\bigcup_{k=1}^{\infty}A_k}$. Por lo tanto $$ (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2} \mathds{1}_{A_k} \uparrow   (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2}_\infty\mathds{1}_{\bigcup_{k=1}^{\infty}A_k}$$(Note que en lo anterior la $n$ es fija y lo que tiende a infinito es $k$).\\Luego usando teorema de la convergencia monotona tenemos:
+$$
+\int  (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2}\mathds{1}_{\bigcup_{k=1}^{\infty}A_k}d\p^{\frac{1}{2}}|_{\F_n}=\lim_{k \rightarrow \infty}\int (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2}\mathds{1}_{A_k}d\p^{\frac{1}{2}}|_{\F_n}
+$$
+Pero como cada $A_k\in  \ensuremath{\mc{L}}$ entonces
+$$
+\lim_{k \rightarrow \infty}\int (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2}\mathds{1}_{A_k}d\p^{\frac{1}{2}}|_{\F_n}=\lim_{k \rightarrow \infty}\p^p|_{\F_n}(A_k)=\p^p|_{\F_n}(\bigcup_{k=1}^{\infty}A_k)
+$$
+Por lo tanto hemos probado que:
+$$
+\p^p|_{\F_n}(\bigcup_{k=1}^{\infty}A_k)=\int_{\bigcup_{k=1}^{\infty}A_k} (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2} d\p^{\frac{1}{2}}|_{\F_n}
+$$
+De donde se sigue entonces que $\bigcup_{k=1}^{\infty}A_k \in \ensuremath{\mc{L}}$. Luego por los tres puntos anteriores se concluye que $\ensuremath{\mc{L}}$ es $\lambda$-sistema y por tanto;
+$$
+\p^p|_{\F_n}(A)=\int_A (2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2} d\p^{\frac{1}{2}}|_{\F_n} \quad \forall A \in \F_n
+$$
+Lo anterior nos indica  que  $\p^p$ es localmente absolutamente continua respecto de $\p^{1/2}$ y adem\'as la martingala asociada es:
+$$
+D_n=(2q)^n\paren{\frac{p}{q}}^\frac{X_n+n}{2}
+$$
+\end{itemize}
+\end{proof}
+\item Para $a,b>0$, sea $T=\min\set{n\in\na: X_n\in \set{-a,b}}$. Pruebe que $T$ y $X_T$ son independientes bajo $\p^{1/2}$. Al utilizar la continuidad absoluta local, pruebe que $T$ y $X_T$ tambi\'en son independientes bajo $\p^p$. Utilice alguna martingala de ejercicios anteriores para calcular $\esp{T^2}$. 
+\end{enumerate}
+\begin{proof}
+En clase probamos que en el problema de la ruina del jugador con  el supuesto de que $p=\frac{1}{2}$  se ten\'ia que:
+$$
+\esp{T}=ab \quad \text{ y } \quad \esp{X_T}=\esp{X_0}=0
+$$
+Por lo tanto $\esp{T}\esp{X_T}=0$. Si $X_T$ fuera independiente de $T$ entonces se tendria que $\esp{X_TT}=0$, a continuaci\'on presento una simulaci\'on de la caminata aleatoria con a=2 y b=3 donde se observa que el promedio de la variable $X_TT$ no se estabiliza cerca de cero, lo que contradice la hip\'otesis de independencia. 
+\begin{lstlisting}
+a=2
+b=3
+T=0
+X=0
+Sim=40000
+for (k in 1:Sim){
+  S=0
+  S[1]=0
+  j=1
+  while (((S[j]>-a) && (S[j]<b)) ){
+    u=runif(1)
+    if (u <= 1/2)  Y=1  else  Y=-1
+    S[j+1]=S[j]+Y
+    j=j+1
+  }
+  T[k]=(j-1)
+  X[k]=S[j]
+}
+
+mean(T)
+
+Valor teorico a*b=6
+Valor obtenido en la simulacion=6.01975
+
+
+mean(X)
+Valor teorico E(X_T)=E(X_0)=0
+Valor obtenido en la simulacion=-0.00025
+
+Generamos la vaiable $X_T*T$
+G=X*T
+
+mean(G)
+Valor toerico bajo independencia  E(X_T*T)=E(X_T)*E(T)=0
+Valor obtenido en la simulacion=2.01075
+\end{lstlisting}
+Se probar\'a que la independencia  de $X_T$ con $T$ se obtiene cuando se tiene que $a=b$, es decir cuando se define  $T=\min\set{n\in\na: X_n\in \set{-a,a}}$. Bajo estas condiciones se tiene que la variable $X_T$ toma solo dos valores a saber $\set{a,-a}$  ambos con probabilidad (bajo $\p^{\frac{1}{2}}$) igual a  $\frac{a}{a+a}=\frac{1}{2}$, lo que demostraremos  para verificar la independencia entre las variable $X_T$ y  $T$  es que:
+$$
+\p^{\frac{1}{2}}\paren{X_T=a|T=k}=\frac{1}{2}=\p^{\frac{1}{2}}(X_T=a)  \quad \p^{\frac{1}{2}}\paren{X_T=-a|T=k}=\frac{1}{2}=\p^{\frac{1}{2}}(X_T=-a) 
+ $$
+ con $k$ tal que $\p^{\frac{1}{2}}(T=k)>0$. 
+Para la demostraci\'on de lo anterior notemos que:
+$$
+\p^{\frac{1}{2}}\paren{X_T=a|T=k}=\frac{\p^{\frac{1}{2}}(X_T=a,T=k)}{\p^{\frac{1}{2}}(T=k)}=\frac{\p^{\frac{1}{2}}(X_k=a,T=k)}{\p^{\frac{1}{2}}(T=k)}
+$$ 
+Pero notemos dado que  el evento $\set{X_k=a,T=k}$  es equivalente al evento de que la primer visita al estado $a$ sea precisamente en el paso k, denotemos a $f_{0,a}(k)$ como la probabilidad de que la caminata alcance por primera vez al estado $a$ en el paso $k$, bajo esa definici\'on obtenemos que  :
+\begin{equation}
+	\p^{\frac{1}{2}}\paren{X_T=a|T=k}=\frac{f_{0,a}(k)}{\p^{\frac{1}{2}}(T=k)}
+\end{equation}
+De forma an\'aloga se demuestra que:
+\begin{equation}
+\p^{\frac{1}{2}}\paren{X_T=-a|T=k}\frac{f_{0,-a}(k)}{\p^{\frac{1}{2}}(T=k)}
+\end{equation}
+Como $X_T$ solo toma dos valores \set{-a,a} entonces $$\p^{\frac{1}{2}}\paren{X_T=a|T=k}+\p^{\frac{1}{2}}\paren{X_T=-a|T=k}=1$$  por lo tanto:
+$$
+\frac{f_{0,a}(k)}{\p^{\frac{1}{2}}(T=k)}+\frac{f_{0,-a}(k)}{\p^{\frac{1}{2}}(T=k)}=1
+$$
+Entonces tenemos que $\p^{\frac{1}{2}}(T=k)=f_{0,a}(k)+f_{0,-a}(k)$. Luego sustituyendo  esto \'ultimo en la ecuaci\'on (3) obtenemos:
+$$
+\p^{\frac{1}{2}}\paren{X_T=a|T=k}=\frac{f_{0,a}(k)}{f_{0,a}(k)+f_{0,-a}(k)}
+$$
+Por lo que solo hay que verificar que $f_{0,a}(k)=f_{0,-a}(k)$. Para ello notemos que:
+$$
+f_{0,a}(k)=\sum_{i_1,\ldots,i_{k-1}\neq a}\p^{\frac{1}{2}}_0\paren{X_1=i_1,\ldots,X_{k-1}=i_{k-1},X_k=a}=\sum_{i_1,\ldots,i_{k-1}\neq a}\paren{\frac{1}{2}}^k
+$$
+y de forma analoga:
+$$
+f_{0,-a}(k)=\sum_{i_1,\ldots,i_{k-1}\neq -a}\p^{\frac{1}{2}}_0\paren{X_1=i_1,\ldots,X_{k-1}=i_{k-1},X_k=-a}=\sum_{i_1,\ldots,i_{k-1}\neq -a}\paren{\frac{1}{2}}^k
+$$
+De donde se observa que $f_{0,a}(k)=f_{0,-a}(k)$ pues 
+$$
+\sum_{i_1,\ldots,i_{k-1}\neq a}1=\sum_{i_1,\ldots,i_{k-1}\neq -a}1 
+$$
+Ya que $\sum_{i_1,\ldots,i_{k-1}\neq a}1$ nos indica el n\'umero de las distintas trayectorias de la caminata de $0$ a $a$ en k pasos  y por simetr\'ia esto es igual a $\sum_{i_1,\ldots,i_{k-1}\neq -a}1$  que es n\'umero de las distintas trayectorias de la caminata de $0$ a $-a$. 
+Finalmente como $f_{0,a}(k)=f_{0,-a}(k)$ se sigue $$\p^{\frac{1}{2}}\paren{X_T=a|T=k}=\frac{f_{0,a}(k)}{f_{0,a}(k)+f_{0,-a}(k)}=\frac{1}{2}$$Por lo tanto se obtiene que en efecto hay independencia bajo $\p^{\frac{1}{2}}$ pues:
+$$
+\p^{\frac{1}{2}}\paren{X_T=a|T=k}=\frac{1}{2}=\p^{\frac{1}{2}}\paren{X_T=a}
+$$
+Y de forma analoga se obtiene que:
+$$
+\p^{\frac{1}{2}}\paren{X_T=-a|T=k}=\frac{1}{2}=\p^{\frac{1}{2}}\paren{X_T=-a}
+$$
+Ahora, verificaremos que tambi\'en hay independencia entre $X_T$ y $T$ bajo $\p^{p}$ usando que  $\p^p$ es localmente absolutamente continua respecto de $\p^{1/2}$.\\ Primero por el inciso (2) de este ejercicio tenemos que $\p^p|_{\F_T}\ll\p^{\frac{1}{2}}|_{\F_T}$ (Pues ya se hab\'ia probado en clase que $T$ es tiempo de paro finito). Y ademas tenemos que:
+\begin{equation}
+\p^p|_{\F_T}(A)=\int_{A}D_Td\p^{\frac{1}{2}}|_{\F_T}=\int_A(2q)^T\paren{\frac{p}{q}}^\frac{T}{2}\paren{\frac{p}{q}}^\frac{X_T}{2}d\p^{\frac{1}{2}}|_{\F_T}
+\end{equation}
+Para toda $A\in \F_T$. Luego por problema  4 de la tarea 1 tenemos que $X_T$ y $T$ son $\F_T$-medibles, por lo tanto el evento $\set{X_T=a,T=k} \in \F_T$. Para demostrar la independencia probaremos que,  $\p^p(X_T=a,T=k)=\p^p(X_T=a)\p^p(T=k)$. 
+Primero tenemos que:
+$$
+\p^p(X_T=a,T=k)=\mathds{E}^{\frac{1}{2}}\paren{(2q)^T\paren{\frac{p}{q}}^\frac{T}{2}\paren{\frac{p}{q}}^\frac{X_T}{2}\mathds{1}_{\set{X_T=a}}\mathds{1}_{\set{T=k}}}
+$$
+Por la independencia de $X_T$ y $T$ bajo $\p^{\frac{1}{2}}$ obtenemos que:
+$$
+=\mathds{E}^{\frac{1}{2}}\paren{(2q)^T\paren{\frac{p}{q}}^\frac{T}{2}\mathds{1}_{\set{T=k}}}\mathds{E}^{\frac{1}{2}}\paren{ \paren{\frac{p}{q}}^\frac{X_T}{2}\mathds{1}_{\set{X_T=a}}}
+$$
+Entonces:
+\begin{equation}
+\p^p(X_T=a,T=k)=(2q)^k\paren{\frac{p}{q}}^\frac{k}{2}\paren{\frac{p}{q}}^\frac{a}{2}\p^{\frac{1}{2}}(T=k)\p^{\frac{1}{2}}(X_T=a)
+\end{equation}
+Por otro lado calculemos $\p^p(X_T=a)$  dado que $\set{X_T=a} \in \F_T$ y usando (5) tenemos:
+$$
+\p^p(X_T=a)=\int_{\set{X_T=a}}(2q)^T\paren{\frac{p}{q}}^\frac{T}{2}\paren{\frac{p}{q}}^\frac{X_T}{2}d\p^{\frac{1}{2}}|_{\F_T}
+$$
+$$
+=\paren{\frac{p}{q}}^\frac{a}{2}\mathds{E}^{\frac{1}{2}}\paren{(2q)^T\paren{\frac{p}{q}}^\frac{T}{2}\mathds{1}_{\set{X_T=a}}}=\paren{\frac{p}{q}}^\frac{a}{2}\mathds{E}^{\frac{1}{2}}\paren{(2q)^T\paren{\frac{p}{q}}^\frac{T}{2}}\mathds{E}^{\frac{1}{2}}\paren{\mathds{1}_{\set{X_T=a}}}
+$$
+Por lo tanto;
+\begin{equation}
+\p^p(X_T=a)=\paren{\frac{p}{q}}^\frac{a}{2}\p^{\frac{1}{2}}(X_T=a)\mathds{E}^{\frac{1}{2}}\paren{(2q)^T\paren{\frac{p}{q}}^\frac{T}{2}}
+\end{equation}
+De forma analoga obtenemos que;
+\begin{equation}
+\p^p(X_T=-a)=\paren{\frac{p}{q}}^\frac{-a}{2}\p^{\frac{1}{2}}(X_T=-a)\mathds{E}^{\frac{1}{2}}\paren{(2q)^T\paren{\frac{p}{q}}^\frac{T}{2}}
+\end{equation}
+Como $\p^p(X_T=-a)+\p^p(X_T=a)=1$ y adem\'as como sabemos que $\p^{\frac{1}{2}}(X_T=-a)=\p^{\frac{1}{2}}(X_T=a)=\frac{1}{2}$ obtenemos la siguiente igualdad:
+$$
+\frac{1}{2}\mathds{E}^{\frac{1}{2}}\paren{(2q)^T\paren{\frac{p}{q}}^\frac{T}{2}}\paren{\paren{\frac{p}{q}}^\frac{a}{2}+\paren{\frac{p}{q}}^\frac{-a}{2}}=1
+$$
+Depejando:
+$$
+\mathds{E}^{\frac{1}{2}}\paren{(2q)^T\paren{\frac{p}{q}}^\frac{T}{2}}=\frac{2}{\paren{\frac{p}{q}}^\frac{a}{2}+\paren{\frac{p}{q}}^\frac{-a}{2}}
+$$
+sustituyendo esto ultimo en (7) y (8) tenemos:
+\begin{equation}
+\p^p(X_T=a)=\frac{\paren{\frac{p}{q}}^\frac{a}{2}}{\paren{\frac{p}{q}}^\frac{a}{2}+\paren{\frac{p}{q}}^\frac{-a}{2}}
+\end{equation}
+\begin{equation}
+\p^p(X_T=-a)=\frac{\paren{\frac{p}{q}}^\frac{-a}{2}}{\paren{\frac{p}{q}}^\frac{a}{2}+\paren{\frac{p}{q}}^\frac{-a}{2}}
+\end{equation}
+Por otro lado calcularemos $\p^{p}(T=k)$
+$$
+\p^{p}(T=k)=\p^p(X_T=a,T=k)+\p^p(X_T=-a,T=k)
+$$
+Usando (6)
+\begin{equation}
+\p^{p}(T=k)=(2q)^k\paren{\frac{p}{q}}^\frac{k}{2}\p^{\frac{1}{2}}(T=k)\p^{\frac{1}{2}}(X_T=a)\paren{\paren{\frac{p}{q}}^\frac{a}{2} +\paren{\frac{p}{q}}^\frac{-a}{2}   }
+\end{equation}
+Por lo tanto  usando (6), (11) y (9) obtenemos que en efecto:
+$$
+\p^{p}(X_T=a,T=k)=\p^{p}(X_T=a)\p^{p}(T=k)
+$$
+Y de forma similar
+$$
+\p^{p}(X_T=-a,T=k)=\p^{p}(X_T=-a)\p^{p}(T=k)
+$$
+Y como lo anterior fue para $k$ arbitrario se sigue que $X_T$ y $T$ son independientes bajo $\p^{p}$, luego por lo anterior se concluye que $X_T^2$ y $T$ son independientes, entonces usando  el ejercicio 4 de la tarea 2 
+$$
+\esp{S_T^2}=ab=\esp{T}
+$$
+$$
+\esp{T^2}=\frac{6\esp{TS_T^2}-\frac{ab\paren{a^3+b^3}}{a+b}-2ab}{3}
+$$
+Dada la independencia de $T$ con $S_T$
+$$
+\esp{TS_T^2}=\esp{T}\esp{S_T^2}=(ab)^2
+$$
+Por lo tanto:
+$$
+\esp{T^2}=\frac{6(ab)^2-\frac{ab\paren{a^3+b^3}}{a+b}-2ab}{3}
+$$
+
+\end{proof}
+
+\defin{Categor\'ias: }Cambio de medida, Caminata aleatoria simple.
+\end{problema}
+
+
+\bibliography{GenBib}
+\bibliographystyle{amsalpha}
+\end{document}
