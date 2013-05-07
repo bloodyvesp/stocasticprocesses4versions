@@ -1,0 +1,34 @@
+\documentclass[a5paper,oneside]{amsart}
+\usepackage[scale={.9,.9}]{geometry}
+\usepackage{mathrsfs}
+\usepackage[utf8]{inputenc}
+\usepackage{amsthm}
+
+\newtheoremstyle{dotless}{}{}{\itshape}{}{\bfseries}{}{ }{}
+\theoremstyle{dotless}
+\renewenvironment{proof}{{\bfseries Demostración:}}
+
+\newtheorem{teorema}{\;\;Teorema}[section]
+\newtheorem{problema}[teorema]{\;\;Problema}
+\newtheorem{definicion}[teorema]{\;\;Definición}
+\newtheorem*{categoria}{Categorías:}
+\newtheorem*{remark}{Remark}
+
+\input{definitions.tex}
+
+\title[Problemas de Procesos I]{Problemas de Procesos Estocásticos I\\ Semestre 2013-II\\ Posgrado en Ciencias Matemáticas\\ Universidad Nacional Autónoma de México}
+
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+
+\begin{document}
+	\maketitle
+	\section{Tarea 1}
+		\input{problema1_1.tex}
+		\input{problema1_2.tex}
+		\input{problema1_3.tex}
+		\input{problema1_4.tex}
+	\section{Tarea 2}
+	
+	\bibliography{GenBib}
+	\bibliographystyle{amsalpha}
+\end{document}

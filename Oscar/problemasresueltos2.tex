@@ -1,0 +1,556 @@
+\documentclass[a5paper,oneside]{amsart}
+\usepackage[scale={.9,.8}]{geometry}
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{dsfont}
+\usepackage[spanish,mexico]{babel}
+\usepackage[latin1]{inputenc}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{problema}{Problema}
+%\newtheorem{problema}{Ejercicio}
+\newtheorem*{definition}{Definition}
+\newtheorem*{remark}{Remark}
+\usepackage{enumitem}
+\usepackage{listings}
+\lstset{
+language=R,
+basicstyle=%\scriptsize
+\ttfamily,
+commentstyle=\ttfamily\color{gray},
+numbers=none,
+numberstyle=\ttfamily\color{gray}\footnotesize,
+stepnumber=1,
+numbersep=5pt,
+backgroundcolor=\color{white},
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+frame=none,
+tabsize=4,
+captionpos=b,
+breaklines=true,
+breakatwhitespace=false,
+title=\lstname,
+escapeinside={},
+keywordstyle={},
+morekeywords={}
+}
+\title[Problemas de Procesos I]{Problemas de Procesos Estoc\'asticos I\\ Semestre 2013-II\\ Posgrado en Ciencias Matem\'aticas\\ Universidad Nacional Aut\'onoma de M\'exico}
+\author{Ger\'onimo Uribe Bravo}
+%\address{}
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+\input{definitions.tex}
+%\usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+\newcommand{\nats}{\mathds{N}}
+\newcommand{\reals}{\mathds{R}}
+\newcommand{\entpos}{\mathds{Z}_{+}}
+\newcommand{\prob}{\mathds{P}}
+\newcommand{\mean}{\mathds{E}}
+\newcommand{\mat}[1]{{\bm #1}}
+\newcommand{\nota}[1]{\hspace{5 mm}\mbox{#1}}
+\newcommand{\tres}{\hspace{3 mm}}
+\newcommand{\cinco}{\hspace{5 mm}}
+\newcommand{\uno}{\hspace{1 mm}}
+\newcommand{\ent}{\Rightarrow}
+\newcommand{\sii}{\Leftrightarrow}
+\newcommand{\borr}{\mathds{B}_{\mathds{R}}}
+\newcommand{\Cp}{\mathcal{C}}
+\newcommand{\Ll}{\mathcal{L}}
+
+\begin{document}
+\maketitle
+
+%
+\begin{problema}
+Sean $\F_1,\F_2,\ldots $ y $\G$ sub\sa s de $\F$. Decimos que $\F_1,\F_2,\ldots$ son condicionalmente independientes dada $\G$ si para cualquier $H_i$ que sea $\F_i$ medible y acotada se tiene que\begin{esn}
+\espc{H_1\cdots H_n}{\G}=\espc{H_1}{\G}\cdots \espc{H_n}{\G}.
+\end{esn}
+\begin{enumerate}
+\item ?`Qu\'e quiere decir la independencia condicional cuando $\G=\set{\oo,\emptyset}$?
+\begin{proof}
+Si $\G$ es la $\sigma$-álgebra trivial, entonces $\mean (X |\G ) = \mean ( X )$, de modo que la propiedad de independencia condicional se reduce a 
+\begin{esn}
+\mean ({H_1\cdots H_n})=\mean ({H_1})\cdots \mean ({H_n}).
+\end{esn}
+Sea $A_i\in\F_i$ para toda $i\le n$. Si elegimos a $H_i=\mathds{1}_{A_i}$, entonces la anterior condición se traduce a 
+\begin{esn}
+\p ({A_1\cdots A_n})=\p ({A_1})\cdots \p ({A_n}).
+\end{esn}
+Lo anterior es válido para todo $A_i\in\F_i$ para todo $i\le n$, lo cual corresponde a la definición de independencia (normal) de $\F_1,\dots ,\F_n$, que se puede extender a la independencia de toda la secuencia $\F_1, \F_2,\dots$.
+\end{proof}
+\item Pruebe que $F_1$ y $\F_2$ son condicionalmente independientes dada $\G$ (denotado $\condind{\F_1}{\F_2}{\G}$) si y s\'olo si para cualquier $H$ que sea $\F_1$-medible y acotada se tiene que\begin{esn}
+\espc{H}{\F_2,\G}=\espc{H}{\G}.
+\end{esn}
+\begin{proof}
+Notemos que el hecho de que $H_1$ y $H_2$ sean acotadas, permite trabajar con la esperanza condicional de su producto.
+
+$\ent$ )Supongamos que $\condind{\F_1}{\F_2}{\G}$. Sea $H$ una función $\F_1$ -medible y acotada. Definamos $Y:=\mean (H | \G )$, de manera que $Y$ es una función $\G$-medible y acotada. Entonces bastará demostrar que para todo $A\in \sigma (\F_2\cup \G)$, 
+\[\mean (H\mathds{1}_{A})=\mean(Y\mathds{1}_{A}).\]
+Para generar correctamente a la familia $\sigma (\F_2\cup \G)$, consideremos a
+\[\Cp := \{C\in \sigma (\F_2\cup \G ): C=F_2\cap G \mbox{ donde } F_2\in \F_2 \mbox{ y } G\in\G \}.\]
+Como $\Omega\in\G$, entonces todos los elementos de $\F_2$ pueden ser expresados mediante su intersección con $\Omega$ y por lo tanto, $\F_2\subset \Cp$. El mismo argumento sigue para $\G$, de manera que $\sigma (\Cp )= \sigma (\F_2\cup \G )$. Además, es muy sencillo verificar que $\Cp$ es una $\pi$-sistema. 
+
+Después, definamos 
+\[\Ll := \{A\in\sigma (\Cp ) : \mean (H\mathds{1}_{A})=\mean(Y\mathds{1}_{A})\}.\]
+La finalidad es demostrar que $\Ll$ es un $\lambda$-sistema y que $\Cp\subset\Ll$ para concluir que $\Ll=\sigma (\Cp ) = \sigma (\F_2\cup \G )$, es decir, que la propiedad (SEÑALAR) es válida para todo $A\in\sigma (\F_2\cup \G )$.
+A continuación demostremos que $\Ll$ es un $\lambda$-sistema. La primera condición ($\Omega \in \Ll$) se cumple al notar que 
+\[\mean (H\mathds{1}_{\Omega}) = \mean (H) = \mean (\mean (H | \G )) = \mean (Y)=\mean (Y\mathds{1}_{\Omega}). \]
+Para la segunda condición, sea $A,B\in\Ll$ tal que $B\subset A$, es decir $\mathds{1}_{A-B} = \mathds{1}_A - \mathds{1}_B$. Entonces 
+\[\mean (H\mathds{1}_{A-B}) = \mean (H\mathds{1}_A) - \mean (H\mathds{1}_B) = \mean (Y\mathds{1}_A) - \mean (Y\mathds{1}_B) = \mean (Y\mathds{1}_{A-B}),\]
+por lo que $A-B\in\Ll$. Para la tercera y última condición, sea $A_1,A_2,\dots \in\Ll$ tal que $A_i\subset A_{i+1}$, de manera que $\{\mathds{1}_{A_i}\}_{i\in\nats}$ es una sucesión creciente que converge a $\mathds{1}_{\cup A_i}$. Entonces usando convergencia monótona,
+\[\mean (H\mathds{1}_{\cup A_i}) = \lim_{i\to\infty} \mean (H\mathds{1}_{A_i}) = \lim_{i\to\infty} \mean (Y\mathds{1}_{A_i}) = \mean (Y\mathds{1}_{\cup A_i}),\]
+por lo que $\cup A_i\in\Ll$, y queda demostrado que $\Ll$ es un $\lambda$-sistema. 
+
+Para finalizar esta parte de la demostración, resta demostrar que $\Cp\subset\Ll$. Sea $C\in\Cp$ tal que $C=F_2\cap G$ donde  $F_2\in \F_2 \mbox{ y } G\in\G$. Entonces
+\begin{align*}
+\mean (H\mathds{1}_C ) & = \mean (H\mathds{1}_{F_2} \mathds{1}_{G} ) = \mean(\mean (H\mathds{1}_{F_2} \mathds{1}_{G}| \G))\\
+& = \mean( \mathds{1}_{G} \mean (H\mathds{1}_{F_2}| \G))\\
+& = \mean( \mathds{1}_{G} \left(\mean (H| \G) \mean (\mathds{1}_{F_2}| \G)\right) )\nota{(Por ind. cond.)}\\
+& = \mean( \mathds{1}_{G} Y \mean (\mathds{1}_{F_2}| \G) )\\
+& = \mean(  \mean (\mathds{1}_{G} Y\mathds{1}_{F_2}| \G) )\nota{(Por $\G$ medibilidad de $Y$ y $G$)}\\
+& = \mean( \mathds{1}_{G} Y\mathds{1}_{F_2} ) = \mean (Y\mathds{1}_C ),
+\end{align*}
+demostrando que $\Cp\subset\Ll$ y concluyendo que la propiedad (SEÑALAR) es válida para todo $A\in\sigma (\F_2\cup \G )$.
+
+
+$\Leftarrow$) 
+A continuación supongamos que $\mean (H_1 | \F_2,\G ) = \mean (H_1|G )$ para toda función $H_1$ que sea $\F_1$-medible. Entonces 
+\begin{align*}
+\mean(H_1 H_2|\G ) & = \mean (\mean(H_1 H_2|\sigma (\F_2\cup\G ) )|\G)\nota{(Por propiedad de torre)}\\
+& = \mean (H_2 \mean(H_1 |\sigma (\F_2\cup\G ) )|\G)\\
+& \nota{($H_2$ es $\F_2$-medible y entonces será $\sigma (\F_2\cup\G )$-medible)}\\
+& = \mean (H_2 \mean(H_1 |\G  )|\G)\nota{(Por hipótesis)}\\
+& = \mean(H_1 |\G  )\mean (H_2 |\G) \nota{(Por $\G$-medibilidad de $\mean(H_1 |\G  )$),}\\
+\end{align*}
+finalizando la demostración.
+\end{proof}
+\item Pruebe que $\F_1,\F_2,\ldots, $ son condicionalmente independientes dada $\G$ si y s\'olo si para cada $n\geq 1$, $\F_{n+1}$ es condicionalmente independiente de $\F_1,\ldots, \F_n$ dada $\G$. 
+\begin{proof}
+$\ent$) Supongamos que $\F_1,\F_2,\dots$ son cond. ind. dada $\G$. Definamos $\F^n:=\F_1\cup\dots\cup\F_n $: Por el inciso 2), solo será necesario demostrar que para cualquier función $H_{n+1}$ que sea $\F_{n+1}$-medible y acotada, se cumple que
+\[\mean(H_{n+1} |\sigma(\F^n\cup \G) ) = \mean(H_{n+1} | \G ).\] 
+Definamos $Y:=\mean(H_{n+1} | \G )$.
+\[\Cp := \{C\in \sigma (\F^n\cup \G ): C=F_1\cap\cdots\cap F_n\cap G \mbox{ donde } F_i\in \F_i \mbox{ y } G\in\G \}.\]
+Claramente $\Cp$ es un $\pi$ sistema, y por los mismos argumentos que en el inciso 2), $\sigma (\Cp )=\sigma (\F^n\cup \G)$. Siendo así, definamos
+\[\Ll := \{A\in\sigma (\Cp ) : \mean (H_{n+1}\mathds{1}_{A})=\mean(Y\mathds{1}_{A})\}.\]
+En el inciso 2) se demostró para un conjunto casi idéntico que este es un $\lambda$-sistema. Por lo tanto, si demostramos que $\Cp\subset\Ll$, entonces se tendrá como conclusión que $\Ll=\sigma (\Cp )$ y por lo tanto que la propiedad (SEÑALAR) es válida en todo $\sigma (\Cp )$. Entonces, sea $C\in\Cp$ tal que $C=F_1\cap\cdots\cap F_n\cap G$ donde $F_i\in \F_i \mbox{ y } G\in\G$. Entonces 
+\begin{align*}
+\mean (H_{n+1}\mathds{1}_C ) & = \mean (H_{n+1}\mathds{1}_{F_1}\cdots\mathds{1}_{F_n} \mathds{1}_{G} ) = \mean(\mean (H_{n+1}\mathds{1}_{F_1}\cdots\mathds{1}_{F_n} \mathds{1}_{G}| \G))\\
+& = \mean( \mathds{1}_{G} \mean (H_{n+1}\mathds{1}_{F_1}\cdots\mathds{1}_{F_n}| \G))\\
+& = \mean( \mathds{1}_{G} \left(\mean (H_{n+1}| \G) \mean (\mathds{1}_{F_1}| \G)\cdots \mean(\mathds{1}_{F_n}| \G)\right) )\nota{(Por ind. cond.)}\\
+& = \mean( \mathds{1}_{G} Y \mean (\mathds{1}_{F_1}\cdots\mathds{1}_{F_n}| \G) )\nota{(Por def. de $Y$ y por ind. cond.)}\\
+& = \mean(  \mean (\mathds{1}_{G} Y\mathds{1}_{F_1}\cdots\mathds{1}_{F_n}| \G) )\\
+& \nota{(Por $\G$ medibilidad de $Y$ y $G$)}\\
+& = \mean (\mathds{1}_{G} Y\mathds{1}_{F_1}\cdots\mathds{1}_{F_n})\\
+& = \mean( Y\mathds{1}_C ),
+\end{align*}
+es decir, $C\in\Ll$, entonces $\Ll = \sigma (\Cp ) = \sigma (\F^n\cup\G)$ y la propiedad (SEÑALAR) se cumplirá en todo $\sigma (\F^n\cup\G)$.
+
+$\Leftarrow$)Ahora supongamos que para todo $n\ge 2$, $\condind{\F_{n}}{\sigma (\F^{n-1}\cup \G) }{\G}$, es decir, que para cualquier función $H_{n}$ que sea $\F_{n}$-medible, se cumple 
+\[\mean (H_{n+1}|\sigma (\F^{n}\cup \G))=\mean (H_{n+1}| \G),\]
+y queda por demostrar que si $H_{i}$ es una función $\F_{i}$-medible para todo $i\le n$, entonces
+\begin{esn}
+\espc{H_1\cdots H_{n}}{\G}=\espc{H_1}{\G}\cdots \espc{H_{n}}{\G},
+\end{esn}
+lo cual será demostrado por inducción. La base para el caso $n=2$ está demostrado en el inciso 2). Supongamos entonces que (SEÑALAR) es válido para $n$. Entonces
+\begin{align*}
+\mean(H_1\cdots H_{n+1}|\G ) & = \mean (\mean(H_1\cdots H_{n+1}|\sigma (\F^{n}\cup\G ) )|\G)\nota{(Por propiedad de torre)}\\
+& = \mean (H_1\cdots H_{n} \mean(H_{n+1} |\sigma (\F_2\cup\G ) )|\G)\\
+& \nota{($H_1\cdots H_{n}$ son $\sigma (\F^n\cup\G )$-medibles)}\\
+& = \mean (H_1\cdots H_{n} \mean(H_{n+1} |\G  )|\G)\nota{(Por hipótesis (no de ind.))}\\
+& = \mean(H_{n+1} |\G  )\mean (H_1\cdots H_{n}|\G) \nota{(Por $\G$-medibilidad de $\mean(H_1 |\G  )$)}\\
+& = \left(\mean(H_{1} |\G  )\cdots \mean(H_{n} |\G  )\right)\mean(H_{n+1} |\G  )\nota{(Por hip. ind.),}
+\end{align*}
+finalizando la inducción y la prueba.
+
+\end{proof}
+\end{enumerate}
+
+\defin{Categor\'ias: } Esperanza condicional, Independencia condicional.
+\end{problema}
+%
+\begin{problema}
+Sea $\mu$ una distribuci\'on de progenie y defina $\tilde \mu_j=\mu_{j+1}$. Sea $S=\paren{S_n}$ una caminata aleatoria con distribuci\'on de salto $\tilde\mu$. Sea $k$ un entero no-negativo y defina recursivamente\begin{esn}
+Z_0=k=C_0,\quad Z_{n+1}=k+S_{C_n}\quad\text{y} C_{n+1}=C_n+Z_{n+1}.
+\end{esn}
+\begin{enumerate}
+\item Pruebe que $Z_n\geq 0$ para toda $n$ y que si $Z_n=0$ entonces $Z_{n+1}=0$.
+\begin{proof}
+En el caso en que $Z_n=0$, se tiene que $0=k+S_{C_{n-1}}$ y que $C_{n}=C_{n-1}+0$, que conjuntamente dan como resultado $S_{C_{n}}= S_{C_{n-1}} = k$, de manera que por definición, $Z_{n+1} =  k+S_{C_n} = k-k = 0$. Es decir, si en algún momento el proceso $Z$ alcanza el nivel $0$, se quedará ahí en los siguientes pasos.
+
+Antes de continuar, notemos que la caminata aleatoria $S$ tiene incrementos, digamos $\tilde\xi_i\sim\tilde \mu$, con soporte en $\{-1, 0, 1,\dots \}$, o equivalentemente con incrementos $\xi_i - 1$ donde $\xi_i\sim\mu$ con soporte en $\{0, 1,\dots\}$.
+Para demostrar que $Z_n\geq 0$ para toda $n$, se hará por inducción. $Z_0=K\ge 0$, demostrando la base. Ahora supongamos que $Z_n\ge 0$. De nuevo, si $Z_n$ es $0$, entonces $Z_{n+1}=0$. Si $Z_n>0$, entonces
+\begin{align*}
+Z_{n+1} & = k+S_{C_n} = k+S_{C_{n-1}+Z_{n}} = k+S_{C_{n-1}+Z_{n}} -Z_n + Z_n\\
+& = k+S_{C_{n-1}+Z_{n}} -(k- S_{C_{n-1}}) + Z_n\\
+& = (S_{C_{n-1}+Z_{n}} - S_{C_{n-1}}) + Z_n\\
+& = \sum_{i=1}^{C_{n-1}+Z_n}\tilde\xi_i -  \sum_{i=1}^{C_{n-1}}\tilde\xi_i + Z_n\\
+& = \sum_{i=C_{n-1}+1}^{C_{n-1}+Z_n}\tilde\xi_i + Z_n\\
+& \ge \sum_{i=C_{n-1}+1}^{C_{n-1}+Z_n}(-1) + Z_n\nota{(Por el soporte de $\tilde\xi_i$)}\\
+& = -Z_n + Z_n = 0,
+\end{align*}
+y se concluye que en ese caso, $Z_{n+1}\ge 0$.
+\end{proof}
+\item Pruebe que $C_n$ es un tiempo de paro para la filtraci\'on can\'onica asociada a $S$.
+\begin{proof}
+Se demostrará por inducción. El caso $C_0=k$ es un tiempo de paro respecto a cualquier filtración, quedando demostrada la base. Entonces supongamos que $C_{n}$ es un tiempo de paro respecto a la filtración asociada a $S$, digamos $\F_m=\sigma(S_i,i\le m)$. Notemos que
+\begin{align*}
+\{C_{n+1}=j\} & = \{C_{n} + Z_{n+1}=j\} = \cup_{i=0}^j \{C_{n}= i, Z_{n+1}=j-i\}\\
+& = \cup_{i=0}^j \{C_{n}= i, k + S_{C_n}=j-i\}\\
+& = \cup_{i=0}^j \{C_{n}= i, k + S_i=j-i\}\\
+& = \cup_{i=0}^j \left[\{C_{n}= i\}\cap \{S_i=j-i-k\}\right]
+\end{align*}
+donde $\{C_{n}= i\}\in\F_i\subset\F_j$ por hipótesis de inducción y $\{S_i=j-i-k\}\in\F_i\subset\F_j$ por definición de $\F_m$. La unión de estos eventos para todo $i\ge j$ se mantiene en $\F_j$, por lo tanto $\{C_{n+1}=j\}\in\F_j$, entonces $C_{n+1}$ es un tiempo de paro respecto a $\F_m$, finalizando la inducción.
+\end{proof}
+\item Pruebe que $Z$ es un proceso de Galton-Watson con ley de progenie $\mu$. 
+\begin{proof}
+$Z$ es un proceso de Galton-Watson si y sólo si
+\[Z_0=k\mbox{ y } Z_{n+1} = \sum_{i=1}^{Z_n}\xi_{i,n},\]
+para alguna colección $\{\xi_{i,n}\}_{i,n\in\nats}$ v.a.i.i.d. con distribución $\mu$ y con soporte en $\entpos$. Para comprobar la segunda propiedad, basta sustituir en $S$ los incrementos $\tilde\xi_i\sim\tilde\mu$ por $\xi_i - 1$ donde $\xi_i\sim\mu$, descritos en el inciso 1). Es decir, por (SEÑALAR) se tendrá que
+\begin{align*}
+Z_{n+1} & = \sum_{i=C_{n-1}+1}^{C_{n-1}+Z_n}\tilde\xi_i + Z_n\\
+& = \sum_{i=C_{n-1}+1}^{C_{n-1}+Z_n}(\xi_i - 1) + Z_n\\
+& = \sum_{i=C_{n-1}+1}^{C_{n-1}+Z_n}\xi_i -Z_n + Z_n\\
+& = \sum_{i=C_{n-1}+1}^{C_{n-1}+Z_n}\xi_i\\
+& = \sum_{i=1}^{Z_n}\xi_{i+C_{n-1}},
+\end{align*}
+de manera que los incrementos de la caminata aleatoria $S$, en lugar de tomarlos de una sucesión lineal (que es lo que se está haciendo), los podríamos tomar de una colección de dimensión 2. Entonces haciendo $\xi_{i,n}=\xi_{i+C_{n-1}}$, para todo $n\in\nats$ y $i\le Z_n$ (que son justamente las v.a. que usamos y necesitamos), entonces
+\[Z_{n+1} = \sum_{i=1}^{Z_n}\xi_{i,n},\]
+que tendrá incrementos con distribución $\mu$ y soporte en $\{0,1,\dots \}$,
+finalizando la demostración.
+\end{proof}
+\item Pruebe que si $S$ alcanza $-1$ entonces existe $n$ tal que $Z_n=0$. Deduzca que si la media de $\mu$ es $1$ entonces $Z$ se extingue. (Sugerencia: utilice un ejercicio anterior sobre martingalas con saltos acotados hacia abajo.)
+\begin{proof}
+Si $\mean (\xi ) = 1$, entonces $\mean (\tilde\xi ) = 0$. Es decir, $S$ es una caminata aleatoria con saltos integrables cuya media es $0$, por lo que usando (SEÑALAR), esta caminata oscila y en particular, $\liminf_n S_n = - \infty$. Para demostrar que en algún momento $Z$ alcanza el nivel $0$, supongamos que no lo hace, es decir, que $Z_n> 0$ para todo $n\in\nats$. Entonces $C_n= C_{n-1} + Z_n > C_{n-1}$, por lo que $C$ es una sucesión estrictamente creciente y por lo tanto tiende a $\infty$. Además, en estos puntos sabemos que $k + S_{C_n} = Z_{n+1} > 0$, es decir, que $S_{C_n}> -k$ para toda $n\in\nats$. Solamente falta estudiar los tiempos entre los instantes $C_n$ y $C_{n+1}$ en la caminata aleatoria $S$. Notemos que existirán $Z_{n+1}$ saltos entre estos tiempos, entonces para $j\in\{1,\dots, Z_{n+1}\}$, se tendrá que
+\begin{align*}
+S_{C_n + j} & = S_{C_n} + \sum_{i=C_n + 1}^{C_n + j}\tilde\xi_i\\
+& \ge S_{C_n} + \sum_{i=C_n + 1}^{C_n + j}(-1)\nota{(Por el soporte de $\tilde\xi_i$)}\\
+& = S_{C_n} - j \le S_{C_n} - Z_{n+1} = S_{C_n} - (k + S_{C_n}) = -k,
+\end{align*}
+es decir, la cadena $S$ será mayor que $-k$ en los pasos entre los tiempos $C_n$ y $C_{n+1}$ (para toda $n\in\nats$), y por lo tanto se tendrá que $S_n\ge -k$ para todo $n\in\nats$, lo cual es una contradicción ya que $S$ oscila, demostrando que $Z$ debe tomar el valor $0$ en algún punto. 
+\end{proof} 
+\end{enumerate}
+
+\defin{Categor\'ias: } Caminatas aleatorias, Procesos de Galton-Watson%, Propiedad de Markov fuerte.
+\end{problema}
+
+
+\begin{problema}
+El objetivo de este ejercicio es ver ejemplos de cadenas de Markov $X$ y de funciones $f$ tales que $\imf{f}{X}=\paren{\imf{f}{X_n},n\in\na}$ sean o no cadenas de Markov.
+\begin{enumerate}
+\item Considere el hipercubo $n$-dimensional $E=\set{0,1}^n$. A $E$ lo pensaremos como la composici\'on de la primera de dos urnas que tienen en total $n$ bolas etiquetadas del $1$ al $n$. Si $x=\paren{x_1,\ldots, x_n}\in E$, interpretaremos $x_i=1$ como que la bola $i$ est\'a en la urna $1$. Considere el siguiente experimento aleatorio: inicialmente la composici\'on de las urnas est\'a dada por $x$ y a cada instante de tiempo escogemos una bola al azar y la cambiamos de urna. Modele esta situaci\'on por medio de una cadena de Markov $X$ en $E$. Sea $\fun{f}{E}{\set{0,\ldots, n}}$ dada por $\imf{f}{x}=\sum_i x_i$. Pruebe que $\imf{f}{X}=\paren{\imf{f}{X_n},n\in\na}$ es una cadena de Markov cuya matriz de transici\'on determinar\'a.
+\begin{proof}
+Sean $y=(y_1,\dots ,y_n)$ y $z=(z_1,\dots ,z_n)$ elementos de $E$. Lo primero que hay que notar, es que la transición de un estado a otro depende solamente de la constitución actual de las urnas (y no de como estuvieron compuestas anteriormente), es decir, es razonable pensar que se puede modelar mediante una cadena de Markov. El experimento dice que se puede cambiar una bola a la vez en cada paso, es decir, para ir de $y$ a $z$ en un paso, se debe cumplir que haya exactamente un cambio en alguna coordenada de estos vectores, o en otras palabras, que $\sum_{i=1}^n | y_i - z_i|=1$. Las demás transiciones serán imposibles. También hay que notar que para $y$ fijo, existen $n$ vectores $z$ en total que cumplen tal condición (cambiando cada una de las coordenadas), y que la elección de la coordenada a cambiar es equiprobable. Por lo tanto, la matriz de transición para el proceso que deseamos construir tendrá entradas
+\[p_{y,z} = \frac{1}{n}\mathds{1}_{\sum_{i=1}^n | y_i - z_i|=1}\]
+para todo $y,z\in E$, tendiendo como distribución inicial $\nu=\delta_{x}$. Por las notas, se tiene que dados estos parámetros existirá una cadena de Markov, digamos $X$, que tiene esta matriz de transición y distribución inicial, finalizando la primera parte.
+
+
+Para ver si el proceso $Y=f(X)$ es una cadena de Markov, basta ver que este modelo es el de las urnas de Ehrenfest, el cual ya fue estudiado en clase y concluimos que su matriz de transición estaba dada por
+\[p_{i,j} = \frac{n-i}{n}\delta_{j,i+1} + \frac{i}{n}\delta_{j,i-1}.\]
+\end{proof}
+
+\item Sea $\paren{S_n}_{n\in\na}$ una cadena de Markov con espacio de estados $\z$ y matriz de transici\'on\begin{esn}
+P_{i,i+1}=p\quad P_{i,i-1}=1-p
+\end{esn}donde $p\in [0,1]$. D\'e una condici\'on necesaria y suficiente para que $\paren{\abs{S_n},n\in\na}$ sea una cadena de Markov.
+\begin{proof}
+Antes de empezar, calculemos $\prob(S_n = i| S_0=0)$. Hay que notar que esta probabilidad es positiva solo si $n$ y $i$ son pares o impares y si $n\ge |i|$ (los demás casos tendrán probabilidad $0$). Bajo estos supuestos, para que suceda que $S_n=i$, tuvo que suceder que el proceso subió en total $(n+i)/2$ veces y bajo $(n-i)/2$ veces, en cualquier orden. Pero existen justamente 
+\[{n \choose {(n+i)/2}}={n \choose {(n-i)/2}}\]
+de estas ordenaciones, por lo tanto se tiene que
+\[\prob(S_n = i| S_0=0) = {n \choose {(n+i)/2}}p^{(n+i)/2}q^{(n-i)/2},\]
+y al ser una caminata aleatoria, se puede generalizar a 
+\[\prob(S_n = i| S_0=x_0) = \prob(S_n = i-x_0| S_0=0)= {n \choose {(n+i-x_0)/2}}p^{(n+i-x_0)/2}q^{(n-i+x_0)/2}.\]
+Sigamos con el estudio de $|S_n|$, al ver que este proceso solamente se puede mover, al igual que $S_n$, una unidad para arriba o una para abajo en cada paso; estudiaremos el caso cuando este se mueve una unidad para arriba y así también concluiremos, por complementación, el estudio del proceso cuando este se mueve un paso para abajo. Demostraremos que bajo la condición $|S_0|=0$, la cadena $|S_n|$ es efectivamente una cadena de Markov homogénea. Pero mientras, supongamos que $|S_0|=x_0$. Entonces
+\begin{align*}
+\prob_{x_0} & (|S_n|=i+1||S_n| = i)  = \frac{\prob_{x_0}(|S_n|=i+1,|S_n| = i)}{\prob_{x_0}(|S_n| = i)}\\
+& = \frac{\prob_{x_0}(S_n=i+1,S_n= i) + \prob_{x_0}(S_n=-i-1,S_n= -i)}{\prob_{x_0}(S_n = i) + \prob_{x_0}(S_n = -i)}\\
+& = \frac{\prob_{x_0}(S_n= i)p + \prob_{x_0}(S_n= -i)q}{\prob_{x_0}(S_n = i) + \prob_{x_0}(S_n = -i)}\\
+& = \frac{\left({n \choose {(n+i-x_0)/2}}p^{(n+i-x_0)/2}q^{(n-i+x_0)/2}\right) p + \left({n \choose {(n-i-x_0)/2}}p^{(n-i-x_0)/2}q^{(n+i+x_0)/2}\right)q}{\left({n \choose {(n+i-x_0)/2}}p^{(n+i-x_0)/2}q^{(n-i+x_0)/2}\right) + \left({n \choose {(n-i-x_0)/2}}p^{(n-i-x_0)/2}q^{(n+i+x_0)/2}\right)}\\
+& = \frac{\left({n \choose {(n+i-x_0)/2}}p^{i+1}\right) + \left({n \choose {(n-i-x_0)/2}}q^{i+1}\right)}{\left({n \choose {(n+i-x_0)/2}}p^{i}\right) + \left({n \choose {(n-i-x_0)/2}}q^{i}\right)}\\
+& \nota{(Factorizando $p^{(n-i-x_0)/2}q^{(n-i+x_0)/2}$)}.
+\end{align*}
+Hasta ese punto es donde se puede llegar suponiendo que $S_0=x_0$; sin embargo, si suponemos que $x_0=0$, todas las combinaciones de la expresión anterior son iguales, por lo tanto se cancelan y tendríamos que
+\[\prob_{0} (|S_n|=i+1||S_n| = i) = \frac{p^{i+1} + q^{i+1}}{p^i + q^i},\]
+que no depende de $n$ y por lo tanto $|S_n|$ es una cadena de Markov homogénea.
+\end{proof}
+\end{enumerate}
+
+\defin{Categor\'ias:} Proyecciones de cadenas de Markov
+\end{problema}
+
+
+\begin{problema}
+Sean $\p$ y $\q$ dos medidas de probabilidad en el espacio can\'onico $E^\na$ para sucesiones con valores en un conjunto a lo m\'as numerable $E$. Decimos que $\q$ es \defin{localmente absolutamente continua} respecto de $\p$ si para cada $n\in\na$, $\q|_{\F_n}\ll\p|_{\F_n}$. Sea\begin{esn}
+D_n=\frac{d \q|_{\F_n}}{d \p|_{\F_n}}.
+\end{esn}
+\begin{enumerate}
+\item Pruebe que $D$ es una martingala bajo $\p$. Pruebe que si $D$ es uniformemente integrable entonces $\q\ll\p$. 
+\begin{proof}
+Por definición de derivada de Radon-Nikodym, $D_n$ es $\F_n$-medible y como $\q$ es una medida no negativa, entonces $D_n$ es no negativa c.s. y entonces
+\[\mean (|D_n|) = \mean(D_n) = \int D_n d \p = \int D_n d \p|_{\F_n} = \q|_{\F_n}(\Omega) = \q (\Omega) = 1,\]
+por lo tanto es integrable. Falta demostrar la condición de martingala, es decir, demostrar que para todo $A\in\F_n$, se tiene que $\mean (D_{n}\mathds{1}_{A}) = \mean (D_{n+1}\mathds{1}_{A})$ bajo $\p$. Entonces
+\begin{align*}
+\mean (D_{n}\mathds{1}_{A}) & = \int D_{n}\mathds{1}_{A} d \p\\
+& = \int D_{n}\mathds{1}_{A} d \p|_{\F_n}\nota{($D_n\mathds{1}_{A}$ es $\F_n$-medible)}\\
+& = \q|_{\F_n}(A)= \q (A)= \q|_{\F_{n+1}}(A) \nota{($A\in\F_n\subset\F_{n+1}$)}\\
+& = \int D_{n+1}\mathds{1}_{A} d \p|_{\F_{n+1}}\\
+& = \int D_{n+1}\mathds{1}_{A} d \p \nota{($D_{n+1}\mathds{1}_{A}$ es $\F_{n+1}$-medible)}\\
+& = \mean (D_{n+1}\mathds{1}_{A}),
+\end{align*}
+demostrando que efectivamente, $D$ es una martingala bajo $\p$.
+
+Si suponemos que $D$ es uniformemente integrable, entonces sabemos que converge c.s. y en $L_1$ a $D_{\infty}$, y además
+$D_n=\mean (D_\infty | \F_n)$. Si demostramos que para todo $A\in\F$ se cumple que
+\[\q(A) = \int_A D_\infty d\p,\]
+habremos demostrado que $\q\ll\p$. Lo haremos por el método usual de clases monótonas (no Dynkin). Sea $\Cp=\cup_n \F_n$. Claramente $\Cp$ es un álgebra. Sea $A\in\Cp$, entonces existe $k\in\nats$ tal que $A\in\F_k$. Pero como $D_k=\mean (D_\infty |F_k)$, en este caso se cumple que 
+\begin{align*}
+\q(A) & = \q|_{\F_{k}}(A) = \int D_k\mathds{1}_A d \p|_{\F_{k}}\\
+& = \int D_\infty \mathds{1}_A d \p|_{\F_{k}}\\
+& = \int D_\infty \mathds{1}_A d \p,
+\end{align*}
+y por lo tanto la propiedad deseada es válida en todo $\Cp$. Definimos 
+\[\Ll:=\{A\in\sigma(\cup_n \F_n): \q(A) = \int_A D_\infty d\p\}.\]
+Se acaba de demostrar que el álgebra $\Cp\subset\Ll$, por lo tanto si demostramos que $\Ll$ es una clase monótona, entonces se tendrá que $\Ll=\sigma(\cup_n \F_n)$ y entonces la propiedad (SEÑALAR) se cumplirá para toda $A\in\sigma(\cup_n \F_n)$, demostrando que efectivamente $q\ll\p$. Entonces sea $A_1,A_2,\dots\in\Ll$ una sucesión creciente, es decir, se tiene que $\mathds{1}_{\cup_i A_i} = \lim_{i\to\infty} \mathds{1}_{ A_i}$. Entonces, 
+\begin{align*}
+\q(\cup_i A_i)& = \lim_{i\to\infty}q(A_i) = \lim_{i\to\infty}\int D_\infty\mathds{1}_{A_i} d\p\\
+& = \int D_\infty\mathds{1}_{\cup_i A_i} d\p\nota{(Por conv. monótona).}
+\end{align*}
+Lo mismo sucede si consideramos una suceción decreciente (ahí se usa convergencia acotada), de manera que $\Ll$ es una clase monotona y $\Ll=\sigma (\cup_n \F_n)$, finalizando la demostración.
+\end{proof}
+\item Pruebe que si $T$ es un tiempo de paro finito entonces $\q|_{\F_T}\ll\p|_{\F_T}$. 
+\begin{proof}
+De nuevo, bastará con demostrar que para todo $A\in\F_T$,
+\[\q|_{\F_T}(A) = \int_A D_T d \p|_{\F_T}.\]
+Por (SEÑALAR), sabemos que si $T$ es un tiempo de paro finito, entonces $D_T$ es $\F_T$-medible. Entonces
+\begin{align*}
+\int D_T\mathds{1}_A d \p|_{\F_T} & = \int D_T\mathds{1}_A d \p\\
+&  = \int \sum_{i=1}^\infty D_T\mathds{1}_{A\cap\{T=i\}} d \p\\
+& =  \int \sum_{i=1}^\infty D_i\mathds{1}_{A\cap\{T=i\}} d \p\\
+& = \sum_{i=1}^\infty \int D_i\mathds{1}_{A\cap\{T=i\}} d \p\\
+& = \sum_{i=1}^\infty \int D_i\mathds{1}_{A\cap\{T=i\}} d \p|_{\F_i}\\
+& \nota{(Por $\F_i$-medibilidad de $D_i\mathds{1}_{A\cap\{T=i\}}$)}\\
+& = \sum_{i=1}^\infty \q_{\F_i}(A\cap\{T=i\}) = \sum_{i=1}^\infty \q(A\cap\{T=i\})\\
+& = \q(A\cap\{T<\infty\}) = \q(A)= \q|_{\F_T}(A),
+\end{align*}
+finalizando la prueba.
+\end{proof}
+\item Sea $\p^p$ la distribuci\'on de una caminata aleatoria simple que comienza en $0$ y va de $k$ a $k+1$ con probabilidad $p$, donde $p\in (0,1)$. Pruebe que $\p^p$ es localmente absolutamente continua respecto de $\p^{1/2}$ y encuentre la martingala $D_n$ asociada.
+\begin{proof}
+Consideremos una trayectoria válida del proceso hasta el paso $n$, digamos $A_n$, que sube $k=k(A_n)$ veces y baja $n-k$. Entonces
+\[\p^p|_{\F_n}(A_n)=p^k q^{n-k} \tres\mbox{ y }\tres\p^{1/2}|_{\F_n}(A_n) = 1/2^n,\] 
+de manera que podemos expresar a 
+\[\p^p|_{\F_n}(A_n)=(2p)^k (2q)^{n-k}\frac{1}{2^n} =  2^n (p/q)^k (q)^{n}\p^{1/2}|_{\F_n}(A_n).\]
+Sin embargo, $k$ depende de la trayectoria elegida, pero bajo $A_n$, el numero de saltos hacia arriba es exactamente $(X_n+n)/2$, por lo tanto
+\[\p^p|_{\F_n}(A_n) = 2^n (p/q)^{(X_n+n)/2} (q)^{n}\p^{1/2}|_{\F_n}(A_n).\]
+La función $2^n (p/q)^{(X_n+n)/2} (q)^{n}$ será nuestro candidato para $D_n$, que de nuevo está definido para toda trayectoria hasta el paso $n$ válida,es decir, estará definida para todo el conjunto 
+\[\Cp:=\{A_n\in\F_n: \mbox{$A_n$ es una trayectoria válida hasta $n$}\}\cup\emptyset,\] 
+el cual es un $\pi$-sistema que genera a $\F_n$. Consideremos también a la familia
+\[\Ll:=\{A_n\in\F_n: \p^p|_{\F_n}(A_n) = \int D_n d\ p^{1/2}|_{\F_n}.\]
+Por lo argumentado inicialmente, $\Cp\subset\Ll$. Por lo tanto si demostramos que $\Ll$ es un $\lambda$-sistema, lo cual es BASTANTE parecido al procedimiento usado en los ejercicios anteriores (usando propiedades de la integral) y será omitido, concluiremos que efectivamente, la función $D_n$ propuesta es la derivada de Radon-Nikodym de $\p^p|_{\F_n}(A_n)$ respecto a $\p^{1/2}|_{\F_n}(A_n)$. Además, por la primera parte del inciso anterior es una martingala  Si se demuestra que $D$ es uniformemente integrable, habremos demostrado, por el inciso 1), que $\p^p\ll\p^{1/2}$. (FALTA DEMOSTRAR UI).
+\end{proof}
+\item Para $a,b>0$, sea $T=\min\set{n\in\na: X_n\in \set{-a,b}}$. Pruebe que $T$ y $X_T$ son independientes bajo $\p^{1/2}$. Al utilizar la continuidad absoluta local, pruebe que $T$ y $X_T$ tambi\'en son independientes bajo $\p^p$. Utilice alguna martingala de ejercicios anteriores para calcular $\esp{T^2}$.
+\end{enumerate}
+
+\defin{Categor\'ias: }Cambio de medida, Caminata aleatoria simple.
+\end{problema}
+
+\begin{problema}
+Sea $N$ un proceso Poisson de par\'ametro $\lambda$ y sea $T_n$ el tiempo de su en\'esimo salto. 
+\begin{enumerate}
+\item Pruebe que condicionalmente a $T_2$, $T_1$ es uniforme en $[0,T_2]$. 
+\begin{proof}
+Como $N$ es un proceso Poisson, $T_1, T_2 - T_1\sim Exp(\lambda )$ y son independientes, por lo que 
+\[f_{T_1,T_2 - T_1}(x,y) = \lambda^2 e^{-\lambda(x+y)}\mathds{1}_{x\ge 0, y\ge 0},\]
+y haciendo una transformación lineal $g : (T_1, T_2-T_1)\to (T_1,T_2)$, que puede ser representado mediante la matriz
+\[\begin{pmatrix}
+1 & 0 \\ 
+1 & 1
+\end{pmatrix} ,\]
+tiene como determinante a $1$. Entonces se tendrá que
+\[f_{T_1,T_2}(x,y) = f_{T_1,T_2 - T_1}(g^{-1}(x,y)) = f_{T_1,T_2 - T_1}(x, y - x) = \lambda^2 e^{-\lambda(y)}\mathds{1}_{y\ge x\ge 0}.\]
+Además, $T_2\sim Gamma(2,\lambda )$, es decir,
+\[f_{T_2}(y)=\lambda^2 y e^{-\lambda y}\mathds{1}_{y\ge 0},\]
+por lo que
+\[f_{T_1|T_2}(x|y) = \frac{f_{T_1,T_2}(x,y)}{f_{T_2}(y)} = \frac{\lambda^2 e^{-\lambda(y)}\mathds{1}_{y\ge x\ge 0}}{\lambda^2 y e^{-\lambda y}\mathds{1}_{y\ge 0}}=\frac{\mathds{1}_{y\ge x\ge 0}}{y},\]
+que se traduce a que bajo el evento $\{T_2=y\}$, $T_1$ tendrá una distribución uniforme en el intervalo $[0,y]$.
+\end{proof}
+\item Pruebe que si $W_1$ y $W_2$  son  exponenciales de par\'ametro $\lambda$  independientes entre si y de una variable uniforme $U$, entonces $U\paren{W_1+W_2}$ es una variable aleatoria exponencial de par\'ametro $\lambda$. 
+\begin{proof}
+Se tiene que $W_1 + W_2\sim Gamma(2,\lambda )$ y es independiente de $U$. Entonces consideremos la transformación $g: (a, b)\to (a, ab)$ y su inversa $g^{-1}: (a,b)\to(a,b/a)$, cuyo Jacobiano es $1/a$. Entonces
+\begin{align*}
+f_{U(W_1 + W_2)}(x)& = \int f_{ W_1 + W_2, U(W_1 + W_2)}(y, x) d y\\
+& = \int_0^\infty f_{W_1+W_2} (y) f_U(x/y)(1/y) d y\\
+& = \int_0^\infty \mathds{1}_{1\ge x/y\ge 0} \lambda^2 y e^{-\lambda y}\mathds{1}_{y\ge 0}(1/y) d y\\
+& = \int_0^\infty \lambda^2 e^{-\lambda y} \mathds{1}_{y\ge x\ge 0} d y\\
+& = \int_x^\infty \lambda^2 e^{-\lambda y}  d y\\
+& = \lambda e^{-\lambda x},
+\end{align*}
+finalizando la demostración.
+\end{proof}
+\item Conjeture c\'omo se  generaliza lo anterior con $T_n$ y $T_1$.
+\begin{proof}
+De nuevo, consideremos una función $g:(T_1,T_2-T_1,\dots , T_n-T_{n-1})\to (T_1,T_2,\dots ,T_n)$, que puede ser representada mediante la matriz
+\[\begin{pmatrix}
+1 & 0 & \cdots & 0 \\ 
+1 & 1 & \cdots & 0 \\ 
+\vdots & \vdots & \ddots & \vdots \\ 
+1 & 1 & \cdots & 1
+\end{pmatrix}, \]
+cuyo Jacobiano vale $1$.
+Entonces
+\begin{align*}
+f_{T_1,T_2,\dots ,T_n}(t_1,t_2,\dots ,t_n) & = f_{T_1,T_2-T_1,\dots , T_n-T_{n-1}}(t_1,t_2-t_1,\dots ,t_n-t_{n-1})\\
+& = \prod_{i=1}^n \lambda e^{-\lambda (t_i-i_{i-1})}\mathds{1}_{t_i-t_{i-1}\ge 0}\nota{(Haciendo $t_0=0$)}\\
+& = \lambda^n e^{-\lambda t_n} \mathds{1}_{0 \le t_1\le\dots\le t_n}.
+\end{align*}
+Además, como $T_n\sim Gamma(n,\lambda )$,
+\begin{align*}
+f_{T_1,\dots ,T_{n-1}|T_n}(t_1,\dots ,t_{n-1}| t_n ) & = \frac{f_{T_1,\dots ,T_{n-1},T_n}(t_1,\dots ,t_{n-1}, t_n )}{f_{T_n}(t_n )}\\
+& = \frac{\lambda^n e^{-\lambda t_n} \mathds{1}_{0 \le t_1\le\dots\le t_n}}{(1/(n-1)!)\lambda^n t_n^{n-1} e^{-\lambda t_n}\mathds{1}_{t_n\ge 0}}\\
+& = \frac{(n-1)!\mathds{1}_{0 \le t_1\le\dots\le t_n}}{t_n^{n-1}},
+\end{align*}
+y entonces
+\begin{align*}
+f_{T_1|T_n} (t_1|t_n) & = \int\cdots\int \frac{(n-1)!\mathds{1}_{0 \le t_1\le\dots\le t_n}}{t_n^{n-1}} dt_{2} \cdots dt_{n-1}\\
+& = \frac{(n-1)!}{t_n^{n-1}}\int\cdots\int \mathds{1}_{0 \le t_1\le\dots\le t_n} dt_{2} \cdots dt_{n-1}\\
+& = \frac{(n-1)!}{t_n^{n-1}}\int\cdots\int \mathds{1}_{0 \le t_1\le\dots\le t_n} dt_{2} \cdots dt_{n-1}\\
+& = \frac{(n-1)!}{t_n^{n-1}}\mathds{1}_{0\le t_1\le t_n}\int_{t_1}^{t_n}\cdots\int_{t_1}^{t_3} 1 dt_{2} \cdots dt_{n-1}\\
+& = \frac{(n-1)!}{t_n^{n-1}}\mathds{1}_{0\le t_1\le t_n} \frac{(t_n - t_1)^{n-2}}{(n-2)!}\\
+& = (n-1)\frac{(t_n - t_1)^{n-2}}{t_n^{n-1}}\mathds{1}_{0\le t_1\le t_n}\\
+& = (n-1)\left(1 - \frac{t_1}{t_n}\right)\left(\frac{1}{t_n}\right)^{n-2}\mathds{1}_{0\le t_1\le t_n}.
+\end{align*}
+\end{proof}
+\item Escriba dos programas en Octave que simulen al proceso de Poisson de par\'ametro $\lambda$ en el intervalo $[0,1]$. En uno utilizar\'a s\'olo variables exponenciales y en el otro puede utilizar una variable Poisson.
+\end{enumerate}
+\end{problema}
+\begin{problema}
+%Simulaci\'on de un proceso Poisson puntual... subordinador...
+ Sea $\Xi$ una medida de Poisson aleatoria en $(0,\infty)\times (0,\infty)$ cuya medida de intensidad $\nu$ est\'a dada por $\imf{\nu}{ds,dx}=\indi{x>0}C/x^{1+\alpha}\, ds\,dx$. 
+ \begin{enumerate}
+\item Determine los valores de $\alpha$ para los cuales $\int 1\wedge x\,\imf{\nu}{dx}<\infty$. 
+ \end{enumerate}
+Nos restringimos ahora a valores de $\alpha$ para los cuales la integral anterior sea finita. Sean $\imf{f_t}{s,x}=\indi{s\leq t}x$ y $X_t=\Xi f_t$. 
+ \begin{enumerate}[resume]
+ \item Determine los valores  de $\alpha$ para los cuales $X_t<\infty$ para toda $t\geq 0$ casi seguramente.
+ \end{enumerate}
+ Nos restringiremos a dichos valores de $\alpha$. 
+ \begin{enumerate}[resume]
+ \item Calcule $\esp{e^{-\lambda X_t}}$ y pruebe que $X_{t}$ tiene la misma distribuci\'on que $t^{1/\alpha}X_1$. 
+ \item Diga por qu\'e el siguiente c\'odigo en Octave simula la trayectoria aproximada del proceso $X$ en el intervalo $[0,1]$.
+ \end{enumerate}
+\end{problema}
+
+\begin{problema}
+Pruebe que si $X$ tiene incrementos independientes entonces el proceso $X^t$ dado por $X^t_s=X_{t+s}-X_t$ es independiente de $\F^X_t=\sag{X_s:s\geq 0}$.
+
+Calcular la esperanza y varianza del proceso de Poisson y de Poisson compuesto (en t\'erminos de la intensidad y la distribuci\'on de salto). Probar que si $X$ es\begin{esn}
+\esp{e^{iu Z_t}}=e^{-\lambda t\paren{1-\imf{\psi}{u}}}\quad\text{donde}\quad \imf{\psi}{u}=\esp{e^{iu \xi_1}}. 
+\end{esn}
+
+Sea $N$ un proceso de L\'evy tal que $N_t$ tiene distribuci\'on de par\'ametro $\lambda t$. 
+\begin{enumerate}
+\item Pruebe que casi seguramente las trayectorias de $N$ son no-decrecientes.
+\item Sea $\Xi$ la \'unica medida en $\mc{B}_{\re_+}$ tal que $\imf{\Xi}{[0,t]}=N_t$. Pruebe que $\Xi$ es una medida de Poisson aleatoria de intensidad $\lambda \cdot\leb$.
+\item Concluya que $N$ es un proceso de Poisson de intensidad $\lambda$. 
+\end{enumerate}
+\end{problema}
+
+\begin{problema}
+Sea $P_t$ la probabilidad de transici\'on en $t$ unidades de tiempo para el proceso de Poisson de par\'ametro $\lambda$. 
+
+Al utilizar el teorema del biniomio, pruebe directamente que las probabilidades de transici\'on del proceso de Poisson satisfacen las ecuaciones de Chapman-Kolmogorov $P_{t+s}=P_tP_s$. D\'e adem\'as un argumento probabil\'istico, basado en condicionar con lo que sucede al tiempo $s$, para probar dicha ecuaci\'on. 
+
+Sea\begin{esn}
+\imf{Q}{i,j}=\begin{cases}
+-\lambda&j=i\\
+\lambda&j=i+1\\
+0&j\neq i,i+1
+\end{cases}.
+\end{esn}Pruebe directamente que se satisfacen las ecuaciones de Kolmogorov\begin{equation*}
+%\label{CKEquationsForPoisson}
+\frac{d}{dt}\imf{P_t}{i,j}=\imf{QP_t}{i,j}=\imf{P_tQ}{i,j},
+\end{equation*}donde $QP_t$ es el producto de las matrices $Q$ y $P_t$.
+\end{problema}
+
+\begin{problema}[Tomado del examen general de probabilidad del Posgrado en Ciencias Matem\'aticas, UNAM, \href{http://www.posgradomatematicas.unam.mx/contenidoEstatico/archivo/files/pdf/Examenes_Generales/Probabilidad/Probabilidad2011-1.pdf}{Febrero 2011}]
+Una planta de producci\'on toma su energ\'ia de dos generadores. La cantidad de generadores al tiempo $t$ est\'a representado por una cadena de Markov a tiempo continuo $\set{X_t,t\geq 0}$ con espacio de estados $E=\set{0,1,2}$ y matriz infinit\'esimal $Q$ dada por\begin{esn}
+Q=\begin{pmatrix}
+-6&6&0\\
+1&-7&6\\
+0&2&-2
+\end{pmatrix}.
+\end{esn}
+\begin{enumerate}
+\item Encuentre la matriz de transici\'on de la cadena de Markov de los estados distintos que toma $X$, clasifique los estados, diga si existe una \'unica distribuci\'on invariante y en caso afirmativo, encu\'entrela. Calcule expl\'icitamente las potencias de la matriz de transici\'on. (Recuerde que de ser posible diagonalizar, esta es una buena estrategia.)
+\item ?`Cu\'al es la probabilidad de que ambos generadores est\'en trabajando al tiempo $t$ si s\'olo uno trabaja al tiempo cero? 
+\item Si $\rho_2$ denota la primera vez que ambos generadores est\'an trabajando al mismo tiempo, encuentre la distribuci\'on de $\rho_2$ cuando s\'olo un generador est\'a trabajando al tiempo cero. 
+\item Encuentre la proporci\'on de tiempo asint\'otica en que los dos generadores est\'an trabajando. Si cada generador produce 2.5 MW de energ\'ia por unidad de tiempo, ?`Cu\'al es la cantidad promedio de energ\'ia producida a largo plazo por unidad de tiempo?
+\end{enumerate}
+\end{problema}
+\begin{problema}[Procesos de ramificaci\'on a tiempo continuo]
+Sea $\mu$ una distribuci\'on en $\na$. A $\mu_k$ lo interpretamos como la probabilidad de que un individuo tenga $k$ hijos. Nos imaginamos la din\'amica de la poblaci\'on como sigue: a tasa $\lambda$, los individuos de una poblaci\'on se reproducen. Entonces tienen $k$ hijos con probabilidad $\mu_k$. Se pueden introducir dos modelos: uno en que el individuo que se reproduce es retirado de la poblaci\'on (nos imaginamos que muere) y otro en que no es retirado de la poblaci\'on (por ejemplo cuando se interpreta a la poblaci\'on como especies y a sus descendientes como mutaciones). En el caso particular del segundo modelo en que $\mu_1=1$, se conoce como proceso de Yule. 
+\begin{enumerate}
+\item Especifique un modelo de cadenas de Markov a tiempo continuo para cada uno de los modelos anteriores. A estos procesos se les conoce como procesos de ramificaci\'on a tiempo continuo.
+\end{enumerate}
+Nuestro primer objetivo ser\'a encontrar una relaci\'on entre procesos de ramificaci\'on a tiempo continuo y procesos de Poisson compuestos. Sea $N$ un proceso de Poisson  y $S$ una caminata aleatoria independiente de $N$ tal que $\proba{S_1=j}=\mu_{j-1}$ \'o $\mu_{j}$ dependiendo de si estamos en el primer caso o en el segundo. Sea $k\geq 0$ y definamos a $X_t=k+S_{N_t}$.
+\begin{enumerate}[resume]
+\item Diga brevemente por qu\'e $X$ es una cadena de Markov a tiempo continuo e identifique su matriz infinitesimal para ambos modelos.
+\end{enumerate}
+Sea ahora $\tau=\min\set{t\geq 0: X_t=0}$ y $Y_t=X_{t\wedge \tau}$. 
+\begin{enumerate}[resume]
+\item Argumente por qu\'e $Y$ es una cadena de Markov a tiempo continuo e identifique su matriz infinitesimal.
+\item Argumente por qu\'e existe un \'unico proceso $Z$ que satisface\begin{esn}
+Z_t=Y_{\int_0^t Z_s\, ds}
+\end{esn}y que dicho proceso es un proceso de ramificaci\'on a tiempo continuo. Sugerencia: Recuerde que las trayectorias de $Y$ son constantes por pedazos.
+\end{enumerate}
+Ahora nos enfocaremos en el proceso de Yule. 
+\begin{enumerate}[resume]
+\item Escriba las ecuaciones backward de Kolmogorov para las probabilidades de transici\'on $\imf{P_t}{x,y}$. Al argumentar por qu\'e $\imf{P_{t}}{x,x}=e^{-\lambda x}$, resuelva las ecuaciones backward por medio de la t\'ecnica de factor integrante (comenzando con $\imf{P_t}{x,x+1}$) y pruebe que\begin{esn}
+\imf{P_t}{x,y}=\binom{y-1}{y-x} e^{-\lambda x t}\paren{1-e^{-\lambda t}}^{y-x}.
+\end{esn}
+\item Al utilizar la f\'ormula para la esperanza de una variable binomial negativa, pruebe que\begin{esn}
+\imf{\se_x}{Z_t}= xe^{\lambda t}.
+\end{esn}
+\item Pruebe que $e^{-\lambda t}Z_t$ es una martingala no-negativa y que por lo tanto converge casi seguramente a una variable aleatoria $W$.
+\item Al calcular la transformada de Laplace de $e^{-\lambda t}Z_t$, pruebe que $W$ tiene distribuci\'on exponencial. Por lo tanto, argumente que casi seguramente $Z$ crece exponencialmente.
+%La distribuciÑn lÕmite està tomada de Beroin-Goldschmidt, ellos citan y corrigen un error de Athreya.
+\end{enumerate}
+\end{problema}
+\begin{problema}
+
+(Tomado del examen general de conocimientos del \'area de Probabilidad del Posgrado en Ciencias Matem\'aticas, UNAM, \href{http://www.posgradomatematicas.unam.mx/contenidoEstatico/archivo/files/pdf/Examenes_Generales/Probabilidad/Probabilidad2011-2.pdf}{Agosto 2011})
+
+Sea $N$ un proceso de Poisson homog\'eneo de par\'ametro $\lambda$. Sea $E=\paren{-1,1}$ y $X_0$ una variable aleatoria con valores en $E$ independiente de $N$. Se define el proceso\begin{esn}
+X_t=X_0 \times \paren{-1}^{N_t}, \quad t\geq 0.
+\end{esn}
+\begin{enumerate}
+\item Explique por qu\'e $X$ es una cadena de Markov a tiempo continuo con valores en $E$. 
+\item Calcule sus probabilidades de transici\'on y su matriz infinitesimal. 
+\item ?`Existe una distribuci\'on estacionaria para esta cadena? En caso afirmativo ?'Cu\'al es?
+\end{enumerate}
+\end{problema}
+\begin{problema}
+Sea\begin{esn}
+Q=\begin{pmatrix}
+-2&2\\
+3&-3
+\end{pmatrix}.
+\end{esn}\begin{enumerate}
+\item Haga un programa en octave que permita simular las trayectorias de una cadena de Markov a tiempo continuo $X$ con matriz infinitesimal $Q$.
+\item Utilice su programa para generar 10000 trayectorias en el intervalo de tiempo $[0,10]$ comenzando con probabilidad $1/2$ en cada estado y obtenga la distribuci\'on emp\'irica de $X_10$. 
+\item Calcule $e^{10Q}$ (utilizando alg\'un comando adecuado) y contraste con la distribuci\'on emp\'irica del inciso anterior.
+\item Codifique el siguiente esquema num\'erico, conocido como m\'etodo de Euler, para aproximar a $e^{10 Q}$: escoja $h>0$ peque\~no, defina a $P^h_0$ como la matriz identidad y recursivamente\begin{esn}
+P^h_{i+1}=P^h_i+hQP^h_i. 
+\end{esn}corra hasta que $i=\floor{10/h}$ y compare la matriz resultante con $e^{10Q}$. Si no se parecen escoja a $h$ m\'as peque\~no. ?`Con qu\'e $h$ puede aproximar a $e^{10Q}$ a 6 decimales?
+\end{enumerate}
+\end{problema}
+
+\bibliography{GenBib}
+\bibliographystyle{amsalpha}
+\end{document}

@@ -1,0 +1,74 @@
+\documentclass[a5paper,oneside]{amsart}
+\usepackage[scale={.9,.9}]{geometry}
+\usepackage{mathrsfs}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{problema}{Problema}
+\newtheorem*{definition}{Definition}
+\newtheorem*{remark}{Remark}
+\title[Problemas de Procesos I]{Problemas de Procesos Estoc\'asticos I\\ Semestre 2013-II\\ Posgrado en Ciencias Matem\'aticas\\ Universidad Nacional Aut\'onoma de M\'exico}
+\author{Ger\'onimo Uribe Bravo}
+%\address{}
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+\input{definitions.tex}
+%\usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+\begin{document}
+\maketitle
+\begin{problema}
+Sean $\paren{X_n}_{n\in\na}$ un proceso estoc\'astico con valores reales y $A\subset\re$ un boreliano. Pruebe que si\begin{esn}
+T_0=0\quad\text{y}\quad T_{n+1}=\min\set{n>T_n: X_n\in A}
+\end{esn}entonces $T_n$ es un tiempo de paro para toda $n$ y $T_n\to \infty$ puntualmente conforme $n\to\infty$. 
+
+\defin{Categor\'ias: } Tiempos de paro
+\end{problema}
+\begin{problema}[Lo que siempre tiene una posibilidad razonable de suceder lo har\'a; (casi seguramente)-- y pronto]
+\emph{Tomado de \cite[E10.5, p.223]{MR1155402}}
+
+Suponga que \(T\) es un tiempo de paro tal que para alg\'un \(N\in\na\) y \(\varepsilon>0\) se tiene que para toda \(n\in\na\):
+ $$
+ \p (T\leq N+ n|\F_n)>\varepsilon \text{ casi seguramente}
+ $$
+Al verificar la desomposici\'on
+ $$
+\p (T>kN)= \p (T>kN,T>(k-1)N),
+ $$pruebe por inducci\'on que para cada \(k=1,2,\ldots\):
+ $$
+\p (T>kN)\leq \paren{1-\eps}^k. 
+ $$Pruebe que \( \esp{T}<\infty \).
+ 
+ \defin{Categor\'ias:} Tiempos de paro.
+\end{problema}
+\begin{problema}
+\emph{Tomado de Mathematical Tripos, Part III, Paper 33, 2012, \url{http://www.maths.cam.ac.uk/postgrad/mathiii/pastpapers/}}
+
+Sean $\paren{X_i,i\in\na}$ variables aleatorias independientes con $\proba{X_i=\pm 1}=1/2$. Sean $S_0=0$ y $S_n=\sum_{i=1}^n X_i$. 
+\begin{enumerate}
+\item Sea $T_1=\min\set{n\geq 0:S_n=1}$. Explique por qu\'e $T_1$ es un tiempo de paro y calcule su esperanza.
+\item Mediante el inciso anterior, construya una martingala que converge casi seguramente pero no lo hace en $L_1$.
+\item Sea $T=\min\set{n\geq 2:S_n=S_{n-1}}$ y $U=T-2$. ?`Son $T$ y $U$ tiempos de paro? Justifique su respuesta.
+\item Para la variable $T$ que hemos definido, calcule $\esp{T}$. 
+\end{enumerate}
+
+\defin{Categor\'ias: } Tiempos de paro, problema de la ruina
+\end{problema}
+
+\begin{problema}[Extensiones del teorema de paro opcional]
+Sea \(M=\paren{M_n,n\in\na}\) una (super)martingala respecto de una filtraci\'on \(\paren{\F_n,n\in\na}\) y sean \(S\) y \(T\) tiempos de paro.
+\begin{enumerate}
+                \item Pruebe que \(S\wedge T\), \(S+T\) y \(S\vee T\) son tiempos de paro.
+                \item Sea \begin{esn}\F_T=\set{A\in\F:A\cap\set{T\leq n}\in\F_n\text{ para toda } n}\end{esn}es una \(\sigma\)-\'algebra, a la que nos referimos como la \(\sigma\)-\'algebra detenida en \(\tau\). Comente qu\'e puede fallar si \(T\) no es tiempo de paro. Pruebe que \(T\) es \(F_T\)-medible. 
+                \item Pruebe que si \(T\) es finito, entonces \(M_T\) es \(\F_T\)-medible.
+                \item Pruebe que si \(S\leq T\leq n\) entonces \(\F_S\subset\F_T\). Si adem\'as \(T\) es acotado entonces \(X_S,X_T\in L_1\) y \begin{esn}\espc{M_T}{\F_S}\leq M_S.\end{esn}
+                \item Si \(X=\paren{X_n,n\in\na}\) es un proceso estoc\'astico \(\paren{\F_n}\)-adaptado y tal que \(X_n\in L_1\) y tal que para cualesquiera tiempos de paro acotados \(S\) y \(T\) se tiene que \(\esp{X_S}=\esp{X_T}\) entonces \(X\) es una martingala. Sugerencia: considere tiempos de paro de la forma \(n\indi{A}+(n+1)\indi{A^c}\) con \(A\in\F_n\).
+\end{enumerate}
+
+\defin{Categor\'ias: }Tiempos de paro, Muestreo opcional
+\end{problema}
+\bibliography{GenBib}
+\bibliographystyle{amsalpha}
+\end{document}
