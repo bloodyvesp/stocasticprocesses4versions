@@ -1,0 +1,86 @@
+\begin{problema}
+	Sea $\left({X_n}_{n\in\mathbb{N}}\right)$ un proceso estocástico con valores reales y $A\subset \mathbb{R}$ un boreliano. 
+	Pruebe que si
+	$$T_0=0\quad\text{y}\quad T_{n+1}=\min\{k>T_n: X_k\in A \subset \mathbb{R}\}$$
+	entonces $T_n$ es un tiempo de paro para toda $n$ y $T_n\to \infty$ puntualmente conforme $n\to\infty$. 
+
+	\begin{categoria} 
+		Tiempos de paro.
+	\end{categoria}
+\end{problema}
+		
+\begin{proof}
+\\
+
+	Sea $(\mathscr{F}_n = \sigma(  X_0, X_1, \dots, X_n ))_{ n \in \mathbb{N}}$ una filtración.
+\\
+
+	Veamos que $T_0$ es tiempo de paro. $\{T_0 = 0\} = \Omega \in \mathscr{F}_n$ y 
+	$\{T_0 = c\} = \emptyset \in \mathscr{F}_n$ para $c \not= 0 \in \mathbb{N}$. Recordemos que:		
+	\begin{equation}\label{problema_1_1:equivalencia_varable_aleatoria}
+		\{T_0 = n\} \in \mathscr{F}_n \; \forall n \in \mathbb{N} \iff 
+		\{T_0 \leq n\} \in \mathscr{F}_n \; \forall n \in \mathbb{N}.
+	\end{equation}
+	Y por lo tanto $T_0$ es variable aleatoria sobre la sigma álgebra $\sigma(\cup_{n \in \mathbb{N}} 
+	\mathscr{F}_n)$.
+
+	Para $n=1$, veamos que:
+ 
+	\begin{gather*}
+			\{T_1 = 1\} = \{ X_1 \in A \} 
+			\in \mathscr{F}_1 
+		\\	\\
+			\{T_1 = 2\} = \{ X_1 \not\in A, X_2 \in A \} = \\ 
+			\{ X_1 \not\in A \} \cap \{X_2 \in A \}  
+			\in \mathscr{F}_2	
+		\\ \\
+			\{T_1 = 3\} = 
+			\{ X_1 \not\in A, X_2 \not\in A,  X_3 \in A \} = \\
+			\{ X_1 \not\in A \} \cap \{ X_2 \not\in A \} \cap \{X_3 \in A \} 
+			\in \mathscr{F}_3
+		\\
+			\vdots
+		\\
+			\{T_1 = n\} = 
+			\{ X_1 \not\in A, X_2 \not\in A, \dots, X_{n-1} \not\in A, X_n \in A \} = \\
+			\bigcap_{i=1}^{i=n-1} \{ X_i \not\in A \} \cap \{X_n \in A \} 
+			\in \mathscr{F}_n
+	\end{gather*} 
+ 
+	Por hipótesis de inducción supongamos que $\{T_k = n\} \in \mathscr{F}_n$ para cierta $k>1$ 
+	y para toda $n \in \mathbb{N}$ . \\
+
+	Para demostrar la primera parte del ejercicio, basta probar que $\{T_{k+1} = n\} \in \mathscr{F}_n$ para 
+	toda $n \in \mathbb{N}$. Pues por lo dicho en (\ref{problema_1_1:equivalencia_varable_aleatoria}) resultarían ser 
+	variables aleatorias en $\sigma(\cup_{n \in \mathbb{N}} \mathscr{F}_n)$.
+	\\
+	
+	Dado que 
+	\begin{equation}\label{problema_1_1:T_n->infty}
+		0=T_0<T_1<T_2<\dots<T_k
+	\end{equation}  
+	tenemos que $\{ T_k = n\} = \emptyset \in \mathscr{F}_l$ para $n < k$. 
+	
+	Ahora, sea $n \geq k$
+	
+	\begin{equation}\label{problema_1_1:T_k+1}
+		\{ T_{k+1} = n\} = 
+		\left( \bigcup_{i < n } \{T_k = i \} \right) 
+		\cap 
+		\left( \bigcap_{i < n} \{ X_i \not\in A \} \right)
+		\cap
+		\{ X_n \in A\}
+	\end{equation}
+	
+	
+	Donde 
+	\begin{itemize}
+		\item	 $\{ T_k = i\} \in \mathscr{F}_n \; \forall i < n \in \mathbb{N} \; $ (Por hipótesis de inducción).	
+		\item	 $\{ X_i \not \in A\} \in \mathscr{F}_n \; \forall i < n \in \mathbb{N} \;$ (Por ser $\mathscr{F}$ filtración).
+		\item $\{ X_n \in A\} \in \mathscr{F}_n$ (Por ser $X_n$ variable aleatoria en $\mathscr{F}_n$)	
+	\end{itemize}
+	
+	Y por lo tanto, (\ref{problema_1_1:T_k+1}) pertenece a $\mathscr{F}_n$. Con lo que termina la demostración de la primera parte del ejercicio.\\
+	
+	Ahora, de (\ref{problema_1_1:T_n->infty}) se sigue inmediatamente que que $T_n \rightarrow \infty$.
+\end{proof}
