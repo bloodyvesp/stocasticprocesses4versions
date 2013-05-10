@@ -1851,8 +1851,26 @@ Por lo  tanto $\esp{e^{iu X_t}}=e^{-\lambda t\paren{1-\imf{\psi}{u}}}$.
 Sea $N$ un proceso de L\'evy tal que $N_t$ tiene distribuci\'on de par\'ametro $\lambda t$. 
 \begin{enumerate}
 \item Pruebe que casi seguramente las trayectorias de $N$ son no-decrecientes.
+\begin{proof}
+
+
+\begin{align}
+\proba{N_{t+s}\geq N_t}&=\proba{N_{t+s}-N_t\geq 0}\notag \\
+&=\proba{N_{t}-N_0\geq 0}\notag \\
+&=\proba{N_t\geq 0}=1 \notag
+\end{align}
+ya que por hip\'otesis sabemos que $N_t$ tiene distribuci\'on de par\'ametro $\lambda t$.
+
+Por lo tanto $N_{t+s}\geq N_t$ casi seguramente.
+\end{proof}
+
 \item Sea $\Xi$ la \'unica medida en $\mc{B}_{\re_+}$ tal que $\imf{\Xi}{[0,t]}=N_t$. Pruebe que $\Xi$ es una medida de Poisson aleatoria de intensidad $\lambda \cdot\leb$.
-\item Concluya que $N$ es un proceso de Poisson de intensidad $\lambda$. 
+\begin{proof}
+Por proposici\'on 4.5  de las notas se obtiene el resultado.
+\end{proof}
+
+\item Concluya que $N$ es un proceso de Poisson de intensidad $\lambda$.
+
 \end{enumerate}
 \end{problema}
 
@@ -1970,6 +1988,23 @@ P=\begin{pmatrix}
 \end{esn}
 
 Todos los estados son recurrentes y $P$ es irrecucible. Por lo tanto existe la distribuci\'on invariante:
+
+\begin{esn}
+\begin{pmatrix}
+\pi_1& \pi_2& \pi_3
+\end{pmatrix}
+\begin{pmatrix}
+0&1&0\\
+1/7&0&6/7\\
+0&1&0
+\end{pmatrix}
+=\begin{pmatrix}
+\pi_1&\pi_2& \pi_3
+\end{pmatrix}
+\end{esn}
+
+Con la condici\'on de que $\pi_1+\pi_2+\pi_3=1$ entonces $\pi=(1/14,1/2,3/7)$. Como $P$ tiene distribuci\'on invariante entonces $P_t$ tiene distibuci\'on invariante. Caculando la distribuci\'on invariante de $P_t$:
+
 \begin{esn}
 \begin{pmatrix}
 6\pi_1& 7\pi_2& 2\pi_3
@@ -2138,7 +2173,8 @@ Como el estado 2 es absorbente entonces:
 
 \item Encuentre la proporci\'on de tiempo asint\'otica en que los dos generadores est\'an trabajando. Si cada generador produce 2.5 MW de energ\'ia por unidad de tiempo, ?`Cu\'al es la cantidad promedio de energ\'ia producida a largo plazo por unidad de tiempo?
 \begin{proof}
-La proporci\'on de tiempo asint\'otica de que ambos generadores esten trabajando es: $\lim_{t\rightarrow\infty}P_t(1,2)=18/25$.
+La proporci\'on de tiempo asint\'otica de que ambos generadores esten trabajando es: $\pi_3=18/25$.
+La cantidad promedio es $5*\pi_3+2.5*\pi_2=5*18/25+2.5*6/25=4.2$.
 \end{proof}
 \end{enumerate}
 \end{problema}

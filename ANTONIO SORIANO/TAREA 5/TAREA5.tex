@@ -126,7 +126,7 @@ Ahora, recordemos que la densidad de los estad\'isticos de orden de una muestra 
 $$
 f_{Y_1\dots ,Y_{n-1}}(y_1,\ldots ,y_{n-1})=(n-1)!f_{Y_1}(y_1)\ldots f_{Y_{n-1}}(y_{n-1})\mathds{1}_{\set{y_1\leq y_2 \ldots \leq y_{n-1}}}
 $$
-Luego entonces si tenemos una muestra de tama\~no $n-1$ de una distribuci\'on uniforme$(0,t_n)$  tendr’amos que:
+Luego entonces si tenemos una muestra de tama\~no $n-1$ de una distribuci\'on uniforme$(0,t_n)$  tendr\'iamos que:
 $$
 f_{Y_1\dots ,Y_{n-1}}(y_1,\ldots ,y_{n-1})=\frac{(n-1)!}{t_n^{n-1}}
 $$
@@ -136,7 +136,58 @@ f_{T_i|T_n}(t_i |t_n)=i {n-1 \choose i}\paren{\frac{t_i}{t_n}}^{i-1}\paren{1-\fr
 $$
 
 \end{proof}
-\item Escriba dos programas en Octave que simulen al proceso de Poisson de par\'ametro $\lambda$ en el intervalo $[0,1]$. En uno utilizar\'a s\'olo variables exponenciales y en el otro puede utilizar una variable Poisson.
+\item Escriba dos programas en Octave que simulen al proceso de Poisson de par\'ametro $\lambda$ en el intervalo $[0,1]$. En uno utilizar\'a s\'olo variables exponenciales y en el otro puede utilizar una variable Poisson.\\
+\begin{lstlisting}
+SIMULACION DEL PROCESO POISSON A PARTIR DEL LA SIMULACION DE EXPONENCIALES 	
+N=20        		 NUMERO DE RENOVACIONES
+lambda=0.8  	     INTENSIDAD 
+S=0         			
+T=0         		
+t=0         			
+
+for(i in 1:N){
+ 	S[i]=rexp(1,lambda) 	 (Simulacion de una variable exponencial)
+ 	t=S[i]+t
+ 	T[i]=t
+}
+Nt=seq(1:N)
+plot(T,Nt,type="S",main="Proceso Poisson Intensidad 0.8 con 20 Renovaciones",col=4)
+
+(Ver Figura 1)
+\end{lstlisting}
+ \begin{figure}
+  \centering
+    \includegraphics[width=0.9\textwidth]{Poisson1.png}
+  \caption{ Simulaci\'on del proceso Poisson}
+  \label{fig:ejemplo1}
+\end{figure}
+\begin{lstlisting}
+SIMULACION DEL PROCESO POISSON APARTIR DE UNA SIMULACION DE UNA POISSON Y UNIFORMES
+
+(Supongamos que observamos durante 30 unidades de tiempo)
+T_N=30
+lambda=0.8
+
+(Simulacion de una variable poisson)
+NT=rpois(1,lambda*T_N)
+
+
+T=runif(NT-1,0,T_N)
+T=sort(T) 		Ordenacion de las uniformes
+T[NT]=T_N
+
+Nt=seq(1:NT)
+plot(T,Nt,type="S",main="Proceso Poisson Intensidad 0.8",col=4)
+
+(Ver Figura 2)
+\end{lstlisting}
+ \begin{figure}
+  \centering
+    \includegraphics[width=0.9\textwidth]{Poisson2.png}
+  \caption{ Simulaci\'on del proceso Poisson con Uniformes}
+  \label{fig:ejemplo1}
+\end{figure}
+
 \end{enumerate}
 \end{problema}
 \begin{problema}
@@ -263,43 +314,42 @@ $$
 \begin{problema}
 Pruebe que si $X$ tiene incrementos independientes entonces el proceso $X^t$ dado por $X^t_s=X_{t+s}-X_t$ es independiente de $\F^X_t=\sag{X_s:s \leq t}$.
 \begin{proof}
-Sea $0 \leq s_1\leq s_2, \ldots ,\leq s_n$  y $0 \leq t_1\leq t_2, \ldots ,\leq t_m \leq t$  y definamos los eventos:
+Por el lema de clases mon\'otonas solo es necesario mostrar la independencia para conjuntos $A \in \F^X_t$ que son de la forma:
 $$
-A=\set{X_{t_1} \leq x_{t_1}, \ldots , X_{t_m} \leq x_{t_m}} \quad B=\set{X^t_{s_1} \leq x^t_{s_1}, \ldots , X^t_{s_n} \leq x^t_{s_n}}
+A=\set{X_{t_1}\in A_1, X_{t_2}\in A_2,\ldots, X_{t_n} \in A_n, X_t \in A_{n+1}}
 $$
-Notemos que $A \in \F^X_t$ y $B \in \sag{X^t_s: s \geq 0}$, demostraremos que $A$ y $B$ son eventos independientes.
+con  $0 \leq t_1 < t_1 \ldots < t_n < t$ y $A_i \in \B_{\re^+}$
+Luego definamos al conjunto $B$ como:
 $$
-\p(A\cap B)=\p\paren{X_{t_1} \leq x_{t_1}, \ldots , X_{t_m} \leq x_{t_m},X^t_{s_1} \leq x^t_{s_1}, \ldots , X^t_{s_n} \leq x^t_{s_n}}
+B=\set{X^t_{s_1} \in B_1,X^t_{s_2} \in B_2,\ldots, X^t_{s_n} \in B_n}
 $$
+con  $0 \leq s_1 < s_1 \ldots < s_n $ y $B_i \in \B_{\re^+}$.
+Observamos que por definici\'on, del proceso $X^t$ se tiene que:
 $$
-=\lim_{k \rightarrow \infty}\p\paren{X_{t_1} \leq x_{t_1}, \ldots , X_{t_m} \leq x_{t_m},X_t\leq k,X^t_{s_1} \leq x^t_{s_1}, \ldots , X^t_{s_n} \leq x^t_{s_n}}
+B=\set{X_{t_+{s_1}}-X_t \in B_1,X_{t+{s_2}}-X_t \in B_2,\ldots, X_{t+{s_n}}-X_t \in B_n}
 $$
-Recordando que $X^t_s=X_{t+s}-X_t$ lo que implica que $X^t_{s_2}-X^t_{s_1}=X_{t+s_2}-X_{t+s_1}$ entonces al construir incrementos independientes obtenemos:
+Luego si hacemos incrementos  tanto en el conjunto $A$ como en el $B$ obtenemos:
 $$
-=\lim_{k \rightarrow \infty}\p\paren{X_{t_1} \leq x_{t_1},   \ldots ,X_t-X_{t_m} \leq k-x_{t_m},\ldots, X_{t+s_n}-X_{t+s_{n-1}} \leq x^t_{s_n}-x^t_{s_{n-1}}}
-$$ 
-Por la independencia en incrementos lo anterior es igual a:
-$$
-\p\paren{X_{t_1} \leq x_{t_1}, X_{t_2}-X_{t_1} \leq x_{t_2}-x_{t_1} ,\ldots ,X_{t_m}-X_{t_{m-1}} \leq x_{t_m}-x_{t_{m-1}}}*
-$$
-$$
-\p\paren{X_{t_{s_1}}-X_t \leq x^t_{s_1}, X_{t+s_2}-X_{t+s_1} \leq x^t_{s_2}-x^t_{s_1} ,\ldots ,X_{t+s_n}-X_{t_{s_{n-1}} }\leq x^t_{s_n}-x^t_{s_{n-1}}}*
+A=\set{X_{t_1}\in A_1, X_{t_2}-X_{t_1} \in A^*_2,\ldots, X_{t_n}-X_{t_n-1} \in A^*_n, X_t-X_{t_n} \in A^*_{n+1}}
 $$
 $$
-\lim_{k \rightarrow \infty}\p\paren{X_t-X_{t_m} \leq k-x_{t_m}}
+B=\set{X_{t_+{s_1}}-X_t \in B_1,X_{t+{s_2}}-X_{t+{s_1}} \in B^*_2,\ldots, X_{t+{s_n}}-X_{t+{s_{n-1}}} \in B^*_n}
 $$
-Notamos que el \'ultimo l\'imite es igual a 1  y como tenemos la siguiente igualdad de eventos:
+Notemos entonces que como tenemos los tiempos:
 $$
-A=\set{X_{t_1}-X_0 \leq x_{t_1}-0, X_{t_2}-X_{t_1} \leq x_{t_2}-x_{t_1} ,\ldots ,X_{t_m}-X_{t_{m-1}} \leq x_{t_m}-x_{t_{m-1}}}
+0 \leq t_1 < t_1 \ldots < t_n < t<t+{s_1}<t+{s_2}\ldots t+{s_n}
 $$
+Entonces al intercectar A con B obtenemos un conjunto de la forma:
+\fontsize{8pt}{8pt} \selectfont 
 $$
-B=\set{X_{t_{s_1}}-X_t \leq x^t_{s_1}, X_{t+s_2}-X_{t+s_1} \leq x^t_{s_2}-x^t_{s_1} ,\ldots ,X_{t+s_n}-X_{t_{s_{n-1}} }\leq x^t_{s_n}-x^t_{s_{n-1}}}
+\tiny\set{X_{t_1}\in A_1, X_{t_2}-X_{t_1} \in A^*_2,\ldots, X_t-X_{t_n} \in A^*_{n+1}, X_{t_+{s_1}}-X_t \in B_1,\ldots, X_{t+{s_n}}-X_{t+{s_{n-1}}} \in B^*_n}
 $$
-Lo que demuestra que:
+\fontsize{10pt}{10pt} \selectfont 
+De donde por la hip\'otesis de incrementos independientes se sigue que:
 $$
-\p(A\cap B)=\p(A)\p(B)
+\p(A \cap B)=\p(A)\p(B)
 $$
-Notemos que suponemos que adem\'as de incrementos independientes se tiene que el proceso empieza en 0 $(X_0=0)$.
+Lo anterior fue hecho para  $A \in \F^X_t$ que son de la forma: $$A=\set{X_{t_1}\in A_1, X_{t_2}\in A_2,\ldots, X_{t_n} \in A_n, X_t \in A_{n+1}}$$ el cual resulta ser un $\pi$ sistema que genera a la sigma algebra   $\F^X_t$ se sigue entonces usando lema de clases mon\'otonas que $X^t_s=X_{t+s}-X_t$ es independiente de $\F^X_t=\sag{X_s:s \leq t}$.
 \end{proof}
 Calcular la esperanza y varianza del proceso de Poisson y de Poisson compuesto (en t\'erminos de la intensidad y la distribuci\'on de salto). 
 \begin{proof}
@@ -317,17 +367,9 @@ $$
 $$
 =\esp{\xi_1}\esp{N_t}=\esp{\xi_1}\lambda t
 $$
-Por otro lado la varianza del proceso poisson compuesto la podemos calcular recordando que:
+Por otro lado la varianza del proceso poisson compuesto la podemos  encontrar  calculando el segundo momento de la variable $X_t$:
 \begin{equation}
-\var{X_t}=\esp{\var{X_t|N_t}}+\var{\espc{X_t}{N_t}}
-\end{equation}
-El segundo sumando de la expresi\'on anterior lo podemos calcular usando lo que ya se hizo en en el calculo de la esperanza del proceso Poisson compuesto: 
-\begin{equation}
-\var{\espc{X_t}{N_t}}=\var{\esp{\xi_1}N_t}=\esp{\xi_1}^2\var{N_t}=\esp{\xi_1}^2\lambda t
-\end{equation}
-Por otro lado:
-\begin{equation}
-\var{X_t|N_t}=\espc{X_t^2}{N_t}-\espc{X_t}{N_t}^2=\espc{X_t^2}{N_t}-{N_t}^2\esp{\xi_i}^2
+\var{X_t}=\esp{X_t^2}-\esp{X_t}^2
 \end{equation}
 Luego como:
 $$
@@ -340,13 +382,24 @@ De donde concluimos que:
 $$
 \espc{X_t^2}{N_t}=N_t\esp{\xi_1^2}+N_t(N_t-1)\esp{\xi_1}^2
 $$
-Sustituyendo esto en la ecuaci\'on (4) obtenemos:
+Por lo tanto :
 $$
-\var{X_t|N_t}=N_t\esp{\xi_1^2}+N_t(N_t-1)\esp{\xi_1}^2-{N_t}^2\esp{\xi_i}^2=N_t\paren{\esp{\xi_1^2}-\esp{\xi_1}^2}
+\esp{X_t^2}=\esp{\espc{X_t^2}{N_t}}=\esp{N_t\esp{\xi_1^2}+N_t(N_t-1)\esp{\xi_1}^2}
 $$
-Luego sustituyendo en (2)  y tomando el resultado de (3) obtenemos que la varianza del proceso Poisson compuesto es:
 $$
-\var{X_t}=\esp{N_t\paren{\esp{\xi_1^2}-\esp{\xi_1}^2}}+\esp{\xi_1}^2\lambda t=\lambda t \esp{\xi_1^2}
+=\esp{N_t}\esp{\xi_1^2}+\esp{N_t(N_t-1)}\esp{\xi_1}^2=\lambda t \esp{\xi_1^2}+(\esp{N_t^2}-\lambda t)\esp{\xi_1}^2
+$$
+En esta parte necesitamos calcular el segundo momento del proceso poisson, el cual se obtiene recordando que la varianza del proceso  eso tambi\'en $\lambda t$. 
+$$
+\var{N_t}=\lambda t =\esp{N_t^2}-\esp{N_t}^2 \Rightarrow \esp{N_t^2}=\lambda t+ (\lambda t)^2
+$$
+Sutituyendo este ultimo resultado obtenemos que el segundo momento del proceso $X_t$ es:
+$$
+\esp{X_t^2}=\lambda t \esp{\xi_1^2}+(\lambda t+ (\lambda t)^2-\lambda t)\esp{\xi_1}^2=\lambda t \esp{\xi_1^2}+(\lambda t)^2\esp{\xi_1}^2
+$$
+Por lo  tanto utilizando la ecuaci\'on (2) concluimos que:
+$$
+\var{X_t}=\lambda t \esp{\xi_1^2}+(\lambda t)^2\esp{\xi_1}^2-(\lambda t)^2\esp{\xi_1}^2=\lambda t \esp{\xi_1^2}
 $$
 Resumiendo tenemos que para el proceso Poisson compuesto se tiene que:
 $$
@@ -375,7 +428,7 @@ Por lo tanto:
 $$
 \espc{e^{iu \sum_{i=0}^{N_t}\xi_i}}{N_t}=\esp{e^{iu \xi_1}}^{N_t}=\imf{\psi}{u}^{N_t}
 $$
-Sustituyendo esto \'ultimo en (5) obtenemos que:
+Sustituyendo esto \'ultimo en (3) obtenemos que:
 $$
 \esp{e^{iu X_t}}=\esp{\imf{\psi}{u}^{N_t}}=\sum_{k=0}^{\infty}\imf{\psi}{u}^k\p(N_t=k)=\sum_{k=0}^{\infty}\imf{\psi}{u}^k\frac{(\lambda t)^{k}}{k!}e^{-\lambda t}
 $$
@@ -399,14 +452,14 @@ Luego como $N_{s}$ es Poisson sabemos que $N_s\geq0$ casi seguramente y por tant
 \begin{proof}
 Tenemos que probar dos cosas:
 \begin{enumerate}
-\item Para todo $A\in \mc{B}_{\re_+}$ la variable $\Xi(A)$ tiene distribuci\'on  Poisson  de parametro $\lambda \cdot\leb(A)$\\
-Para probar esto usaremos el lema de clases mon\'onotonas definiendo lo siguiente:
+\item Para todo $A\in \mc{B}_{\re_+}$ la variable $\Xi(A)$ tiene distribuci\'on  Poisson  de paR\'ametro $\lambda \cdot\leb(A)$\\
+Para probar esto usar\'emos el lema de clases mon\'onotonas definiendo lo siguiente:
 $$
 \ensuremath{\mc{C}}:=\set{A\in \mc{B}_{\re_+} : A=\bigcup_{i=1}^{n} (a_i,b_i] \text{ tal que } a_i<b_i<a_{i+1}}
 $$
 Notamos que  $\ensuremath{\mc{C}}$ asi definida es una \'algebra  y como en su $\sigma$-\'algebra est\'an los intervalos abiertos pues:
 $$
-(a,b)=\bigcup_{n=1}^{\infty}=[a+\frac{1}{n},b)
+(a,b)=\bigcup_{n=1}^{\infty}=(a,b-\frac{1}{n}]
 $$
 Luego entonces $\sigma(\ensuremath{\mc{C}})=\mc{B}_{\re_+}$. Por otro lado definamos  a la colecci\'on $\ensuremath{\mc{M}}$ como:
 $$
@@ -420,7 +473,7 @@ Pero cada $\Xi(A_i) \sim Poisson(\lambda \cdot\leb(A_i))$ pues $A_i \in \ensurem
 $$
 \p(\Xi(A)=n)=\lim_{i\rightarrow \infty}e^{-\lambda \cdot\leb(A_i)}\frac{\paren{\lambda \cdot\leb(A_i)}^n }{n!}
 $$
-Pero como $A_i \uparrow A$ entonces $ \cdot\leb(A_i) \uparrow \leb(A) $ de donde se concluye que:
+Pero como $A_i \uparrow A$ entonces $ \leb(A_i) \uparrow \leb(A) $ de donde se concluye que:
 $$
 \p(\Xi(A)=n)=e^{-\lambda \cdot\leb(A)}\frac{\paren{\lambda \cdot\leb(A)}^n }{n!}
 $$
@@ -440,11 +493,17 @@ $$
 De donde se concluye que $A \in \ensuremath{\mc{M}}$ y por tanto $\ensuremath{\mc{C}} \subset \ensuremath{\mc{M}}$. Luego entonces por el lema de clases mon\'otonas se concluye que para todo $A\in \mc{B}_{\re_+}$ la variable $\Xi(A)$ tiene distribuci\'on  Poisson  de parametro $\lambda \cdot\leb(A)$\
  
  
-\item Si $A_1,\ldots, A_n \in  \mc{B}_{\re_+}$ son ajenos por pares entonces $\Xi(A_1),\ldots,\Xi(A_n)$ son independientes
+\item Si $A_1,\ldots, A_n \in  \mc{B}_{\re_+}$ son ajenos por pares entonces $\Xi(A_1),\ldots,\Xi(A_n)$ son independientes. \\
+Esta prueba es similar a lo que viene en la notas (pagina  106).\\
+
+Para la misma \'algebra $\mc{C}$ consideremos a la clase $\mc{M}_1$ de eventos $A_1\in\mc{B}_{[0,\infty)}$ tales que si $A_1,\ldots,A_n\in\mc{C}$ y   $A_1,A_2,\ldots, A_n$ son ajenos por pares entonces $\imf{\Xi}{A_1}$ es independiente de $\imf{\Xi}{A_2},\ldots,\imf{\Xi}{A_n}$. Puesto que la independencia es estable cuando tomamos l\'imites casi seguros, se sigue que $\mc{M}_1$ es una clase mon\'otona. Por otra parte, al utilizar la independencia de los incrementos de $N$, se sigue que $\mc{C}\subset\mc{M}_1$, lo cual implica que $\mc{M}_1=\mc{B}_{[0,\infty)}$. Para proceder, consideramos a la clase $\mc{M}_2$ de eventos $A_2\in\mc{B}_{[0,\infty)}$ tales que si $A_1\in\mc{B}_{\re_+}$, $A_3,\ldots,A_n\in\mc{C}$ y  si $A_1,A_2,\ldots, A_n$ son ajenos por pares entonces $\imf{\Xi}{A_2}$ es independiente de $\imf{\Xi}{A_1},\imf{\Xi}{A_3},\ldots,\imf{\Xi}{A_n}$. por independencia de los incrementos sabemos que si $A_2\in\mc{C}$ entonces $\imf{\Xi}{A_2}$ es independiente de $\imf{\Xi}{A_3},\ldots, \imf{\Xi}{A_n}$. Por otra parte, puesto que $\mc{M}_1=\mc{B}_{\re_+}$ se sigue que $A_1$ es independiente de $A_2,\ldots, A_n$ y por lo tanto $A_2$ es independiente de $A_1,A_3,\ldots, A_n$. Esto prueba que $\mc{C}\subset\mc{M}_2$ y por lo tanto $\mc{M}_2=\mc{B}_{\re_+}$. El resto de la demostraci\'on es an\'alogo. 
+
 \end{enumerate}
 
 \end{proof}
-\item Concluya que $N$ es un proceso de Poisson de intensidad $\lambda$. 
+\item Concluya que $N$ es un proceso de Poisson de intensidad $\lambda$. \\
+Por el inciso anterior tenemos que $N$  es un proceso de conteo. Luego  el teorema 4.1 de las notas  nos indica  que un proceso de cont\'eo es de Poisson si y s\'olo si es un Proceso de Levy.\\
+En nuestro caso,  como N es un proceso de Levy que es de conteo, concluimos que N es un proceso Poisson.
 \end{enumerate}
 \end{problema}
 
@@ -475,29 +534,29 @@ P_{t+s}(i,j)=e^{-\lambda (t+s)}\frac{(\lambda (t+s))^{j-i}}{(j-i)!} =e^{-\lambda
 $$
 Usando el teorema del binomio obtenemos que:
 $$
-\frac{(t+s)^{j-i}}{(j-i)!}=\frac{\sum_{k=0}^{j-i}{j-i \choose k}s^kt^{j-i-k}}{(j-i)!}=\sum_{k=0}^{j-i}\frac{s^kt^{j-i-k}}{(k)!(j-i-k)!}
+\frac{(t+s)^{j-i}}{(j-i)!}=\frac{\sum_{k=0}^{j-i}{j-i \choose k}t^ks^{j-i-k}}{(j-i)!}=\sum_{k=0}^{j-i}\frac{t^ks^{j-i-k}}{(k)!(j-i-k)!}
 $$
 De donde concluimos que la entrada  $i,j$ de la matriz $P_{t+s}$ es:
 \begin{equation}
-P_{t+s}(i,j)=e^{-\lambda (t+s)}\lambda^{j-i}\sum_{k=0}^{j-i}\frac{s^kt^{j-i-k}}{(k)!(j-i-k)!}
+P_{t+s}(i,j)=e^{-\lambda (t+s)}\lambda^{j-i}\sum_{k=0}^{j-i}\frac{t^ks^{j-i-k}}{(k)!(j-i-k)!}
 \end{equation}
 Por otro lado, si calculamos la entrada $i,j$ de la matriz que se obtiene de multiplicar $P_tP_s$ obtenemos:
 $$
 (P_tP_s)(i,j)=\sum_{k=0}^{\infty}P_t(i,k)P_s(k,j)=\sum_{k=0}^{\infty}e^{-\lambda t}\frac{(\lambda t)^{k-i}}{(k-i)!} \mathds{1}_{\set{k\geq i}}e^{-\lambda s}\frac{(\lambda s)^{j-k}}{(j-k)!} \mathds{1}_{\set{k\leq j}}
 $$
 $$
-=e^{-\lambda (t+s)}\lambda^{j-i}\sum_{k=j}^{i}\frac{s^{j-k}t^{k-i}}{(k-i)(j-k)!} 
+=e^{-\lambda (t+s)}\lambda^{j-i}\sum_{k=i}^{j}\frac{s^{j-k}t^{k-i}}{(k-i)(j-k)!} 
 $$
-Luego en la suma anterior haciendo el cambio $u=j-k$ obtenemos que la entreada $i,j$ de la matriz producto $P_tP_s$ es:
+Luego en la suma anterior haciendo el cambio $u=k-i$ obtenemos que la entrada $i,j$ de la matriz producto $P_tP_s$ es:
 \begin{equation}
-(P_tP_s)(i,j)=e^{-\lambda (t+s)}\lambda^{j-i}\sum_{u=0}^{j-i}\frac{s^{u}t^{j-u-i}}{(j-u-i)(u)!} 
+(P_tP_s)(i,j)=e^{-\lambda (t+s)}\lambda^{j-i}\sum_{u=0}^{j-i}\frac{t^{u}s^{j-u-i}}{(j-u-i)(u)!} 
 \end{equation}
-Por las ecuaciones (6) y (7) obtenemos que se da la igualdad de las matrices $P_{t+s}=P_tP_s$.
-Poro otro lado ahora daremos una justificaci—n probab\'istica de las ecuaciones de  Chapman-Kolmogorov
+Por las ecuaciones (4) y (5) obtenemos que se da la igualdad de las matrices $P_{t+s}=P_tP_s$.\\
+Por otro lado ahora daremos una justificaci\'on probabil\'istica de las ecuaciones de  Chapman-Kolmogorov
 $$
 P_{t+s}(i,j)=\p(N_{t+s}=j-i)=\sum_{u=0}^{\infty}\p(N_{t+s}=j-i,N_s=u)
 $$
-Como el proceso $N$ es creciente entonces $N_{t+s}>N_s$ por lo tanto  se debe de tener que  $j-i\geq u$   entonces:
+Como el proceso $N$ es creciente entonces $N_{t+s}\geq N_s$ por lo tanto  se debe de tener que  $j-i\geq u$   entonces:
 $$
 P_{t+s}(i,j)=\sum_{u=0}^{j-i}\p(N_{t+s}=j-i,N_s=u)=\sum_{u=0}^{j-i}\p(N_{t+s}-N_s=j-i-u,N_s=u)
 $$
@@ -537,7 +596,7 @@ Por otros lado, como la matriz toma valores distintos de cero cuando $i=j$ y $j=
 $$
 \imf{QP_t}{i,j}=\sum_{k=0}^{\infty}Q(i,k)P_t(k,j)=Q(i,i)P_t(i,j)+Q(i,i+1)P_t(i+1,j)
 $$ 
-Y por definici—n de Q se tiene entonces que:
+Y por definici\'on de Q se tiene entonces que:
 $$
 \imf{QP_t}{i,j}=-\lambda P_t(i,j)+\lambda P_t(i+1,j)=\frac{d}{dt}\imf{P_t}{i,j}
 $$
@@ -549,7 +608,7 @@ De donde sustituyendo el valor que toma Q en esas entradas:
 $$
 \imf{P_tQ}{i,j}=-\lambda P_t(i,j)+\lambda P_t(i,j-1)=-\lambda P_t(i,j)+\lambda P_t(i+1,j)=\frac{d}{dt}\imf{P_t}{i,j}
 $$
-Lo anterior es valido porque $P_t(i,j-1)=P_t(i,j-1)$, en efecto pues:
+Lo anterior es v\'alido porque $P_t(i,j-1)=P_t(i+1,j)$, en efecto pues:
 $$
 P_t(i,j-1)=\p(N_t=j-1-i)=\p(N_t=j-(i+1))=P_t(i+1,j)
 $$
@@ -568,7 +627,7 @@ Q=\begin{pmatrix}
 \begin{enumerate}
 \item Encuentre la matriz de transici\'on de la cadena de Markov de los estados distintos que toma $X$, clasifique los estados, diga si existe una \'unica distribuci\'on invariante y en caso afirmativo, encu\'entrela. Calcule expl\'icitamente las potencias de la matriz de transici\'on. (Recuerde que de ser posible diagonalizar, esta es una buena estrategia.)
 \begin{proof}
-Primero recordemos que Q tiene las tasas de transici\'on entre estados y que adem\'as $-c(x)=\sum_y Q(x,y)$, $Q(x,y)=c(x)P(x,y)$. Tambien vimos que $P(x,x)=1$ si $c(x)=0$ y  $P(x,x)=0$ si $c(x) \neq 0$. Entonces:
+Primero recordemos que Q tiene las tasas de transici\'on entre estados  $(x \neq y)$ y  que $Q(x,y)=c(x)P(x,y)$. Tambien vimos que $P(x,x)=1$ si $c(x)=0$ y  $P(x,x)=0$ si $c(x) \neq 0$. Entonces:
 \begin{esn}
 P=\begin{pmatrix}
 0&1&0\\
@@ -621,7 +680,7 @@ De donde concluimos  dada la restricci\'on $\pi_1+\pi_2+\pi_3=1$ tenemos que la 
 \frac{3}{7}
 \end{pmatrix}^T
 \end{esn}
-Ahora calcularemos expl’\'icitamente las potencias de la matriz de transici\'on, para ello recurriremos a la diagonalizaci\'on de la matriz P. Primero encontramos los eigenvectores de P obteniendo $\lambda_1=1, \lambda_2=0, \lambda_3=-1$ con eigenvectores  correspondientes: $$v_1=\paren{1,1,1}^t,v_2=\paren{-6,0,1}^t, v_3=\paren{1,-1,1}^t$$
+Ahora calcularemos expl\'i\'icitamente las potencias de la matriz de transici\'on, para ello recurriremos a la diagonalizaci\'on de la matriz P. Primero encontramos los eigenvectores de P obteniendo $\lambda_1=1, \lambda_2=0, \lambda_3=-1$ con eigenvectores  correspondientes: $$v_1=\paren{1,1,1}^t,v_2=\paren{-6,0,1}^t, v_3=\paren{1,-1,1}^t$$
 Por lo tanto definiendo la matrices U  y D como:
 \begin{esn}
 U:=
@@ -695,7 +754,7 @@ Observamos que entonces la $P^n$ no converge.
 \end{proof}
 \item ?`Cu\'al es la probabilidad de que ambos generadores est\'en trabajando al tiempo $t$ si s\'olo uno trabaja al tiempo cero?  
 \begin{proof}
-Necesitamos calcular $P_t(1,2)$, para ello primero tenemos que encontrar $P_t$ a partir de la matriz infinitesimal $Q$, por lo que nuevamente tendremos que  diagonalizar $Q$.  Para ello encontramos los eigenvalores y egenvectores asociados obteniendo $\lambda_1=0, \lambda_2=-5, \lambda_3=-10$ con eigenvectores  correspondientes: $$v_1=\paren{1,1,1}^t,v_2=\paren{18,3,-2}^t, v_3=\paren{-6,4,-1}^t$$
+Necesitamos calcular $P_t(1,2)$, para ello primero tenemos que encontrar $P_t$ a partir de la matriz infinitesimal $Q$, por lo que nuevamente tendr\'emos que  diagonalizar $Q$.  Para ello encontramos los eigenvalores y egenvectores asociados obteniendo $\lambda_1=0, \lambda_2=-5, \lambda_3=-10$ con eigenvectores  correspondientes: $$v_1=\paren{1,1,1}^t,v_2=\paren{18,3,-2}^t, v_3=\paren{-6,4,-1}^t$$
 Definiendo nuevamente las matrices U y D como:
  \begin{esn}
 U:=
@@ -912,7 +971,7 @@ P(x,y)=\begin{cases}
 \end{cases}.
 \end{esn}
 \end{itemize}
-Finalmente, en clase vimos que dada una matriz de tasas de transici\'on podemos encontrar una cadena de markov a tiempo continuo $X_t$ mediante el siguiente procedimiento, primero construimos $S_1,S_2,\ldots $ variables aleatorias independiente e id\'enticamente distribuidas como exponenciales de par\'ametro 1 , luego por el teorema de kolmogorov sabemos existe $Z_n$ una cadena de markov con matriz de transici\'on  $P$  y que comience en $X_0=k$ (k suponemos son el n\'umero de individuos con los que comienza la poblaci\'on. Con lo anterior definimos $T_0=0$ y $T_{n+1}=T_n+\frac{S_n}{c(Z_n)}$ y finalmente se considera al proceso:
+Finalmente, en clase vimos que dada una matriz de tasas de transici\'on podemos encontrar una cadena de markov a tiempo continuo $X_t$ mediante el siguiente procedimiento, primero construimos $S_1,S_2,\ldots $ variables aleatorias independiente e id\'enticamente distribuidas como exponenciales de par\'ametro 1 , luego por el teorema de kolmogorov sabemos existe $Z_n$ una cadena de markov con matriz de transici\'on  $P$  y que comience en $X_0=k$ ($k$ suponemos es el n\'umero de individuos con los que comienza la poblaci\'on). Con lo anterior definimos $T_0=0$ y $T_{n+1}=T_n+\frac{S_n}{c(Z_n)}$ y finalmente se considera al proceso:
 $$
 X_t=Z_n \quad \text{ si } t \in [T_n,T_{n+1}) 
 $$
@@ -927,7 +986,7 @@ Primero notemos que al proceso $X_t=k+S_{N_t}$ lo podemos  escribir como:
 $$
 X_t=k+S_{n}=k+\sum_{i=0}^{n}\xi_i \quad T_{n-1}\leq t < T_{n}
 $$
-Donde $T_n$ son los tiempos de salto del proceso poisson. $N_t$. Luego entonces el proceso de salto asociado $Z_n=X_{T_n}=k+S_n$ es una cadena de Markov a tiempo discreto, en efecto pues:
+Donde $T_n$ son los tiempos de salto del proceso poisson $N_t$. Luego entonces el proceso de salto asociado $Z_n=X_{T_n}=k+S_n$ es una cadena de Markov a tiempo discreto, en efecto pues:
 $$
 \probac{Z_n=z_n}{Z_1=z_1,\ldots,Z_{n-1}=z_{n-1}}=\frac{\p(Z_1=z_1,\ldots Z_n=z_n)}{\p(Z_1=z_1,\ldots,Z_{n-1}=z_{n-1})}
 $$
@@ -949,7 +1008,7 @@ De donde concluimos que:
 $$
 \probac{Z_n=z_n}{Z_1=z_1,\ldots,Z_{n-1}=z_{n-1}}=\mu_{z_n-z_{n-1}}=\probac{Z_n=z_n}{Z_{n-1}=z_{n-1}}
 $$
-Luego entonces, $Z_n$ as’ definido es una cadena de Markov en tiempo discreto. Adicionalmente a esto, como los tiempo de salto $T_n-T_{n-1}$ vienen del proceso poisson N, entonces sabemos que son independientes  y exponenciales de par\'ametro $\lambda$. De donde se concluye que $X_t$ es en efecto una cadena de Markov a tiempo continuo.\\ Ahora encontramos las matrices infinitesimales asociadas.
+Luego entonces, $Z_n$ as\'i definido es una cadena de Markov en tiempo discreto. Adicionalmente a esto, como los tiempos de salto $T_n-T_{n-1}$ vienen del proceso poisson N, entonces sabemos que son independientes  y exponenciales de par\'ametro $\lambda$. De donde se concluye que $X_t$ es en efecto una cadena de Markov a tiempo continuo.\\ Ahora encontramos las matrices infinitesimales asociadas.
 \begin{itemize}
  \item Caso 1: (El individuo es retirado de la poblaci\'on). En este caso tenemos que la distribuci\'on de las variables $\xi_i$ cumplen con:  $\p(\xi_i=j)=\mu_{j+1}$, es decir la variable $\xi_i$ puede tomar valores  en $\set{-1,0,1\ldots}$. Primero obtengamos la matriz de tasas de transici\'on la cual obtenemos razonando de manera similar, suponiendo que tenemos $x$ individuos  entonces la tasa con la que abandonamos el estado $x$ para llegar al estado $y$  (individuos) $y \geq x-1$ es precisamente $\lambda x \p(\xi_1=y-x)=\lambda x \mu_{y-x+1}$ por lo tanto la matriz es:
 \begin{esn}
@@ -1106,7 +1165,7 @@ Resolviendo la ecuaci\'on diferencial obtemos:
 $$
 \imf{P_t}{x,x}=e^{-\lambda x  t}=\binom{x-1}{x-x} e^{-\lambda x t}\paren{1-e^{-\lambda t}}^{x-x}
 $$
-Ahora atacaremos el problema en que $y > x$ utilizando inducci\'on, supongamos y=x+k, comenzamos con el caso k=1. Entonces:
+Ahora atacaremos el problema en que $y > x$ utilizando inducci\'on, supongamos $y=x+k$, comenzamos con el caso $k=1$. Entonces:
 $$
 \frac{d}{dt}\imf{P_t}{x,x+1}=\lambda x P_t(x+1,x+1)-\lambda x P_t(x,x+1)
 $$
@@ -1141,7 +1200,7 @@ Nuevamente haciendo uso de la t\'ecnica del factor integrante (multiplicamos por
 $$
 \frac{d}{dt}\paren{e^{\lambda xt} \imf{P_t}{x,x+k+1}}=\lambda x \binom{x+k}{k} e^{-\lambda t}\paren{1-e^{-\lambda t}}^{k}
 $$
-Resolviendo la ecuaci—n integrando 
+Resolviendo la ecuaci\'on integrando 
 $$
 \paren{e^{\lambda xt} \imf{P_t}{x,x+k+1}}=\int_0^t\lambda x \binom{x+k}{k} e^{-\lambda s}\paren{1-e^{-\lambda s}}^{k}ds
 $$
@@ -1153,7 +1212,7 @@ Finalmente como:
 $$
 \frac{x}{k+1}\binom{x+k}{k}=\frac{x(x+k)!}{(k+1)x!k!}=\frac{(x+k)!}{(x-1)!(k+1)!}=\binom{x+k}{k+1}
 $$
-Obtenemos que la form\'upa es valida para k+1, pues:
+Obtenemos que la form\'ula es valida para $k+1$, pues:
 $$
 \imf{P_t}{x,x+k+1}=\binom{x+k}{k+1}e^{-\lambda xt} \paren{1-e^{-\lambda t}}^{k+1}
 $$
@@ -1174,7 +1233,11 @@ $$
 $$
 \begin{proof}
 $$
-\imf{\se_x}{Z_t}=\sum_{z=0}^{\infty}z\p_x(Z_t=z)=\sum_{z=0}^{\infty}zP_t(x,z)=\espc{Z}{Z\sim BinNeg(z; p=e^{-\lambda t},r=x)}
+\imf{\se_x}{Z_t}=\sum_{z=0}^{\infty}z\p_x(Z_t=z)=\sum_{z=0}^{\infty}zP_t(x,z)=\esp{Z}
+$$
+Donde tenemos que:
+$$
+Z\sim BinNeg(z; p=e^{-\lambda t},r=x)
 $$
 Como la esperanza de una distribuci\'on Binomial Negativa de par\'ametros $p,r$ es $\frac{r}{p}$ entonces:
 $$
@@ -1216,7 +1279,7 @@ $$
 $$
 Como tenemos indeterminaci\'on de $\frac{0}{0}$ aplicamos L'Hopital obtenemos:
 $$
-\paren{\lim_{u \rightarrow 0}\frac{1}{e^{-su}{-s}+1)}}^k=\paren{\frac{1}{1-s}}^k
+\paren{\lim_{u \rightarrow 0}\frac{1}{e^{-su}(-s)+1)}}^k=\paren{\frac{1}{1-s}}^k
 $$
 La \'ultima expresi\'on corresponde a la funci\'on generadora de momentos de una distribuc\'on Gamma de par\'ametros $(k,\lambda=1)$, es decir, concluimos que $W$ tiene una distribuci\'on $Gamma(k,1)$.\\
 Observaci\'on: Si el proceso $Z_t$ hubiera comenzado con un s\'olo  individuo entonces $W$ sigue una distribuci\'on Exponencial de par\'ametro 1.
@@ -1224,7 +1287,279 @@ Observaci\'on: Si el proceso $Z_t$ hubiera comenzado con un s\'olo  individuo en
 %La distribuci?n l?mite est? tomada de Beroin-Goldschmidt, ellos citan y corrigen un error de Athreya.
 \end{enumerate}
 \end{problema}
+\begin{problema}
+(Tomado del examen general de conocimientos del \'area de Probabilidad del Posgrado en Ciencias Matem\'aticas, UNAM, \href{http://www.posgradomatematicas.unam.mx/contenidoEstatico/archivo/files/pdf/Examenes_Generales/Probabilidad/Probabilidad2011-2.pdf}{Agosto 2011})
 
+Sea $N$ un proceso de Poisson homog\'eneo de par\'ametro $\lambda$. Sea $E=\paren{-1,1}$ y $X_0$ una variable aleatoria con valores en $E$ independiente de $N$. Se define el proceso\begin{esn}
+X_t=X_0 \times \paren{-1}^{N_t}, \quad t\geq 0.
+\end{esn}
+\begin{enumerate}
+\item Explique por qu\'e $X$ es una cadena de Markov a tiempo continuo con valores en $E$. 
+\begin{proof}
+Para verificar que $X_t$ es una cadena de Markov a tiempo continuo verificaremos que el proceso $W_n=X_{T_n}=X_0(-1)^n$ es una cadena de markov a tiempo discreto,donde $T_n$ son los tiempos en donde el proceso Poisson $N_t$ cambia de estado.Para verificar que $W_n$ es cadena de markov a tiempo discreto calculamos la probabilidad de $W_n$ dado el pasado y verificaremos que s\'olo depende del \'ultimo paso.\\
+Como $W_n=X_0(-1)^n=X_0(-1)^{n-1}(-1)=-W_{n-1}$ y dado que suponemos que  $\p(W_{n-1}=i_{n-1},\ldots,W_0=i_0)>0$, entonces
+$$
+\probac{W_n={i_n}}{W_{n-1}=i_{n-1},\ldots,W_0=i_0}=\probac{-W_{n-1}={i_n}}{W_{n-1}=i_{n-1},\ldots,W_0=i_0}
+$$
+$$
+\probac{W_{n-1}=-{i_n}}{W_{n-1}=i_{n-1},\ldots,W_0=i_0}=\probac{W_{n-1}=-{i_n}}{W_{n-1}=i_{n-1}}=\mathds{1}_{\set{i_n=-i_{n+1}}}
+$$
+De donde concluimos que el proceso $W_n$ a tiempo discreto cumple con la propiedad de Markov. Finalmente para concluir que $X_t$ es una cadena de Markov a tiempo continuo hay que verificar que $S_n=T_n-T_{n-1}$ siguen una distribuci\'on exponencial  y son independientes   para toda $n$, pero esto es inmediato dado que  $N_t$ es un proceso de poisson. Por lo tanto se concluye que en  efecto $X_t$ es una cadena de Markov a tiempo continuo, adem\'as por construcci\'on se tiene  que $X_t \in \set{-1,1}$ para toda $t$ 
+\end{proof}
+\item Calcule sus probabilidades de transici\'on y su matriz infinitesimal. 
+\begin{proof}
+Calculamos las tasas de transici\'on $\alpha(x,y)$  en este caso sabemos que estando en $x$ la tasa con la que cambiamos de estado a $y$ debe ser $\lambda$ es decir la tasa con la que proceso Poisson $N_t$ cambia de estado, ademas  se tiene que $\alpha(x,x)=0$ entonces:
+ \begin{esn}
+\alpha(x,y)=
+\left( \begin{array}{cc}
+0 & \lambda \\
+\lambda & 0
+\end{array} \right)
+\Rightarrow 
+ Q(x,y)=
+\left( \begin{array}{cc}
+-\lambda & \lambda \\
+\lambda & -\lambda
+\end{array} \right)
+\end{esn}
+De aqu\'i tambi\'en obtenemos que la matriz de la cadena asociada es:
+\begin{esn}
+P(x,y)=
+\left( \begin{array}{cc}
+0 & 1 \\
+1 & 0
+\end{array} \right)
+\end{esn}
+Y finalmente para encontrar la familia de probabilidades de transaci\'on $P_t$, primero diagonalizamos a Q.
+\begin{esn}
+Q(x,y)=
+\left( \begin{array}{cc}
+-\lambda & \lambda \\
+\lambda & -\lambda
+\end{array} \right)
+=
+\left( \begin{array}{cc}
+1 & 1 \\
+1 & -1
+\end{array} \right)
+\left( \begin{array}{cc}
+0 & 0 \\
+0 & -2\lambda
+\end{array} \right)
+\left( \begin{array}{cc}
+\frac{1}{2} & \frac{1}{2} \\
+\frac{1}{2} & -\frac{1}{2}
+\end{array} \right)
+\end{esn}
+Por lo tanto $P_t$ es:
+\begin{esn}
+P_t(x,y)=
+\left( \begin{array}{cc}
+1 & 1 \\
+1 & -1
+\end{array} \right)
+\left( \begin{array}{cc}
+1 & 0 \\
+0 & e^{-2\lambda t}
+\end{array} \right)
+\left( \begin{array}{cc}
+\frac{1}{2} & \frac{1}{2} \\
+\frac{1}{2} & -\frac{1}{2}
+\end{array} \right)
+\end{esn}
+\begin{esn}
+P_t(x,y)=
+\left( \begin{array}{cc}
+\frac{1}{2}+\frac{1}{2}e^{-2\lambda t} & \frac{1}{2}-\frac{1}{2}e^{-2\lambda t}  \\
+\frac{1}{2}-\frac{1}{2}e^{-2\lambda t} & \frac{1}{2}+\frac{1}{2}e^{-2\lambda t} 
+\end{array} \right)
+\end{esn}
+\end{proof}
+\item ?`Existe una distribuci\'on estacionaria para esta cadena? En caso afirmativo ?'Cu\'al es?
+\begin{proof}
+Dado que la matriz de la cadena de markov $P$ es recurrente y tiene estados finitos, entonces sabemos que es positivo recurrente y por tanto tiene una \'unica distribuci\'on invariante. Para encontrar dicha distribuci\'on  utilizaremos 5.6 que nos indica $\nu=(\pi_1,\pi_2)$ es invariante para $X_t$ si $c\nu$ es invariante para la matriz asociada $P$, entonces buscamos el vector $\nu$ tal que:
+\begin{esn}
+\left( \begin{array}{cc}
+\lambda \pi_1 & \lambda \pi_2 
+\end{array} \right)
+\left( \begin{array}{cc}
+0 & 1\\
+1& 0
+\end{array} \right)
+=
+\left( \begin{array}{cc}
+\lambda \pi_1 & \lambda \pi_2 
+\end{array} \right)
+\end{esn}
+Luego dado que $\pi_1+\pi_2=1$ se sigue que la distribuci\'on invarianate es $\nu=(\frac{1}{2},\frac{1}{2})$
+Observaci\'on: Notamos que:
+$$
+\lim_{t\rightarrow \infty}P_t(x_y)=\frac{1}{2} =\pi_1=\pi_2
+$$
+ES decir la proporci\'on de tiempo asint\'otica  en que la cadena esta en cada estado es $1/2$.
+\end{proof}
+\end{enumerate}
+\end{problema}
+
+
+
+
+\begin{problema}
+Sea\begin{esn}
+Q=\begin{pmatrix}
+-2&2\\
+3&-3
+\end{pmatrix}.
+\end{esn}\begin{enumerate}
+\item Haga un programa en octave que permita simular las trayectorias de una cadena de Markov a tiempo continuo $X$ con matriz infinitesimal $Q$.
+\begin{proof}
+El programa esta hecho R:
+\begin{lstlisting}
+SIMULACION: CADENA A TIMPO CONTINUO
+(Tasa para ir del estado 1 al 2 = 2)
+(Tasa para ir del estado 2 al 1 = 3)
+
+X=0 		(Variable que guardara los estados de la cadena)
+T=0 		(Variable que guardara los tiempos de cambio de estado)
+p=0.5  	    (Probabilidad para definir la distrIbucion inicial)
+y=runif(1)
+if(y<p)  X[1]=1  else  X[1]=2
+
+(Generacion de los tiempos de cambio de estado)
+
+
+for (i in 1:20){
+  X[i+1]=X[i]+(-1)^(i+X[1])
+  if (i==1) T[1]=rexp(1,X[i]+1) else T[i]=rexp(1,X[i]+1)+T[i-1]
+}
+
+(Grafica del proceso de markov)
+par(mfrow=c(1,1))
+plot(T,X[1:20],ylab="Estados",yaxp=c(2,1,1), type="s",main="Proceso Markov a Tiempo Continuo",col=4)
+\end{lstlisting}
+ \begin{figure}
+  \centering
+    \includegraphics[width=0.7\textwidth]{Continuo1.png}
+  \caption{ Simulaci\'on del proceso Continuo}
+  \label{fig:ejemplo1}
+\end{figure}
+
+\end{proof}
+\item Utilice su programa para generar 10000 trayectorias en el intervalo de tiempo $[0,10]$ comenzando con probabilidad $1/2$ en cada estado y obtenga la distribuci\'on emp\'irica de $X_{10}$. 
+\item Calcule $e^{10Q}$ (utilizando alg\'un comando adecuado) y contraste con la distribuci\'on emp\'irica del inciso anterior.
+\begin{proof}
+\begin{lstlisting}
+SIMULACION DE 1000 TRAYECTORIAS DEL PROCESO
+library(Matrix)
+R=0
+for (k in 1:1000){
+X=0 		(Variable que guardara los estados de la cadena)
+T=0 		(Variable que guardara los tiempos de cambio de estado)
+p=0.5 	    (Probabilidad para definir la distirbucion inicial)
+y=runif(1)
+if(y<p)  X[1]=1  else  X[1]=2
+
+(Generacion de los tiempos de cambio de estado)
+
+i=2
+T[1]=0
+
+while (T[i-1]<=10){
+  X[i]=X[i-1]+(-1)^((i-1)+X[1])
+  if (i==2) T[2]=rexp(1,X[i-1]+1) else T[i]=rexp(1,X[i-1]+1)+T[i-1]
+  i=i+1
+ }
+ R[k]=X[length(X)-1]
+}
+P2=mean(R-1)
+P1=1-mean(R-1)
+
+(Distribucion Teorica vs Distribucion Historica)
+Q=cbind(c(-2,3),c(2,-3))
+P_t=expm(10*Q)
+v=cbind(p,1-p)
+v*P_t
+cbind(P1,P2)
+hist(R,xlab="ESTADOS", main="DISTRIBUCION EMPIRICA", col='blue')
+
+SALIDA DEL PROGRAMA:
+(Distribucion Teorica)
+1 x 2 Matrix of class "dgeMatrix"
+     	[,1] 	[,2]
+[1,]  	0.6  	0.4
+
+(Distribucion Empirica)
+       	 P1    P2
+[1,] 	0.614 0.386
+\end{lstlisting}
+\begin{figure}
+  \centering
+    \includegraphics[width=0.7\textwidth]{Empirica1.png}
+  \caption{Distribuci\'on empirica de $X_10$}
+  \label{fig:ejemplo1}
+\end{figure}
+\end{proof}
+\item Codifique el siguiente esquema num\'erico, conocido como m\'etodo de Euler, para aproximar a $e^{10 Q}$: escoja $h>0$ peque\~no, defina a $P^h_0$ como la matriz identidad y recursivamente\begin{esn}
+P^h_{i+1}=P^h_i+hQP^h_i. 
+\end{esn}corra hasta que $i=\floor{10/h}$ y compare la matriz resultante con $e^{10Q}$. Si no se parecen escoja a $h$ m\'as peque\~no. ?`Con qu\'e $h$ puede aproximar a $e^{10Q}$ a 6 decimales?
+\end{enumerate}
+\end{problema}
+\begin{lstlisting}
+IMPLEMENTACION METODO EULER h=0.333
+options(digits=6)
+Q=cbind(c(-2,3),c(2,-3))
+h=0.333
+
+P=diag(1,2)
+k=floor(10/h)
+for (i in 1:k){
+  P=P+h*(Q%*%P)
+}
+P
+expm(10*Q)
+
+(Salida)
+P
+         [,1]     [,2]
+[1,] 0.600002 0.399998
+[2,] 0.599997 0.400003
+
+expm(10*Q)
+2 x 2 Matrix of class "dgeMatrix"
+     [,1] [,2]
+[1,]  0.6  0.4
+[2,]  0.6  0.4
+
+IMPLEMENTACION METODO EULER h=0.3.25
+
+options(digits=6)
+Q=cbind(c(-2,3),c(2,-3))
+h=0.325
+
+P=diag(1,2)
+k=floor(10/h)
+for (i in 1:k){
+  P=P+h*(Q%*%P)
+}
+P
+expm(10*Q)
+
+(Salida)
+P
+         [,1]     [,2]
+[1,] 0.600000 0.400000
+[2,] 0.600000 0.400000
+
+expm(10*Q)
+2 x 2 Matrix of class "dgeMatrix"
+     [,1] [,2]
+[1,]  0.6  0.4
+[2,]  0.6  0.4
+
+\end{lstlisting}
+
+Por lo tanto con h=0.325 se aproxima $e^{10Q}$ con 6 decimales.
 \bibliography{GenBib}
 \bibliographystyle{amsalpha}
 \end{document}
+
