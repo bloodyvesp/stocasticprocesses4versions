@@ -1742,7 +1742,7 @@ Por proposici\'on vista en clase sabemos que $X_t<\infty$ si  la integral $\int 
 &=Ct\paren{\int_0^1 \frac{1}{x^{\alpha}}dx+\int_1^{\infty}\frac{1}{x^{1+\alpha}}} \notag
 \end{align}
 
-Analogamente que en el ejercicio anterior $\alpha \in (0,1)$ para que $\int 1 \wedge f_t dv\infty$. Por lo tanto $X_t<\infty$ casi seguramente si $\alpha \in (0,1)$.
+Analogamente que en el ejercicio anterior $\alpha \in (0,1)$ para que $\int 1 \wedge f_t dv<\infty$. Por lo tanto $X_t<\infty$ casi seguramente si $\alpha \in (0,1)$.
 Adem\'as si $\alpha \in (0,1)$ tenemos que:
 \begin{esn}
 \int 1 \wedge f_t dv =Ct\paren{\frac{1}{1-\alpha}+\frac{1}{\alpha}}=\frac{Ct}{\alpha(1-\alpha)}.
@@ -1967,7 +1967,7 @@ P_{t+s}(i,j)&=\proba{N_{t+s}=j-i}\notag \\
 \intertext{Como $N_{t+s}\geq N_s$ entonces $j-i\geq k$:}
 &=\sum_{k=0}^{j-i}\proba{N_{t+s}=j-i,N_s=k}\notag \\
 &=\sum_{k=0}^{j-i}\proba{N_{t+s}-N_s=j-i-k,N_s=k}\notag
-\intertext{Haciendo h=k+i:}
+\intertext{Haciendo h=$k+i$:}
 &=\sum_{h=i}^{j}\proba{N_{t+s}-N_s=j-h,N_s=h-i}\notag \\
 &=\sum_{h=i}^{j}\proba{N_{t+s}-N_s=j-h}\proba{N_s=h-i}\notag \\
 &=\sum_{h=i}^{j}\proba{N_{t}=j-h}\proba{N_s=h-i}\notag \\
@@ -2447,7 +2447,7 @@ Por lo tanto:
 \imf{P_t}{x,x+k+1}=\binom{x+k}{k+1}e^{-\lambda xt} \paren{1-e^{-\lambda t}}^{k+1}
 \end{esn}
 
-Por lo tanto la form\'ula es v\'alida para k+1.
+Por lo tanto la form\'ula es v\'alida para $k+1$.
 
 Por lo tanto:
 \begin{esn}
@@ -2651,11 +2651,79 @@ plot (T,X , type ="S")
 \caption{Simulaci\'on de Cadena de Markov con matriz infinitesimal Q}
 \label{3}
 \end{figure}
-\item Utilice su programa para generar 10000 trayectorias en el intervalo de tiempo $[0,10]$ comenzando con probabilidad $1/2$ en cada estado y obtenga la distribuci\'on emp\'irica de $X_10$. 
+\item Utilice su programa para generar 10000 trayectorias en el intervalo de tiempo $[0,10]$ comenzando con probabilidad $1/2$ en cada estado y obtenga la distribuci\'on emp\'irica de $X_{10}$.
+\begin{lstlisting}
+cont=0
+for(j in 1:10000){
+X=0
+p=.5
+if(runif(1)<p){
+X=0
+T=rexp(1,2)
+}else{
+X=1
+T=rexp(1,3)
+}
+i=2
+while(T[i-1]<=10){
+if(X[i-1]==0){
+X[i]=1
+T[i]=T[i-1]+rexp(1,3)
+}else{
+X[i]=0
+T[i]=T[i-1]+rexp(1,2)
+}
+i=i+1
+}
+if(X[i-1]==0){
+cont=cont+1
+}
+}
+
+p0=cont/10000
+p1=1-p0
+p0
+p1
+
+Distribuci\'on emp\'irica
+> p0
+[1] 0.6084
+> p1
+[1] 0.3916
+\end{lstlisting} 
 \item Calcule $e^{10Q}$ (utilizando alg\'un comando adecuado) y contraste con la distribuci\'on emp\'irica del inciso anterior.
+\begin{lstlisting}
+library(Matrix)
+Q= cbind(c(-2,3),c(2,-3))
+P_10=expm(10*Q)
+P_10
+
+> P_10
+2 x 2 Matrix of class "dgeMatrix"
+     [,1] [,2]
+[1,]  0.6  0.4
+[2,]  0.6  0.4
+\end{lstlisting}
 \item Codifique el siguiente esquema num\'erico, conocido como m\'etodo de Euler, para aproximar a $e^{10 Q}$: escoja $h>0$ peque\~no, defina a $P^h_0$ como la matriz identidad y recursivamente\begin{esn}
 P^h_{i+1}=P^h_i+hQP^h_i. 
 \end{esn}corra hasta que $i=\floor{10/h}$ y compare la matriz resultante con $e^{10Q}$. Si no se parecen escoja a $h$ m\'as peque\~no. ?`Con qu\'e $h$ puede aproximar a $e^{10Q}$ a 6 decimales?
+\begin{lstlisting}
+options(digits=6)
+Q= cbind(c(-2,3),c(2,-3))
+h=.3
+P=diag(1,2)
+k=floor(10/h)
+for(i in 1:k){
+P=P+h*(Q%*%P)
+}
+P
+> P
+     [,1] [,2]
+[1,]  0.6  0.4
+[2,]  0.6  0.4
+
+Por lo tanto con h=.3 se puede aproximar a P con 6 decimales.
+\end{lstlisting}
 \end{enumerate}
 \end{problema}
 %
