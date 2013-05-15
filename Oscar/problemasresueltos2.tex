@@ -64,6 +64,8 @@ morekeywords={}
 \newcommand{\borr}{\mathds{B}_{\mathds{R}}}
 \newcommand{\Cp}{\mathcal{C}}
 \newcommand{\Ll}{\mathcal{L}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\deror}[1]{\frac{\dd}{\dd #1}}
 
 \begin{document}
 \maketitle
@@ -352,10 +354,13 @@ La función $2^n (p/q)^{(X_n+n)/2} (q)^{n}$ será nuestro candidato para $D_n$, qu
 \[\Cp:=\{A_n\in\F_n: \mbox{$A_n$ es una trayectoria válida hasta $n$}\}\cup\emptyset,\] 
 el cual es un $\pi$-sistema que genera a $\F_n$. Consideremos también a la familia
 \[\Ll:=\{A_n\in\F_n: \p^p|_{\F_n}(A_n) = \int D_n d\ p^{1/2}|_{\F_n}.\]
-Por lo argumentado inicialmente, $\Cp\subset\Ll$. Por lo tanto si demostramos que $\Ll$ es un $\lambda$-sistema, lo cual es BASTANTE parecido al procedimiento usado en los ejercicios anteriores (usando propiedades de la integral) y será omitido, concluiremos que efectivamente, la función $D_n$ propuesta es la derivada de Radon-Nikodym de $\p^p|_{\F_n}(A_n)$ respecto a $\p^{1/2}|_{\F_n}(A_n)$. Además, por la primera parte del inciso anterior es una martingala  Si se demuestra que $D$ es uniformemente integrable, habremos demostrado, por el inciso 1), que $\p^p\ll\p^{1/2}$. (FALTA DEMOSTRAR UI).
+Por lo argumentado inicialmente, $\Cp\subset\Ll$. Por lo tanto, si demostramos que $\Ll$ es un $\lambda$-sistema, lo cual es bastante parecido (y se omitirá) al procedimiento usado en los ejercicios anteriores (usando propiedades de la integral), concluiremos que efectivamente, la función $D_n$ propuesta es la derivada de Radon-Nikodym de $\p^p|_{\F_n}(A_n)$ respecto a $\p^{1/2}|_{\F_n}(A_n)$, y en conclusión $\p^p|_{\F_n}\ll\p^{1/2}|_{\F_n}$ para todo $n\in\nats$, es decir, $\p^p$ es localmente absolutamente continua respecto de $\p^{1/2}$.
 \end{proof}
 \item Para $a,b>0$, sea $T=\min\set{n\in\na: X_n\in \set{-a,b}}$. Pruebe que $T$ y $X_T$ son independientes bajo $\p^{1/2}$. Al utilizar la continuidad absoluta local, pruebe que $T$ y $X_T$ tambi\'en son independientes bajo $\p^p$. Utilice alguna martingala de ejercicios anteriores para calcular $\esp{T^2}$.
 \end{enumerate}
+\begin{proof}
+(FALTA)
+\end{proof}
 
 \defin{Categor\'ias: }Cambio de medida, Caminata aleatoria simple.
 \end{problema}
@@ -434,22 +439,89 @@ f_{T_1|T_n} (t_1|t_n) & = \int\cdots\int \frac{(n-1)!\mathds{1}_{0 \le t_1\le\do
  Sea $\Xi$ una medida de Poisson aleatoria en $(0,\infty)\times (0,\infty)$ cuya medida de intensidad $\nu$ est\'a dada por $\imf{\nu}{ds,dx}=\indi{x>0}C/x^{1+\alpha}\, ds\,dx$. 
  \begin{enumerate}
 \item Determine los valores de $\alpha$ para los cuales $\int 1\wedge x\,\imf{\nu}{dx}<\infty$. 
+\begin{proof}
+Se tomará $\nu (\dd s, \dd x)=\mathds{1}_{s\ge 0, x> 0} C/x^{1+\alpha}\dd s \dd x$. Para $s<0$ cualquier integral será exactamente igual a $0$. Por lo tanto, elijamos $s\ge 0$. Entonces,
+\begin{align*}
+\int 1\wedge x \nu (s,\dd s) & = \int (1\wedge x) \mathds{1}_{s\ge 0, x> 0} \frac{C}{x^{1+\alpha}}\dd x\\
+& =\int_0^\infty (1\wedge x)  \frac{C}{x^{1+\alpha}}\dd x\\
+& =\int_0^1 x  \frac{C}{x^{1+\alpha}}\dd x + \int_1^\infty 1  \frac{C}{x^{1+\alpha}}\dd x\\
+& =\int_0^1 \frac{C}{x^{\alpha}}\dd x + \int_1^\infty  \frac{C}{x^{1+\alpha}}\dd x.
+\end{align*}
+Estudiemos estas dos integrales a continuación. Si $\alpha=1$, entonces
+\[\int_0^1 \frac{C}{x^{\alpha}}\dd x = [C\log (x)]_0^1 = -C \lim_{x\to 0}\log(x) ,\]
+que converge a $\infty$ y por lo tanto no es un valor posible. Supongamos que $\alpha\neq 1$. Entonces
+\begin{align*}
+\int_0^1 \frac{C}{x^{\alpha}}\dd x & = \int_0^1 C x^{-\alpha}\dd x\\
+& = \left[\frac{C x^{1 -\alpha}}{1 -\alpha}\right]_0^1 = \frac{C}{1 -\alpha} - \lim_{x\to 0}\frac{C x^{1 -\alpha}}{1 -\alpha},
+\end{align*}
+de manera que esta integral existe (y es igual a $C/(1-\alpha )$) si y solo si $\alpha < 1$.
+
+Por otro lado, si $\alpha = 0$,
+\[\int_1^\infty  \frac{C}{x}\dd x = C\log_{x\to\infty} \log (x),\]
+el cual converge a $\infty$ y tamoco es una valor posible. Por lo tanto, supongamos que $\alpha\neq 0$. Entonces
+\begin{align*}
+\int_1^\infty  \frac{C}{x^{1+\alpha}}\dd x & = \int_1^\infty  C x^{-(1+\alpha )}\dd x = \left[\frac{C x^{-\alpha}}{-\alpha}\right]_1^\infty\\
+& = \lim_{x\to\infty} \frac{C x^{-\alpha}}{-\alpha} + \frac{C}{\alpha},
+\end{align*}
+de manera que la integral existe (y es igual a $C/\alpha$ si y solo si $\alpha >0$. 
+
+Por lo tanto, (SEÑALAR) es finito si y solo si $\alpha\in (0,1)$.
+\end{proof}
  \end{enumerate}
 Nos restringimos ahora a valores de $\alpha$ para los cuales la integral anterior sea finita. Sean $\imf{f_t}{s,x}=\indi{s\leq t}x$ y $X_t=\Xi f_t$. 
  \begin{enumerate}[resume]
  \item Determine los valores  de $\alpha$ para los cuales $X_t<\infty$ para toda $t\geq 0$ casi seguramente.
+ \begin{proof}
+ En clase se demostró que $\Xi f_t$ es finito c.s. si y sólo si $\int (1\wedge f_t) \dd \nu$ es finito. Entonces,
+ \begin{align*}
+ \int (1\wedge f_t) \dd \nu & = \int \int (1\wedge \mathds{1}_{s\ge t} x) \mathds{1}_{s\ge 0, x> 0}\frac{C}{x^{1+\alpha}}\dd x\dd s\\
+ & = \int_0^t \int_0^\infty (1\wedge x) \frac{C}{x^{1+\alpha}}\dd x\dd s\\
+ & = \int_0^t  \left( \int_0^1 \frac{C}{x^{\alpha}}\dd x + \int_1^\infty  \frac{C}{x^{1+\alpha}}\dd x\right)\dd s\\
+  & = \int_0^t  \left( \frac{C}{1-\alpha} + \frac{C}{\alpha}\right)\dd s\nota{(Por inciso anterior)}\\
+  & = t\left( \frac{C}{1-\alpha} + \frac{C}{\alpha}\right) = \frac{C t}{\alpha (1-\alpha)}.
+ \end{align*}
+ En conclusión, la restricción $\alpha \in (0,1)$ es necesaria y suficiente.
+ \end{proof}
  \end{enumerate}
  Nos restringiremos a dichos valores de $\alpha$. 
  \begin{enumerate}[resume]
  \item Calcule $\esp{e^{-\lambda X_t}}$ y pruebe que $X_{t}$ tiene la misma distribuci\'on que $t^{1/\alpha}X_1$. 
- \item Diga por qu\'e el siguiente c\'odigo en Octave simula la trayectoria aproximada del proceso $X$ en el intervalo $[0,1]$.
- \end{enumerate}
+ \begin{proof}
+Por clase, sabemos que
+\begin{align*}
+\mean (e^{-\lambda X_t}) & = \mean (e^{-\Xi [\lambda f_t]})\nota{($\Xi$ es un operador lineal)}\\
+& = \exp (-\int (1-e^{-\lambda f_t})\dd \nu).
+\end{align*}
+Calculando la integral,
+\begin{align*}
+\int (1-e^{-\lambda f_t})\dd \nu & = \int\int (1 - e^{-\lambda \mathds{1}_{s\le t}x})\mathds{1}_{s\ge 0, x > 0}\frac{C}{x^{1+\alpha}}\dd s \dd x\\
+& = \int_0^\infty \int_0^t (1 - e^{-\lambda x})\frac{C}{x^{1+\alpha}}\dd s \dd x\\
+& = Ct \int_0^\infty \frac{1 - e^{-\lambda x}}{x^{1+\alpha}} \dd x\\
+& = Ct \int_0^\infty \frac{\int_0^x \lambda e^{-\lambda r}\dd r}{x^{1+\alpha}} \dd x\\
+& = Ct\lambda \int_0^\infty \int_r^\infty \frac{e^{-\lambda r}}{x^{1+\alpha}}\dd x \dd r\\
+& = Ct\lambda \int_0^\infty e^{-\lambda r} \left[\frac{1}{-\alpha x^\alpha}\right]_r^\infty \dd r\\
+& = \frac{Ct\lambda }{\alpha}\int_0^\infty  \frac{e^{-\lambda r}}{ r^\alpha}\dd r\\
+& = \frac{Ct\lambda }{\alpha}\frac{\lambda^\alpha}{\lambda}\int_0^\infty  \frac{e^{-\lambda r}}{ (\lambda r)^\alpha}\lambda \dd r\nota{(Multiplicando por un $1$ conveniente)}\\
+& = \frac{Ct\lambda^{\alpha}}{\alpha}\int_0^\infty   (\lambda r)^{(-\alpha + 1) - 1} e^{-\lambda r}\dd (\lambda r)\\
+& = \frac{Ct\lambda^{\alpha}}{\alpha} \Gamma (1-\alpha ),
+\end{align*}
+y por lo tanto,
+\[\mean (e^{-\lambda X_t}) = \exp \left( - \frac{C t \lambda^\alpha \Gamma (1-\alpha )}{\alpha}\right),\]
+que justamente corresponde a su transformada de Laplace.
+Tomando $t=1$ y $\lambda = \lambda' t'^{1/\alpha}$, entonces
+\[\mean (\exp ( -\lambda' t'^{1/\alpha} X_1 )) = \exp \left( - \frac{C \cdot 1\cdot (-\lambda' t'^{1/\alpha})^\alpha \Gamma (1-\alpha )}{\alpha}\right) = \exp \left( - \frac{C t' \lambda'^\alpha \Gamma (1-\alpha )}{\alpha}\right),\]
+es decir $\mean (\exp (-\lambda (t^{1/\alpha}X_1))) = \mean (\exp (-\lambda X_t))$, es decir, sus transformadas de Laplace coinciden, y como son variables aleatorias no negativas, éstas deben tener la misma distribución.
+ \end{proof}
+
+\item Diga por qu\'e el siguiente c\'odigo en Octave simula la trayectoria aproximada del proceso $X$ en el intervalo $[0,1]$.
+\end{enumerate}
 \end{problema}
 
 \begin{problema}
 Pruebe que si $X$ tiene incrementos independientes entonces el proceso $X^t$ dado por $X^t_s=X_{t+s}-X_t$ es independiente de $\F^X_t=\sag{X_s:s\geq 0}$.
 
-Calcular la esperanza y varianza del proceso de Poisson y de Poisson compuesto (en t\'erminos de la intensidad y la distribuci\'on de salto). Probar que si $X$ es\begin{esn}
+Calcular la esperanza y varianza del proceso de Poisson y de Poisson compuesto (en t\'erminos de la intensidad y la distribuci\'on de salto). Probar que si $X$ es
+\begin{esn}
 \esp{e^{iu Z_t}}=e^{-\lambda t\paren{1-\imf{\psi}{u}}}\quad\text{donde}\quad \imf{\psi}{u}=\esp{e^{iu \xi_1}}. 
 \end{esn}
 
