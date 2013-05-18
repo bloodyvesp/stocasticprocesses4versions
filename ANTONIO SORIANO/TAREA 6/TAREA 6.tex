@@ -1,0 +1,449 @@
+\documentclass[a5paper,oneside]{amsart}
+\usepackage[scale={.9,.8}]{geometry}
+\usepackage{mathrsfs}
+\usepackage{dsfont}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{conjecture}{Conjecture}
+\theoremstyle{definition}
+\newtheorem{problema}{Problema}
+%\newtheorem{problema}{Ejercicio}
+\newtheorem*{definition}{Definition}
+\newtheorem*{remark}{Remark}
+\usepackage{enumitem}
+\usepackage{listings}
+\lstset{
+language=R,
+basicstyle=%\scriptsize
+\ttfamily,
+commentstyle=\ttfamily\color{gray},
+numbers=none,
+numberstyle=\ttfamily\color{gray}\footnotesize,
+stepnumber=1,
+numbersep=5pt,
+backgroundcolor=\color{white},
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+frame=none,
+tabsize=4,
+captionpos=b,
+breaklines=true,
+breakatwhitespace=false,
+title=\lstname,
+escapeinside={},
+keywordstyle={},
+morekeywords={}
+}
+\title[Problemas de Procesos I]{Problemas de Procesos Estoc\'asticos I\\ Semestre 2013-II\\ Posgrado en Ciencias Matem\'aticas\\ Universidad Nacional Aut\'onoma de M\'exico}
+\author{Ger\'onimo Uribe Bravo}
+%\address{}
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+\input{definitions.tex}
+%\usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref}
+\begin{document}
+\maketitle
+\begin{problema}
+Un proceso estoc\'astico $B=\paren{B_t,t\geq 0}$ es un movimiento browniano en ley si y s\'olo si es un proceso gaussiano centrado y $\esp{B_sB_t}=s\wedge t$.\\
+
+\end{problema}
+\begin{proof}
+$\Rightarrow:)$ Supongamos que $B=\paren{B_t,t\geq 0}$ es un movimiento browniano en ley por demostrar que $\paren{B_t,t\geq 0}$  es un proceso gaussiano centrado y que ademas $\esp{B_sB_t}=s\wedge t$.\\
+Primero, para demostrar que $\paren{B_t,t\geq 0}$  es un proceso gaussiano tenemos que ver que el vector ,$\paren{B_{t_1},B_{t_2},\ldots,B_{t_n}}$ donde  $(t_1<t_2,\ldots,<t_n)$ es un vector gaussiano lo que equivale  a probar que cualquier  combinaci\'on lineal sigue una distribuci\'on normal.
+$$
+\sum_{i=1}^{n}\lambda_iB_{t_i} \sim Normal
+$$
+Sin embargo notemos que esto \'ultimo es cierto debido a que por hip\'otesis $\paren{B_t,t\geq 0}$ es un movimiento browniano en ley  y por tanto $B_{t_i} \sim Normal(0,t_i)$ y como combinaci\'on lineal finita de Normales es normal se sigue que  $\paren{B_{t_1},B_{t_2},\ldots,B_{t_n}}$  es un vector gaussiano que adem\'as es centrado porque cada $B_{t_i}$ tiene esperanza igual a cero,  lo que demuestra que $\paren{B_t,t\geq 0}$  es un proceso gaussiano centrado\\
+Finalmente para probar que $\esp{B_sB_t}=s\wedge t$ lo haremos por casos:
+\begin{itemize}
+\item Supongamos $s=t$, entonces:
+ $$
+\esp{B_sB_t}=\esp{B_s^2}=\var{B_s^2}=s=t=s\wedge t
+ $$
+\item Supongamos $s < t$, entonces
+$$
+\esp{B_sB_t}=\esp{B_sB_t-B_s^2+B_s^2}=\esp{B_s(B_t-B_s)+B_s^2}=\esp{B_s(B_t-B_s)}+s
+$$
+$$
+=\esp{(B_s-B_0)(B_t-B_s)}+s=\esp{B_s-B_0}\esp{B_t-B_s}+s=s=s\wedge t
+$$  
+\item De forma muy similar a lo anterior,  ahora  supongamos $t < s$, entonces:
+$$
+\esp{B_sB_t}=\esp{B_sB_t-B_t^2+B_t^2}=\esp{B_t(B_s-B_t)+B_t^2}=\esp{B_t(B_s-B_t)}+t
+$$
+$$
+=\esp{(B_t-B_0)(B_s-B_t)}+t=\esp{B_t-B_0}\esp{B_s-B_t}+t=t=s\wedge t
+$$  
+\end{itemize}
+En todos los casos se tiene que $\esp{B_sB_t}=s\wedge t$  lo que termina la primer parte de la prueba.\\
+$\Leftarrow:)$  Ahora supongamos que $\paren{B_t,t\geq 0}$  es un proceso gaussiano centrado tal que $\esp{B_sB_t}=s\wedge t$, por demostrar que $B=\paren{B_t,t\geq 0}$ es un movimiento browniano en ley. Tenemos entonces que probar las siguientes propiedades:
+\begin{itemize}
+\item $B_0=0$. Esto es consecuencia del hecho de que $\esp{B_0^2}=\esp{B_0B_0}=0\wedge 0=0$, esto implica directamente que $B_0$  es una variable degenerada que toma el valor cero pues se tiene que $\esp{B_0}=0$ y $\var{B_0}=0$.
+\item B tiene incrementos independientes. Sea $0\leq t_1<t_2,\ldots,<t_n$ queremos demostrar que $(B_{t_i}-B_{t_{i-1}})$ son variables aleatorias independientes. Primero, como B es un proceso gaussiano tenemos que el vector $\paren{B_{t_1},B_{t_2},\ldots,B_{t_n}}$ es un vector gaussiano centrado y por lo tanto  $B_{t_i}$ son v.a.  gaussinas de donde se sigue que el vector $\paren{B_{t_1}-B_0,B_{t_2}-B_{t_1},\ldots,B_{t_n}-B_{t_{n-1}}}$ es tambi\'en un vector gaussiano ya que nuevamente al hacer el producto punto:
+$$
+\sum_{i=1}^{n}\lambda_i\paren{B_{t_i}-B_{t_{i-1}}} 
+$$ 
+Obtenemos una combinaci\'on lineal de normales y por tanto es Normal, por lo anterior para verificar la independencia solo tenemos que probar  que la correlaci\'on entre las entradas de este vector son cero. En efecto, tomemos  la entrada $i$ y la entrada $j$ $ (i\neq j)$ de este vector y verifiquemos su correlaci'on (Recordemos que tenemos un vector gaussiano centrado y por tanto el calculo de la correlaci\'on se reduce  a calcular la esperanza del producto de las variables aleatorias), sin p\'erdida de generalidad supondremos que $i < j$:
+$$
+\esp{(B_{t_i}-B_{t_{i-1}})(B_{t_j}-B_{t_{j-1}}}=\esp{B_{t_i}B_{t_j}-B_{t_i}B_{t_{j-1}}-B_{t_{i-1}}B_{t_j}+B_{t_{i-1}}B_{t_{j-1}}}
+$$
+$$
+=\esp{B_{t_i}B_{t_j}}-\esp{B_{t_i}B_{t_{j-1}}}-\esp{B_{t_{i-1}}B_{t_j}}+\esp{B_{t_{i-1}}B_{t_{j-1}}}=i-i-(i-1)+(i-1)=0
+$$
+Por lo tanto se concluye que $(B_{t_i}-B_{t_{i-1}})$  son variables aleatorias normales e independientes por tener correlaci—n cero.
+\item $B_t \sim Normal(0,t)$. En efecto, pues  tenemos por hip\'otesis que $B_t$ es  v.a. normal centrada por lo tanto $\esp{B_t}=0$ luego como por hip\'otesis  $\esp{B_sB_t}=s\wedge t$ entonces $\var{B_t}=\esp{B_t^2}=\esp{B_tB_t}=t$ por lo tanto $B_t \sim Normal(0,t)$.
+\item $B$ tiene incrementos estacionarios. Tenemos que probar que $B_{t+s}-B_t=^d B_s$.   Primero como $B_t \sim N(0,t)$ entonces  $B_{t+s}-B_t$ al ser combinaci—n de normales tenemos que $B_{t+s}-B_t$ es normal, calc\'ulemos sus par\'ametros.
+$$
+\esp{B_{t+s}-B_t}=\esp{B_{t+s}}-\esp{B_t}=0
+$$
+$$
+\var{B_{t+s}-B_t}=\esp{(B_{t+s}-B_t)^2}=\esp{B_{t+s}^2}-2\esp{B_{t+s}B_t}+\esp{B_t^2}
+$$
+$$
+=(t+s)-2t\wedge (t+s)+t=t+s-2t+t=s
+$$
+Por lo tanto concluimos que $B_{t+s}-B_t \sim N(0,s)$. Por otro lado por el inciso anterior sabemos que $B_s\sim N(0,s)$ por lo tanto tenemos que:
+$$
+B_{t+s}-B_t\stackrel{d}{=}B_s
+$$
+De donde concluimos que el proceso tiene incrementos estacionarios.
+\end{itemize}
+Finalmente  por los puntos anteriores   se concluye que $B=\paren{B_t,t\geq 0}$ es un movimiento browniano en ley.
+\end{proof}
+\begin{problema}
+El objetivo de este problema es construir, a partir de movimientos brownianos en $[0,1]$, al movimiento browniano en $[0,\infty)$.
+\begin{enumerate}
+\item Pruebe que existe un espacio de probabilidad $\ofp$ en el que existe una sucesi\'on $B^1,B^2,\ldots$ de movimientos brownianos en $[0,1]$ independientes. (Sugerencia: utilice la construcci\'on del movimiento browniano de L\'evy  para que la soluci\'on sea corta.)
+\begin{proof}
+En la construcci\'on de del movimiento browniano de L\'evy utilizamos el espacio de probabilidad   $\ofp$  donde estuvieran definidas las variables aleatorias:
+$$
+\xi_{i,n}  \quad 0 \leq i \leq 2^n \quad n\geq 1  
+$$
+Tal que estas variables fueran distribuidas de forma Normal de par\'ametros $(0,1)$ y que fueran independientes. Dicho espacio sabemos que existe por lo visto en el capitulo 2 de las notas donde se construy\'o la sucesi\'on de variables aleatorias independientes a partir de una sucesi\'on de variables aleatorias Bernulli, luego se extendi\'o este resultado  a variables uniformes$(0,1)$  para que  finalmente y ,a partir de la funci\'on de cu\'antiles, se obtuviera una sucesi\'on de variables con distribuci\'on arbitrarias e independientes. \\
+Para generalizar este resultado, ahora consideremos el espacio de probabilidad  $\ofp$   donde est\'en definidas las variables aleatorias:
+$$
+\xi_{i,n}^m  \quad 0 \leq i \leq 2^n \quad n\geq 1   \quad m\geq 1
+$$
+De tal forma que todas tengan distribuci\'on Normal Est\'andar con media 0 y varianza 1 y que sean independientes. Luego entonces para cada $m \in \mathds{N}$   podemos construir el proceso browniano $B^m$  en $[0,1]$, es decir con esto estaremos construyendo una infinidad numerable de movimientos Brownianos que ser\'an independientes por la forma en que se construyeron a partir de las variables $\xi_{i,n}^m$ que sabemos, por como se tomaron, que son independientes.
+\end{proof}
+\item Defina a $B_t=B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}$ para $t\geq 0$. Pruebe que $B$ es un movimiento browniano. 
+%\item Pruebe que $\paren{B_t}^2-t$ no tiene incrementos independientes. Sugerencia: En el ejercicio anterior identific\'o la distribuci\'on de $\paren{B_t}^2$; calcule la transformada de Laplace conjunta de dos incrementos.
+\begin{proof}
+Para probar que $B_t$ es un movimiento browniano necesitamos verificar las siguientes propiedades.
+\begin{enumerate}
+\item  $B_0=0$. En efecto pues por definici\'on y construcci\'on de $B^1$ obtenemos que:  $B_0=B^1_0=0$
+\item $B_t \sim N(0,t)$. En efecto, como $B_t=B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}$  entonces notemos que al ser $B^m$ movimientos brownianos, entonces se sigue que $B_t$ es una combinac\'on lineal de normales y por tanto $B_t$ es normal. Veamos los paramestros:
+$$
+\esp{B_t}=\esp{B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}}=0
+$$
+Lo anterior es valida porque cada $B^m$ es movimiento browniano y por tanto tienen media 0. Por otro lado para obtener la varianza  del proceso al tiempo $t$ se tiene
+ que por la independencia de $B^m$:
+ $$
+\var{B_t}=\var{B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}}=\sum_{i=1}^{\floor{t}}\var{B^i_1}+\var{B^{\ceil{t}}_{t-\floor{t}}}
+$$
+Luego como cada $B^i_1\sim N(0,1)$ y como $B^{\ceil{t}}_{t-\floor{t}} \sim N(0,{t-\floor{t}})$. Se sigue entonces que:
+$$
+\var{B_t}=\floor{t}+t-\floor{t}=t
+$$
+De donde concluimos que en efecto $B_t$ tiene distribuci\'on Normal  de paramestro $(0,t)$.
+\end{enumerate}
+Con estos dos puntos hemos demostrado que el proceso $B_t$ es procesos gaussiano centrado, ahora probaremos que adem\'as se cumple la propiedad de que $\esp{B_tB_s}=s\wedge t$. La prueba de esto \'ultimo  se obtendr\'a por casos, si $s=t$ entonces, $\esp{B_tB_s}=\esp{B_t^2}=t=t\wedge s$ por lo tanto se cumple la propiedad, ahora sin perdida de generalidad supongamos que $t<s$.
+\begin{itemize}
+\item Caso 1: Supongamos que $\floor{t} \leq t<s\leq \ceil{t}$. En este caso tenemos que:
+$$
+B_t=B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}
+$$
+$$
+B_s=B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{s-\floor{t}}
+$$
+Entonces al multiplicar  $B_tB_s$ y recordando que los procesos $B^m$ son independientes tenemos que:
+$$
+\esp{B_tB_s}=\esp{(B^1_1)^2}+\cdots+\esp{(B^{\floor{t}}_1)^2}+\esp{B^{\ceil{t}}_{t-\floor{t}}B^{\ceil{t}}_{s-\floor{t}} }
+$$
+Luego como cada $B^i_1 \sim N(0,1)$  y como $B^{\ceil{t}}$ es un movimiento browniano en $[0,1]$ se tiene que $\esp{B^{\ceil{t}}_{t-\floor{t}}B^{\ceil{t}}_{s-\floor{t}} }=t-\floor{t} \wedge s-\floor{t}=t-\floor{t}$. Por lo tanto:
+$$
+\esp{B_tB_s}=\sum_{i=1}^{\floor{t}}\esp{(B^i_1)^2}+t-\floor{t}=\floor{t}+t-\floor{t}=t=t\wedge s
+$$
+\item Caso 2: Supongamos que $\floor{t} \leq t \leq \ceil{t} < s$. En este caso tenemos que:
+$$
+B_t=B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}
+$$
+$$
+B_s=B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_1+B^{\ceil{t}+1}_1+\cdots+B^{\floor{s}}_1+B^{\ceil{s}}_{s-\floor{s}}
+$$
+Entonces al multiplicar  $B_tB_s$ y recordando que los procesos $B^m$ son independientes tenemos que:
+$$
+\esp{B_tB_s}=\esp{(B^1_1)^2}+\cdots+\esp{(B^{\floor{t}}_1)^2}+\esp{B^{\ceil{t}}_{t-\floor{t}}B^{\ceil{t}}_{1} }
+$$
+Luego como cada $B^i_1 \sim N(0,1)$  y como $B^{\ceil{t}}$ es un movimiento browniano en $[0,1]$ se tiene que $\esp{B^{\ceil{t}}_{t-\floor{t}}B^{\ceil{t}}_{1} }=t-\floor{t} \wedge 1=t-\floor{t}$. Por lo tanto:
+$$
+\esp{B_tB_s}=\sum_{i=1}^{\floor{t}}\esp{(B^i_1)^2}+t-\floor{t}=\floor{t}+t-\floor{t}=t=t\wedge s
+$$
+\end{itemize}
+Los puntos anteriores prueban que entonces $\esp{B_tB_s}=t\wedge s$. Luego recapitulando tenemos que el proceso definido $(B_t, t\geq 0)$ es un proceso gaussiano  centrado que adem\'as cumple con la propiedad de que $\esp{B_tB_s}=t\wedge s$, por lo que usando el problema 1 de la tarea 6 concluimos que  $(B_t, t\geq 0)$ es un movimiento browniano en ley, por lo que solo faltar\'ia probar que tiene trayectorias continuas, sin embargo la continuidad de las trayectorias del  proceso $(B_t, t\geq 0)$ se obtiene por construcci\'on el proceso, ya que recordemos que cada $B^m$ es continuo en [0,1] y que ademas $B_0^m=0$ para a toda $m\in \mathds{N}$
+
+\end{proof}
+\end{enumerate}
+\end{problema}
+\begin{problema}
+Pruebe que si $\tilde X$ es una modificaci\'on de $X$ entonces ambos procesos tienen las mismas distribuciones finito-dimensionales. Concluya que si
+ $B$ es un movimiento browniano en ley y $\tilde B$ es una modificaci\'on de $B$ con trayectorias continuas entonces $\tilde B$ es un movimiento browniano. 
+\end{problema}
+\begin{proof}
+Como $\tilde X$ es una modificaci\'on de $X$ entonces sabemos que $\p(X_t=\tilde X_t)=1$ para toda $t\geq 0$. Queremos probar que ambos procesos tienen las mismas distribuciones finito-dimensionales, es decir tenemos que probar que para $0\leq t_1, <t_2, \ldots,<t_n$  se tiene que:
+$$
+\paren{X_{t_1},X_{t_2},\ldots,X_{t_n}}\stackrel{d}{=}\paren{\tilde X_{t_1},\tilde X_{t_2},\ldots,\tilde X_{t_n}}
+$$ 
+Verificamos entonces la igualdad de distribuciones,  para ello definamos al evento $A_n$ como:
+$$
+A_n:=\set{X_{t_1}=\tilde X_{t_1},X_{t_2}=\tilde X_{t_2},\ldots, X_{t_n}=\tilde X_{t_n}}
+$$
+Por la condici\'on de que $\tilde X$ es una modificaci\'on de $X$  se tiene que $P(A_n)=1$ para toda $n$. En efecto, para verificar esto utilizar\'emos inducci\'on sobre n:
+\begin{itemize}
+\item Para $n=1$ se tiene la igualdad por definici\'on  pues $P(X_{t_1}=\tilde X_{t_1})=1$
+
+\item Supongamos valido que $\p(A_n)=1$ por demostrar que $\p(A_{n+1})=1$. Como:
+$$
+\p(A_{n+1})=\p\paren{\set{X_{t_1}=\tilde X_{t_1},X_{t_2}=\tilde X_{t_2},\ldots, X_{t_n}=\tilde X_{t_n}},\set{X_{t_{n+1}}=\tilde X_{t_{n+1}}}}
+$$
+$$
+=\p\paren{\set{A_n} \cap \set{X_{t_{n+1}}=\tilde X_{t_{n+1}}}}
+$$
+Pero notemos que por hip\'otesis de inducci\'on $\p(A_n)=1$ y como $\tilde X$ es una modificaci\'on de $X$  se tiene ademas que:  $\p(X_{t_{n+1}}=\tilde X_{t_{n+1}})=1$, se sigue entonces que la intesecci\'on de estos eventos tiene probabilidad 1, pues:
+$$
+1=\p(A_n)\leq \p\paren{\set{A_n} \cup \set{X_{t_{n+1}}=\tilde X_{t_{n+1}}}} \leq 1
+$$
+Entonces  $\p\paren{\set{A_n} \cup \set{X_{t_{n+1}}=\tilde X_{t_{n+1}}}}=1$ pero como:
+\fontsize{8pt}{8pt} \selectfont 
+$$
+\p\paren{\set{A_n} \cup \set{X_{t_{n+1}}=\tilde X_{t_{n+1}}}} = \p(A_n)+\p\paren{\set{X_{t_{n+1}}=\tilde X_{t_{n+1}}}}-\p\paren{\set{A_n} \cap \set{X_{t_{n+1}}=\tilde X_{t_{n+1}}}}
+$$
+\fontsize{10pt}{10pt} \selectfont 
+Se sigue entonces que:
+$$
+1=1+1-\p\paren{\set{A_n} \cap \set{X_{t_{n+1}}=\tilde X_{t_{n+1}}}}
+$$
+De donde se concluye que en efecto $\p(A_{n+1})=1$, lo que termina la prueba por inducci\'on.
+\end{itemize}
+Por otro lado, continuando con la prueba para mostrar la igualdad en distribuci\'on:
+\fontsize{8pt}{8pt} \selectfont
+\begin{equation}
+\p(X_{t_1}\leq   x_1,X_{t_2} \leq x_2,\ldots,X_{t_n} \leq x_n)=\p\paren{X_{t_1} \leq   x_1,X_{t_2} \leq x_2,\ldots,X_{t_n} \leq x_n, \set{A_n \cup A_n^c}}
+\end{equation}
+$$
+=\p\paren{X_{t_1} \leq   x_1,X_{t_2} \leq x_2,\ldots,X_{t_n} \leq x_n, A_n}+\p\paren{X_{t_1} \leq   x_1,X_{t_2} \leq x_2,\ldots,X_{t_n} \leq x_n, A_n^c}
+$$
+\fontsize{10pt}{10pt} \selectfont
+Pero notemos que: $\p\paren{X_{t_1} \leq   x_1,X_{t_2} \leq x_2,\ldots,X_{t_n} \leq x_n, A^c}=0$ ya que como vimos $\p(A_n)=1$ entonces $\p(A_n^c)=0$, por lo tanto de la ecuaci\'on (1) tenemos que:
+$$
+\p(X_{t_1}\leq   x_1,X_{t_2} \leq x_2,\ldots,X_{t_n} \leq x_n)=\p\paren{X_{t_1} \leq   x_1,X_{t_2} \leq x_2,\ldots,X_{t_n} \leq x_n, A_n}
+$$
+$$
+=\probac{X_{t_1} \leq   x_1,X_{t_2} \leq x_2,\ldots,X_{t_n} \leq x_n}{ A_n}\p(A_n)
+$$
+Luego, como $\p(A_n)=1$ tenemos entonces que:
+$$
+\p(X_{t_1}\leq   x_1,X_{t_2} \leq x_2,\ldots,X_{t_n} \leq x_n)=\probac{X_{t_1} \leq   x_1,X_{t_2} \leq x_2,\ldots,X_{t_n} \leq x_n}{ A_n}
+$$
+$$
+=\probac{X_{t_1} \leq   x_1,X_{t_2} \leq x_2,\ldots,X_{t_n} \leq x_n}{ X_{t_1}=\tilde X_{t_1},X_{t_2}=\tilde X_{t_2},\ldots, X_{t_n}=\tilde X_{t_n} }
+$$
+$$
+=\p(\tilde X_{t_1}\leq   x_1,\tilde X_{t_2} \leq x_2,\ldots, \tilde X_{t_n} \leq x_n)
+$$
+Lo que muestra que en efecto:
+$$
+\paren{X_{t_1},X_{t_2},\ldots,X_{t_n}}\stackrel{d}{=}\paren{\tilde X_{t_1},\tilde X_{t_2},\ldots,\tilde X_{t_n}}
+$$ 
+Por lo tanto ambos procesos tienen las mismas distribuciones finito-dimensionales. Ahora con este resultado podemos afirmar que si
+ $B$ es un movimiento browniano en ley y $\tilde B$ es una modificaci\'on de $B$ con trayectorias continuas entonces $\tilde B$ es un movimiento browniano. En efecto, al ser $\tilde B$ es una modificaci\'on de $B$ tenemos  que ambos procesos tienen las mismas distribuciones finito-dimensionales y por tanto  $\tilde B$  ser\'a un proceso gaussiano centrado ademas se cumple que $\esp{\tilde B_t \tilde B_s}=\esp{B_tB_s}=t \wedge s$ y por lo tanto usando el problema 1 de esta tarea se afirmar’a que $\tilde B$ es un movimiento browniano en ley,  pero como adem\'as $\tilde B$   tiene trayectorias continuas entonces se afirma que $\tilde B$ es un movimiento browniano.
+\end{proof}
+\begin{problema}
+Sea\begin{esn}
+M^\lambda_t=e^{\lambda B_t-\lambda^2t/2}.
+\end{esn}
+\begin{enumerate}
+\item Explique y pruebe formalmente por qu\'e, para toda $n\geq 1$, $\partial^n M^\lambda_t/\partial \lambda^n$ es una martingala. 
+\begin{proof}
+Primero notemos que $M^\lambda_t$ es martingala. En efecto, primero porque $M^\lambda_t$ es adaptado debido a que suponemos se est\'a utilizando la filtraci\'on can\'onica adem\'as dado que:
+$$
+M^\lambda_t=e^{\lambda B_t-\lambda^2t/2} \leq e^{\lambda B_t}
+$$
+Entonces:
+$$
+\esp{\abs{M^\lambda_t}}=\esp{M^\lambda_t}\leq \esp{e^{\lambda B_t}}=e^{\frac{t\lambda^2}{2}}
+$$
+La \'ultima igualdad se debe a que est\'amos calculando la generadora de momentos para $B_t$ que sabemos sigue una distribuci\'on Normal$(0,t)$. Lo anterior concluye entonces que $M^\lambda_t $ es integrable finalmente para probar\'a la propiedad de martingala para $M^\lambda_t$ sea $s<t$, entonces:
+$$
+\espc{M^\lambda_t}{\F_s}=\espc{e^{\lambda B_t-\lambda^2t/2}}{\F_s}=e^{-\lambda^2t/2}\espc{e^{\lambda B_t}}{\F_s}
+$$
+$$
+=e^{-\lambda^2t/2}\espc{e^{\lambda( B_t- B_s+B_s) }}{\F_s}=e^{-\lambda^2t/2+\lambda B_s}\esp{e^{\lambda( B_{t-s}) }}$$
+$$
+=e^{-\lambda^2t/2+\lambda B_s}e^{(t-s)\lambda^2/2}=e^{\lambda B_s-s\lambda^2/2}=M^\lambda_s
+$$
+Lo que implica entonces que $M^\lambda_t$ as\'i definida es una $\F_t$-martingala. Ahora veamos que las derivadas respecto a $\lambda$ son tambi\'en martingalas. Para la demostraci\'on  ocup\'aremos el siguiente teorema que nos permite intercambiar l\'imite con esperanza condicional:
+\begin{theorem}
+Sea$\ofp$ un espacio de probabilidad y   $f:\Omega \times [a,b] \rightarrow \mathds{R}$ una funci\'on tal que para toda $\lambda  \in [a,b]$ la funci\'on  $\omega \rightarrow f(\omega,\lambda)$ es medible e integrable y que adem\'as para cada $\omega \in \Omega$ la funci\'on $\lambda \rightarrow f(\omega,\lambda)$ es derivable. Suponga que existe una funci\'on  $g:\Omega \rightarrow \mathds{R}$ integrable tal que domina a la derivada para todo $\omega \in \Omega$ es decir:
+$$
+\abs{\frac{\partial}{\partial \lambda}f(\omega,\lambda)}\leq g(\omega) \quad \forall \omega
+$$
+Entonces:
+$$
+\espc{\frac{\partial}{\partial \lambda}f(\omega,\lambda)}{\G}=\frac{\partial}{\partial \lambda}\espc{f(\omega,\lambda)}{\G}
+$$
+\end{theorem}
+\begin{proof}
+La demostraci\'on se basa en utlizar el T.C.D.  Primero fijamos $\lambda\in [a,b]$ y definimos en $\ofp$ la funci\'on:
+$$
+X_n=n\paren{f\paren{\omega,\lambda+\frac{1}{n}}- f\paren{\omega,\lambda}}
+$$ 
+Como por hip\'otesis  la funci\'on $\lambda \rightarrow f(\omega,\lambda)$ es derivable se sigue que $X_n \rightarrow X$ donde $X= \frac{\partial}{\partial \lambda}f(\omega,\lambda)$. Luego tenemos  como:
+$$
+\abs{X_n}=n\abs{f\paren{\omega,\lambda+\frac{1}{n}}- f\paren{\omega,\lambda}}=n\abs{\int_{\lambda}^{\lambda+\frac{1}{n}}\frac{\partial}{\partial u}f(\omega,u) du} 
+$$
+$$
+\leq n\int_{\lambda}^{\lambda+\frac{1}{n}}\abs{\frac{\partial}{\partial u}f(\omega,u)}du\leq  n\int_{\lambda}^{\lambda+\frac{1}{n}} g(\omega) du  = g(\omega)n\paren{\lambda +\frac{1}{n}-\lambda}=g(\omega)  
+$$
+Luego entonces tendr\'iamos que:
+$$
+\abs{X_n} \leq g \in L_1
+$$
+Por lo tanto la sucesi\'on es dominada por una funci\'on integrable por lo que usando el T.C.D. se tiene que:
+$$
+\espc{\frac{\partial}{\partial \lambda}f(\omega,\lambda)}{\G}=\espc{\lim_{n \rightarrow \infty}X_n}{\G}=\lim_{n \rightarrow \infty}\espc{X_n}{\G}
+$$
+Pero 
+$$
+\lim_{n \rightarrow \infty}\espc{X_n}{\G}=\lim_{n \rightarrow \infty}\espc{n\paren{f(\omega,\lambda+\frac{1}{n})-f(\omega,\lambda)}}{\G}
+$$
+$$
+=\lim_{n \rightarrow \infty}n\paren{\espc{f(\omega,\lambda+\frac{1}{n})}{\G}- \espc{f(\omega,\lambda)}{\G}  }=\frac{\partial}{\partial \lambda}\espc{f(\omega,\lambda)}{\G}
+$$
+De donde concluimos que en efecto, se puede intercambiar la derivada con la esperanza condicional.
+$$
+\espc{\frac{\partial}{\partial \lambda}f(\omega,\lambda)}{\G}=\frac{\partial}{\partial \lambda}\espc{f(\omega,\lambda)}{\G}
+$$
+\end{proof}
+Con este teorema procedemos a mostrar que  para toda $n\geq 1$, $\partial^n M^\lambda_t/\partial \lambda^n$ es una martingala. La demostraci\'on se har\'a por inducci\'on sobre $n$. 
+\begin{itemize}
+\item Caso $n=1$. Es claro que $\partial M^\lambda_t/\partial \lambda$ es $\F_t$-medible pues la derivada es un limite de funci\'ones que son $\F_t$-medibles. Por otro lado para mostrar que $\partial M^\lambda_t/\partial \lambda$  es integrable notamos que:
+$$
+\abs{\partial M^\lambda_t/\partial \lambda}=e^{\lambda B_t-\lambda^2t/2}\abs{(B_t-\lambda t)}\leq e^{\lambda B_t-\lambda^2t/2} \abs{B_t}+e^{\lambda B_t-\lambda^2t/2} \abs{\lambda t}
+$$
+$$
+\leq e^{\lambda B_t} \abs{B_t}+e^{\lambda B_t} \abs{\lambda t}
+$$
+Como ya vimos $\esp{e^{\lambda B_t} \abs{\lambda t}}=\abs{\lambda t}\esp{e^{\lambda B_t}}=\abs{\lambda t}e^{t\lambda^2/2}\leq \infty$\\
+Por otro lado verificaremos que $e^{\lambda B_t} \abs{B_t}$ es integrable, pues:
+$$
+\esp{e^{\lambda B_t}\abs{B_t}}=\int_{-\infty}^{\infty}\abs{u}e^{\lambda u} \frac{1}{\sqrt{2\pi t}}e^{-\frac{u^2}{2t}}du=\int_{-\infty}^{\infty}\abs{u}\frac{1}{\sqrt{2\pi t}}e^{-\frac{(u-t\lambda)^2}{2t}}du
+$$
+La \'ultima integral sabemos que es finita pues se trata de $\esp{\abs{U}}$ donde $U\sim Normal(\lambda t,t)$ . Luego de este resultado concluimos 2 cosas, primero que $\abs{\partial M^\lambda_t/\partial \lambda}$  esta dominada por $e^{\lambda B_t} \abs{B_t}+e^{\lambda B_t} \abs{\lambda t} \in L_1$ y segundo,   que  
+la primer derivada de  $M^\lambda_t$ esta en $L_1$.\\
+Finalmente para terminar con la demostraci\'on del caso $n=1$  necesitamos verificar que se cumple la propiedad martingala, sea entonces $s < t$, entonces, dado que ya vimos que $\partial M^\lambda_t/\partial \lambda$ es dominada entonces podemos llevar a cabo el intercambio de esperanza con derivada:
+$$
+\espc{\frac{\partial}{\partial \lambda} M^\lambda_t}{\F_s}=\frac{\partial}{\partial \lambda} \espc{ M^\lambda_t}{\F_s}=\frac{\partial}{\partial \lambda}M^\lambda_s
+$$
+Lo que concluye que en efecto $\frac{\partial}{\partial \lambda} M^\lambda_t$ es martingala
+\item Supongamos que $\frac{\partial^n}{\partial \lambda^n} M^\lambda_t$ es martingala, por demostrar que  $\frac{\partial^{n+1}}{\partial \lambda^{n+1}} M^\lambda_t$. Dada la hipotesis de inducci\'on tenemos entonces que:
+$$
+\espc{\frac{\partial^{n+1}}{\partial \lambda^{n+1}} M^\lambda_t}{\F_s}=\espc{\frac{\partial}{\partial \lambda}  \frac{\partial^n}{\partial \lambda^n} M^\lambda_t}{\F_s}=^*\frac{\partial}{\partial \lambda} \espc{ \frac{\partial^n}{\partial \lambda^n} M^\lambda_t}{\F_s}
+$$
+$$
+\frac{\partial}{\partial \lambda} \frac{\partial^n}{\partial \lambda^n} M^\lambda_s=\frac{\partial^{n+1}}{\partial \lambda^{n+1}}M^\lambda_s
+$$
+Lo que demostrar\'ia  que $\frac{\partial^{n+1}}{\partial \lambda^{n+1}} M^\lambda_t$ tiene la propiedad de martingala\\
+(*) Faltaria probar que  $\frac{\partial^n}{\partial \lambda^n} M^\lambda_t $ es dominada por una funci\'on integrable para poder sacar el operador derivada de la esperanza condicional
+\end{itemize}
+\end{proof}
+\item Sea $\imf{H_n}{x}=\paren{-1}^ne^{x^2/2}\frac{d^n}{dx^n}e^{-x^2/2}$. A $H_n$ se le conoce como en\'esimo polinomio de Hermite. Calc\'ulelo para $n\leq 5$. Pruebe que $H_n$ es un polinomio para toda $n\in\na$ y que $\partial^n M^\lambda_t/\partial \lambda^n=t^{n/2}\imf{H_n}{B_t/\sqrt{t}}M^\lambda_t$. 
+\begin{proof}
+Los primeros 6 polinomios de Hermite son:
+$$
+H_0(x)=1
+$$
+$$
+H_1(x)=x
+$$
+$$
+H_2(x)=x^2-1
+$$
+$$
+H_3(x)=x^3-3x
+$$
+$$
+H_4(x)=x^4-6x^2+3
+$$
+$$
+H_5=x^5-10x^3+15x
+$$
+Ahora probaremos que $H_n$ es polinomio de grado $n$ para toda $n$. La prueba ser\'a por inducci\'on sobre $n$
+\begin{itemize}
+\item Caso $n=1$ ya sabemos que $H_1(x)=x$ y por tanto es polinomio de grado 1
+\item Supongamos ahora que $H_n$ es polinomio de grado $n$  por demostrar que $H_{n+1}$ es un polinomio. Por hip\'otesis de inducci\'on tenemos que:
+$$
+\paren{-1}^ne^{x^2/2}\frac{d^n}{dx^n}e^{-x^2/2}=H_n(x)=(a_nx^n+a_{n-1}x^{n-1}+\cdots+a_0)
+$$
+Entonces:
+$$
+\frac{d^n}{dx^n}e^{-x^2/2}=\paren{-1}^ne^{-x^2/2}(a_nx^n+a_{n-1}x^{n-1}+\cdots+a_0)
+$$
+\end{itemize}
+Derivando la expresi—n anterior obtenemos:
+$$
+\frac{d^{n+1}}{dx^{n+1}}e^{-x^2/2}=\paren{-1}^ne^{-x^2/2}(a_nnx^{n-1}+a_{n-1}(n-1)x^{n-2}+\cdots+a_1)
+$$
+$$
++\paren{-1}^n(a_nx^n+a_{n-1}x^{n-1}+\cdots+a_0)e^{-x^2/2}(-1x)
+$$
+Por lo tanto, factorizando $\paren{-1}^{n+1}e^{-x^2/2}$:
+$$
+H_{n+1}(x)=\paren{-1}^ne^{x^2/2}\frac{d^n}{dx^n}e^{-x^2/2}
+$$
+$$
+=\paren{a_nx^{n+1}+a_{n-1}x^{n}+\cdots+a_0x-a_nnx^{n-1}-a_{n-1}(n-1)x^{n-2}-\cdots-a_1}
+$$
+De donde concluimos que $H_{n+1}(x)$ es en efecto un polinomio de grado $n+1$\\
+Finalmente para terminar este inciso tenemos que ver que $$\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}=\left.t^{n/2}\imf{H_n}{B_t/\sqrt{t}}M^\lambda_t\right|_{\lambda=0}=t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$$
+Para su demostraci\'on consideremos a la funci\'on $f(\lambda)=M_t^{\lambda}$ y desarrollemos el polinomio de taylor al rededor de 0
+$$
+f(\lambda)=M_t^{\lambda} =\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}
+$$
+Por otro lado por la definic\'on de $M_t^\lambda$ tenemos:
+$$
+M_t^\lambda=e^{\lambda B_t-\lambda^2t/2}
+$$
+
+\end{proof}
+
+
+\item Pruebe que $t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$ es una martingala para toda $n$ y calc\'ulela para $n\leq 5$. 
+\item Aplique muestreo opcional a las martingalas anteriores al tiempo aleatorio $T_{a,b}=\min\set{t\geq 0:B_t\in\set{-a,b}}$ (para $a,b>0$) con $n=1,2$ para calcular $\proba{B_{T_{a,b}}=b}$ y $\esp{T_{a,b}}$, ?Qu\'e concluye cuando $n=3,4$? ?` Cree que $T_{a,b}$ tenga momentos finitos de cualquier orden? Justifique su respuesta.
+\item Aplique el teorema de muestreo opcional a la martingala $M^\lambda $ al tiempo aleatorio $T_a=\inf\set{t\geq 0:B_t\geq a}$ si $\lambda>0$. Diga por qu\'e es necesaria la \'ultima hip\'otesis y calcule la transformada de Laplace de $T_a$. 
+\item Opcional (para subir calificaci\'on en esta u otra tarea): 
+\begin{enumerate}
+\item Modifique el ejercicio para que aplique al proceso Poisson.
+\item Resu\'elva el ejercicio modificado. 
+\end{enumerate}
+\end{enumerate}
+\end{problema}
+\begin{problema}\mbox{}
+\begin{enumerate}
+\item Al aplicar la desigualdad maximal de Doob sobre los racionales de orden $n$ y pasar al l\'imite conforme $n\to\infty$, pruebe que $\sup_{t\leq }\abs{B_t-B_1}$ es cuadrado integrable.
+\item Pruebe que la sucesi\'on de variables aleatorias\begin{esn}
+\paren{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n},n\in\na}
+\end{esn}son independientes, id\'enticamente distribuidas y de media finita. (Utilice la propiedad de Markov.)
+\item Al utilizar Borel-Cantelli, pruebe que, para cualquier $C>0$ fija\begin{esn}
+\limsup_{n\to\infty}\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}/n\leq C\end{esn} casi seguramente.
+\item Pruebe que $\paren{B_n/n,n\geq 1}$ converge casi seguramente a $0$ y deduzca que\begin{esn}
+\lim_{t\to\infty }B_t/t=0.
+\end{esn}
+\end{enumerate}
+\end{problema}
+\bibliography{GenBib}
+\bibliographystyle{amsalpha}
+\end{document}

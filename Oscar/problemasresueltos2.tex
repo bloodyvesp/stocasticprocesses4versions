@@ -52,8 +52,8 @@ morekeywords={}
 \newcommand{\nats}{\mathds{N}}
 \newcommand{\reals}{\mathds{R}}
 \newcommand{\entpos}{\mathds{Z}_{+}}
-\newcommand{\prob}{\mathds{P}}
-\newcommand{\mean}{\mathds{E}}
+\newcommand{\prob}{\p}
+\newcommand{\mean}{\esp}
 \newcommand{\mat}[1]{{\bm #1}}
 \newcommand{\nota}[1]{\hspace{5 mm}\mbox{#1}}
 \newcommand{\tres}{\hspace{3 mm}}
@@ -510,16 +510,55 @@ y por lo tanto,
 que justamente corresponde a su transformada de Laplace.
 Tomando $t=1$ y $\lambda = \lambda' t'^{1/\alpha}$, entonces
 \[\mean (\exp ( -\lambda' t'^{1/\alpha} X_1 )) = \exp \left( - \frac{C \cdot 1\cdot (-\lambda' t'^{1/\alpha})^\alpha \Gamma (1-\alpha )}{\alpha}\right) = \exp \left( - \frac{C t' \lambda'^\alpha \Gamma (1-\alpha )}{\alpha}\right),\]
-es decir $\mean (\exp (-\lambda (t^{1/\alpha}X_1))) = \mean (\exp (-\lambda X_t))$, es decir, sus transformadas de Laplace coinciden, y como son variables aleatorias no negativas, éstas deben tener la misma distribución.
+es decir $\mean (\exp (-\lambda (t^{1/\alpha}X_1))) = \mean (\exp (-\lambda X_t))$, es decir, sus transformadas de Laplace coinciden, y como son variables aleatorias no negativas c.s., éstas deben tener la misma distribución.
  \end{proof}
 
 \item Diga por qu\'e el siguiente c\'odigo en Octave simula la trayectoria aproximada del proceso $X$ en el intervalo $[0,1]$.
+\begin{proof}
+(FALTA)
+\end{proof}
 \end{enumerate}
 \end{problema}
 
 \begin{problema}
 Pruebe que si $X$ tiene incrementos independientes entonces el proceso $X^t$ dado por $X^t_s=X_{t+s}-X_t$ es independiente de $\F^X_t=\sag{X_s:s\geq 0}$.
+\begin{proof}
+Supongamos que $X^t$ tiene incrementos independientes. La $\sigma$-álgebra $\F_t=\sigma (X_s, 0\le s\le t)$ es generada por los subconjuntos de la forma
+\[\{\omega\in\Omega : X_s (\omega )\in A \}\]
+para todo $s\in [0,t]$ y $A\in\borr$. Más aún, $\F_t$ también es generada por los subconjuntos de la forma 
+\[\{X_{s_0}\in A_0, X_{s_1} - X_{s_0}\in A_1,\dots , X_{s_n} - X_{s_{n-1}}\in A_n \}\]
+para todo $n\in\nats$, $0\le s_0 < s_1 <\dots <s_n\le t$ y $A_0,\dots ,A_n\in\borr$. Para ver esto, notemos que los subconjuntos del primer tipo se pueden ver como subconjuntos del segundo tipo si hacemos $A_1,\dots,A_n= \reals$. Ademas, los conjuntos del segundo tipo son $\F_t$-medibles y por lo tanto, generan justamente a $\F_t$. Llamaremos a la familia de subconjuntos del segundo tipo (uniendo al elemento $\{\emptyset\}$) como $\Cp_t$. Por la discusión anterior se tendrá que $\sigma (\Cp_t )=\F_t$; además, notemos que $\Cp_t$ es un $\pi$-sistema.
 
+Lo mismo se puede concluir para $\F^t=\sigma (X_r^t, r\ge 0) = \sigma (X_{t+r} - X_t, r\ge 0)$; es decir, que $\F^t$ es generada por subconjuntos de la forma
+\[\{X_{t+r_0}- X_t \in B_0, X_{t+r_1} - X_{t+r_0}\in B_1, \dots, X_{t+r_m} - X_{t+r_{m-1}}\in B_m\}\]
+para todo $m\in\nats$, $0\le r_0 < r_1 <\dots <r_m\le t$ y $B_0,\dots ,B_m\in\borr$. A la familia de subconjuntos de este tipo (unión el elemento $\{\emptyset\}$) le llamaremos $\Cp^t$, donde también se tendrá que $\sigma (\Cp^t )=\F^t$ y que $\Cp^t$ es un $\pi$-sistema.
+
+Sea $D_0\in\Cp^t$ fijo, es decir,
+\[D_0=\{X_{t+r_0^0}- X_t \in B_0^0, X_{t+r_1^0} - X_{t+r_0^0}\in B_1^0, \dots, X_{t+r_{m^0}^0} - X_{t+r_{m^0-1}^0}\in B_{m^0}\}.\]
+para algún $m^0\in\nats$, $0\le r_0^0 < r_1^0 <\dots <r_{m^0}^0\le t$ y $B_0^0,\dots ,B_{m^0}^0\in\borr$.
+Definamos
+\[\Ll_t := \{C\in\sigma (\Cp_t )=\F_t: \p (C\cap D_0 ) = \p(C)\p(D_0)\}.\]
+Sea $C_0\in\Cp_t$, es decir,
+\[C_0=\{X_{s_0^0} \in A_0^0, X_{s_1^0} - X_{s_0^0}\in A_1^0,\dots , X_{s_{n^0}^0} - X_{s_{n^0-1}^0}\in A_{n^0}^0\}\]
+para algún $n^0\in\nats$, $0\le s_0 < s_1 <\dots <s_{n^0}\le t$ y $A_0,\dots ,A_{n^0}\in\borr$.
+Entonces
+\begin{align*}
+\p(C_0\cap D_0) & = \p(\{X_{s_0^0} \in A_0^0, X_{s_1^0} - X_{s_0^0}\in A_1^0,\dots , X_{s_{n^0}^0} - X_{s_{n^0-1}^0}\in A_{n^0}^0\}\cap\\
+&\tres \{X_{t+r_0^0}- X_t \in B_0^0, X_{t+r_1^0} - X_{t+r_0^0}\in B_1^0, \dots, X_{t+r_{m^0}^0} - X_{t+r_{m^0-1}^0}\in B_{m^0}\})\\
+& = \p(\{X_{s_0^0} \in A_0^0, X_{s_1^0} - X_{s_0^0}\in A_1^0,\dots , X_{s_{n^0}^0} - X_{s_{n^0-1}^0}\in A_{n^0}^0\}\cap\\
+&\tres \{X_t-X_{s_{n^0}^0}\in\reals\}\cap\\
+&\tres \{X_{t+r_0^0}- X_t \in B_0^0, X_{t+r_1^0} - X_{t+r_0^0}\in B_1^0, \dots, X_{t+r_{m^0}^0} - X_{t+r_{m^0-1}^0}\in B_{m^0}\})\\
+& = \p(X_{s_0^0} \in A_0^0, X_{s_1^0} - X_{s_0^0}\in A_1^0,\dots , X_{s_{n^0}^0} - X_{s_{n^0-1}^0}\in A_{n^0}^0)\times\\
+&\tres \prob(X_t-X_{s_{n^0}^0}\in\reals )\times\\
+&\tres \p (X_{t+r_0^0}- X_t \in B_0^0, X_{t+r_1^0} - X_{t+r_0^0}\in B_1^0, \dots, X_{t+r_{m^0}^0} - X_{t+r_{m^0-1}^0}\in B_{m^0})\\
+& =\p (C_0)\times 1 \times\p (D_0),
+\end{align*}
+de manera que $\Cp_t\subset\Ll_t$. Si demostramos que $\Ll_t$ es un $\lambda$-sistema, se tendría que $\Ll_t=\sigma (\Cp_t )$; esta prueba es muy sencilla y se ha realizado en repetidas ocasiones; esta vez bastará con utilizar la propiedad de aditividad finita continuidad de la función de probabilidad, sin embargo, la demostración formal será omitida.
+A continuación, tomemos un $C_0'\in \F_t$ fijo. Definamos
+\[\Ll^t:=\{D\in \sigma (\Cp^t)=\F_t : \p (C_0'\cap D) = \p(C_0')\p(D)\}.\]
+Por el resultado anterior, se tiene que $\Cp^t\subset\Ll^t$ y de igual manera, se omite la prueba de que $\Ll^t$ es un $\lambda$-sistema (es prácticamente la misma). Así pues, se concluye que $\Ll_2 = \sigma (\Cp^t ) \F^^t$, lo que quiere decir que para todo $C\in\F_t$ y $D\in\F^t$, se tiene que $\p(C\cap D) = \p (C) \p(D)$, es decir, $X^t$ es independiente de $\F_t$.
+
+\end{proof}
 Calcular la esperanza y varianza del proceso de Poisson y de Poisson compuesto (en t\'erminos de la intensidad y la distribuci\'on de salto). Probar que si $X$ es
 \begin{esn}
 \esp{e^{iu Z_t}}=e^{-\lambda t\paren{1-\imf{\psi}{u}}}\quad\text{donde}\quad \imf{\psi}{u}=\esp{e^{iu \xi_1}}. 
@@ -529,7 +568,7 @@ Sea $N$ un proceso de L\'evy tal que $N_t$ tiene distribuci\'on de par\'ametro $
 \begin{enumerate}
 \item Pruebe que casi seguramente las trayectorias de $N$ son no-decrecientes.
 \item Sea $\Xi$ la \'unica medida en $\mc{B}_{\re_+}$ tal que $\imf{\Xi}{[0,t]}=N_t$. Pruebe que $\Xi$ es una medida de Poisson aleatoria de intensidad $\lambda \cdot\leb$.
-\item Concluya que $N$ es un proceso de Poisson de intensidad $\lambda$. 
+\item Concluya que $N$ es un proceso de Poisson de intensidad $\lambda$.
 \end{enumerate}
 \end{problema}
 

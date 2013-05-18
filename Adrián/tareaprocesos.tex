@@ -1210,6 +1210,10 @@ Ya sabemos que $Z_0=k\geq 0$. Tambien sabemos que $Z_{n+1}=Z_n+\sum_{i=C_{n-1}+1
 \item Pruebe que si $S$ alcanza $-1$ entonces existe $n$ tal que $Z_n=0$. Deduzca que si la media de $\mu$ es $1$ entonces $Z$ se extingue. (Sugerencia: utilice un ejercicio anterior sobre martingalas con saltos acotados hacia abajo.) 
 \end{enumerate}
 
+\begin{proof}
+Como $\mu=1$ entonces $\esp{\xi}=1$ esto nos indica que $\esp{\tilde{\xi}+1}=1$, por lo tanto $\esp{\tilde{\xi}}=0$. Entoces $S_n$ es una caminata alaeatoria no trivial con media cero, por ejercicio anterior de la tarea sabemos que la caminata oscila. Por lo tanto $\liminf S_n=-\infty$. Por lo tanto  existe $n$ tal que $S_{C_n}=-k$. Por lo tanto el proceso se $Z$ extingue.
+\end{proof}
+
 \defin{Categor\'ias: } Caminatas aleatorias, Procesos de Galton-Watson%, Propiedad de Markov fuerte.
 \end{problema}
 
@@ -2647,7 +2651,7 @@ plot (T,X , type ="S")
 \end{lstlisting}
 \begin{figure}
 \centering
-\includegraphics[width=0.7\textwidth]{simexp.png}
+\includegraphics[width=0.7\textwidth]{cadenamarkovtc.png}
 \caption{Simulaci\'on de Cadena de Markov con matriz infinitesimal Q}
 \label{3}
 \end{figure}
