@@ -340,7 +340,10 @@ $$
 Como ya vimos $\esp{e^{\lambda B_t} \abs{\lambda t}}=\abs{\lambda t}\esp{e^{\lambda B_t}}=\abs{\lambda t}e^{t\lambda^2/2}\leq \infty$\\
 Por otro lado verificaremos que $e^{\lambda B_t} \abs{B_t}$ es integrable, pues:
 $$
-\esp{e^{\lambda B_t}\abs{B_t}}=\int_{-\infty}^{\infty}\abs{u}e^{\lambda u} \frac{1}{\sqrt{2\pi t}}e^{-\frac{u^2}{2t}}du=\int_{-\infty}^{\infty}\abs{u}\frac{1}{\sqrt{2\pi t}}e^{-\frac{(u-t\lambda)^2}{2t}}du
+\esp{e^{\lambda B_t}\abs{B_t}}=\int_{-\infty}^{\infty}\abs{u}e^{\lambda u} \frac{1}{\sqrt{2\pi t}}e^{-\frac{u^2}{2t}}du
+$$
+$$
+=e^{t\lambda^2/2}\int_{-\infty}^{\infty}\abs{u}\frac{1}{\sqrt{2\pi t}}e^{-\frac{(u-t\lambda)^2}{2t}}du
 $$
 La \'ultima integral sabemos que es finita pues se trata de $\esp{\abs{U}}$ donde $U\sim Normal(\lambda t,t)$ . Luego de este resultado concluimos 2 cosas, primero que $\abs{\partial M^\lambda_t/\partial \lambda}$  esta dominada por $e^{\lambda B_t} \abs{B_t}+e^{\lambda B_t} \abs{\lambda t} \in L_1$ y segundo,   que  
 la primer derivada de  $M^\lambda_t$ esta en $L_1$.\\
@@ -410,24 +413,271 @@ $$
 De donde concluimos que $H_{n+1}(x)$ es en efecto un polinomio de grado $n+1$\\
 Finalmente para terminar este inciso tenemos que ver que $$\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}=\left.t^{n/2}\imf{H_n}{B_t/\sqrt{t}}M^\lambda_t\right|_{\lambda=0}=t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$$
 Para su demostraci\'on consideremos a la funci\'on $f(\lambda)=M_t^{\lambda}$ y desarrollemos el polinomio de taylor al rededor de 0
-$$
+\begin{equation}
 f(\lambda)=M_t^{\lambda} =\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}
-$$
+\end{equation}
 Por otro lado por la definic\'on de $M_t^\lambda$ tenemos:
 $$
-M_t^\lambda=e^{\lambda B_t-\lambda^2t/2}
+M_t^\lambda=e^{\lambda B_t-\lambda^2t/2}=e^{-\frac{1}{2}\paren{-2\lambda B_t + \lambda^2t}  }
 $$
-
+Completamos un trinomio cuadrado en el exponente.
+$$
+=e^{\frac{B_t^2}{2t}-\frac{1}{2}\paren{\frac{B_t^2}{t}-2\lambda B_t + \lambda^2t}  }=e^{\frac{B_t^2}{2t}-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2  }
+$$
+entonces expresando esto \'ultimo como serie de taylor al rededor de $\lambda=0$ obtenemos:
+\begin{equation}
+f(\lambda)=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\left.\frac{\partial^n}{\partial \lambda^n}e^{\frac{B_t^2}{2t}-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}\right|_{\lambda=0}=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}e^{\frac{B_t^2}{2t}}\left.\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}\right|_{\lambda=0}
+\end{equation}
+Nos concentraremos en encontrar una expresi\'on para 
+$$
+\left.\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}\right|_{\lambda=0}
+$$
+Para resolver este problema definamos las siguientes funciones:
+$$
+f(u):=e^{-\frac{u^2}{2}} \quad g(\lambda):=\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}
+$$
+Entonces bajo esta definici\'on:
+$$
+\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}=\frac{\partial^n}{\partial \lambda^n}f(g(\lambda))
+$$
+Afirmaci\'on, bajo las condiciones de este problema se tiene que:
+$$
+\frac{\partial^n}{\partial \lambda^n}f(g(\lambda))=\paren{g^{(1)}(\lambda)}^nf^{(n)}(g(\lambda))
+$$
+Demostraci\'on por inducci\'on:
+\begin{itemize}
+\item Caso $n=1$. Usando regla de la cadena se tiene el resultado:
+$$
+\frac{\partial}{\partial \lambda}f(g(\lambda))=f^{(1)}(g(\lambda))g^{(1)}(\lambda)
+$$
+\item Supongamos que la formula es  v\'alida para $n$ por demostrar que es v\'alida para $n+1$
+$$
+\frac{\partial^{n+1}}{\partial \lambda^{n+1}}f(g(\lambda))=\frac{\partial}{\partial \lambda}\frac{\partial^{n}}{\partial \lambda^{n}}f(g(\lambda))=\frac{\partial}{\partial \lambda}\paren{g^{(1)}(\lambda)}^nf^{(n)}(g(\lambda))
+$$
+$$
+=\paren{g^{(1)}(\lambda)}^n\frac{\partial}{\partial \lambda}f^{(n)}(g(\lambda))+f^{(n)}(g(\lambda))\frac{\partial}{\partial \lambda}\paren{g^{(1)}(\lambda)}^n
+$$
+Sin embargo por la definici\'on de la funci\'on $g$ mostraremos que $\frac{\partial}{\partial \lambda}\paren{g^{(1)}(\lambda)}^n=0$, en efecto pues:
+$$
+\frac{\partial}{\partial \lambda}\paren{g^{(1)}(\lambda)}^n=n\paren{g^{(1)}(\lambda)}^{n-1}g^{(2)}(\lambda)
+$$
+y como $g^{(2)}(\lambda)=\frac{\partial^2}{\partial \lambda^2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}=0$ de donde se sigue que:
+$$
+\frac{\partial^{n+1}}{\partial \lambda^{n+1}}f(g(\lambda))=\paren{g^{(1)}(\lambda)}^n\frac{\partial}{\partial \lambda}f^{(n)}(g(\lambda))=\paren{g^{(1)}(\lambda)}^{n+1}f^{(n+1)}(g(\lambda))
+$$
+Por lo tanto prueba que la f\'ormula es v\'alida para toda $n$ 
+\end{itemize}
+Por lo anterior hemos probado que:
+$$
+\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}=\paren{g^{(1)}(\lambda)}^nf^{(n)}(g(\lambda))=\paren{-\sqrt{t}}^nf^{(n)}\paren{g(\lambda)}
+$$
+Pero notemos que por la definici\'on de $H_n$
+$$
+f^{(n)}(u)=\frac{\partial^n}{\partial \lambda^n}e^{-u^2/2}=(-1)^nH_n(u)e^{-u^2/2}
+$$
+Por lo tanto:
+$$
+\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}=\paren{-\sqrt{t}}^n(-1)^nH_n(g(\lambda))e^{-g(\lambda)^2/2}
+$$
+Sustituyendo  este resultado en la ecuaci\'on (3) obtenemos :
+$$
+f(\lambda)=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}e^{\frac{B_t^2}{2t}}\left.\paren{t}^{n/2}H_n(g(\lambda))e^{-g(\lambda)^2/2}  \right|_{\lambda=0}
+$$
+Pero como $g(0)=B_t/\sqrt{t}$ entonces:
+\begin{equation}
+f(\lambda)=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\paren{t}^{n/2}H_n(B_t/\sqrt{t})
+\end{equation}
+Finalmente por la ecuaci\'on (2) y (4) y la unicidad del polinomio de taylor obtenemos que:
+$$
+\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\paren{t}^{n/2}H_n(B_t/\sqrt{t})=f(\lambda)=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}
+$$
+De donde obtemos el resultado que quer\'iamos probar:
+$$
+\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}=\paren{t}^{n/2}H_n(B_t/\sqrt{t})
+$$
 \end{proof}
-
-
 \item Pruebe que $t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$ es una martingala para toda $n$ y calc\'ulela para $n\leq 5$. 
+\begin{proof}
+Por el inciso anterior sabemos que  $\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}$ es martingala, se sigue entonces que $\paren{t}^{n/2}H_n(B_t/\sqrt{t})$ es martingala. Las primeras cinco martingalas son:\\
+$
+B_t
+$\\
+$
+B_t^2-t
+$\\
+$
+B_t^3-3B_tt
+$\\
+$
+B_t^4-6B_t^2t+3t^2
+$\\
+$
+B_t^5-10B_t^3t+15B_tt^2
+$
+ \end{proof}
+
 \item Aplique muestreo opcional a las martingalas anteriores al tiempo aleatorio $T_{a,b}=\min\set{t\geq 0:B_t\in\set{-a,b}}$ (para $a,b>0$) con $n=1,2$ para calcular $\proba{B_{T_{a,b}}=b}$ y $\esp{T_{a,b}}$, ?Qu\'e concluye cuando $n=3,4$? ?` Cree que $T_{a,b}$ tenga momentos finitos de cualquier orden? Justifique su respuesta.
+\begin{proof}
+Primero, sabemos que $B_t$ es martingala y $T_{a,b} \wedge s$ es tiempo de paro acotado, luego entonces $B_{T_{a,b} \wedge s}$ es martingala acotada. Usando el muestro ¼opcional tenemos que:
+$$
+\esp{B_{T_{a,b} \wedge s}}=\esp{B_0}=0
+$$
+Sin embargo al ser $B_{T_{a,b} \wedge s}$ martingala acotada y como $B_{T_{a,b} \wedge s} \rightarrow B_{T_{a,b}}$  c.s, entonces usando teorema de la convergencia acotada se tiene que:
+$$
+\esp{B_{T_{a,b} \wedge s}} \rightarrow \esp{B_{T_{a,b}}}  \quad \Rightarrow  \esp{B_{T_{a,b}}} =\esp{B_0}=0
+$$ 
+Pero $B_{T_{a,b}}$ es una variable aleatoria que solo toma dos valores $\set{-a,b}$. Entonces:
+$$
+\esp{B_{T_{a,b}}}=-a\p(B_{T_{a,b}}=-a)+b\p(B_{T_{a,b}}=b)=0
+$$
+De donde usando el hecho de que $\p(B_{T_{a,b}}=-a)=1-\p(B_{T_{a,b}}=b)$ se concluye que:
+$$
+\p(B_{T_{a,b}}=-a)=\frac{b}{a+b} \quad \p(B_{T_{a,b}}=b)=\frac{a}{a+b}
+$$
+Ahora utilizando la segunda martingala  $B_t^2-t$ y bajo un argumento similar al anterior concluimos que:
+$$
+0=\esp{B_{T_{a,b}}^2-T_{a,b}}=a^2\p(B_{T_{a,b}}=-a)+b^2 \p(B_{T_{a,b}}=b)-\esp{T_{a,b}}
+$$
+Por lo tanto, sustituyendo el valor de la probabilidades que obtuvimos arriba concluimos que:
+$$
+\esp{T_{a,b}}=\frac{a^2b}{a+b}+\frac{b^2a}{a+b}=ab
+$$
+Ahora trabajaremos con $n=3$, la martingala  que obtenemos es $B_t^3-3B_tt$ de donde nuevamente aplicando el muestreo opcional obtenemos que:
+$$
+0=\esp{B_{T_{a,b}}^3-3B_{T_{a,b}}T_{a,b}}=\frac{b^3a-a^3b}{a+b}-3\esp{B_{T_{a,b}}T_{a,b}}
+$$
+De donde concluimos que:
+$$
+\esp{B_{T_{a,b}}T_{a,b}}=\frac{b^3a-a^3b}{3(a+b)}
+$$
+De esta \'ultima expresi\'on recordemos que $B_{T_{a,b}}=-a\mathds{1}_{\set{B_{T_{a,b}}=-a}}+b\mathds{1}_{\set{B_{T_{a,b}}=b}}$ entonces:
+\begin{equation}
+\frac{b^3a-a^3b}{3(a+b)}=\esp{B_{T_{a,b}}T_{a,b}}=-a\esp{T_{a,b}\mathds{1}_{\set{B_{T_{a,b}}=-a}}}+b\esp{T_{a,b}\mathds{1}_{\set{B_{T_{a,b}}=b}}}
+\end{equation}
+Por otro lado $T_{a,b}=T_{a,b}\mathds{1}_{\set{B_{T_{a,b}}=-a}}+T_{a,b}\mathds{1}_{\set{B_{T_{a,b}}=b}}$ entonces:
+\begin{equation}
+ab=\esp{T_{a,b}}=\esp{T_{a,b}\mathds{1}_{\set{B_{T_{a,b}}=-a}}}+\esp{T_{a,b}\mathds{1}_{\set{B_{T_{a,b}}=b}}}
+\end{equation}
+De las ecuaciones (4) y (5) obtenemos un sistema de ecuaciones de donde al resolverlo obtenemos:
+$$
+\esp{T_{a,b}\mathds{1}_{\set{B_{T_{a,b}}=b}}}=\frac{b^3a-a^3b}{3(a+b)}+\frac{a^2b}{a+b}
+$$
+$$
+\esp{T_{a,b}\mathds{1}_{\set{B_{T_{a,b}}=-a}}}=ab-\frac{b^3a-a^3b}{3(a+b)}-\frac{a^2b}{a+b}
+$$
+Caso $n=4$ tenemos  la siguiente martingala $B_t^4-6B_t^2t+3t^2$ de donde nuevamente aplicando el muestro opcional obtenemos:
+$$
+0=\esp{B_{T_{a,b}}^4-6B_{T_{a,b}}^2{T_{a,b}}+3T_{a,b}^2}
+$$
+De donde despejando:
+$$
+\esp{T_{a,b}^2}=\frac{1}{3}\paren{\esp{6B_{T_{a,b}}^2{T_{a,b}}}-\esp{B_{T_{a,b}}^4}}=2\esp{B_{T_{a,b}}^2{T_{a,b}}}-\frac{a^4b+b^4a}{3(a+b)}
+$$
+De esta \'ultima expresi\'on trabajar\'emos  $\esp{B_{T_{a,b}}^2{T_{a,b}}}$. Como:
+$$
+B_{T_{a,b}}^2=a^2\mathds{1}_{\set{B_{T_{a,b}}=-a}}+b^2\mathds{1}_{\set{B_{T_{a,b}}=b}}
+$$
+Entonces:
+$$
+\esp{B_{T_{a,b}}^2{T_{a,b}}}=a^2\esp{T_{a,b}\mathds{1}_{\set{B_{T_{a,b}}=-a}}}+b^2\esp{T_{a,b}\mathds{1}_{\set{B_{T_{a,b}}=b}}}
+$$
+$$
+a^2\paren{ab-\frac{b^3a-a^3b}{3(a+b)}-\frac{a^2b}{a+b}}+b^2\paren{\frac{b^3a-a^3b}{3(a+b)}+\frac{a^2b}{a+b}}
+$$
+Por lo tanto:
+$$
+\esp{T_{a,b}^2}=2\paren{a^2\paren{ab-\frac{b^3a-a^3b}{3(a+b)}-\frac{a^2b}{a+b}}+b^2\paren{\frac{b^3a-a^3b}{3(a+b)}+\frac{a^2b}{a+b}}
+} -\frac{a^4b+b^4a}{3(a+b)}
+$$
+Lo que muestra que tiene segundo momento finito. Ahora bien, notemos que para calcular el n-\'esimo momento de $T_{a,b}$ requeriremos de la martingala que se obtiene de derivar $2n$ veces a la funci\'on $M_t^\lambda$ y evaluarla en $\lambda=0$, luego como ya probamos  en evaluando $\lambda=0$ se tiene la igualdad $\partial^n M^\lambda_t/\partial \lambda^n=t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$, entonces obtendr\'iamos que la martingala para calcular $\esp{T_{a,b}^n}$ es de la forma:
+$$
+t^{n}\imf{H_2n}{B_t/\sqrt{t}}=t^n\paren{a_{2n}\paren{\frac{B_t}{\sqrt t}}^{2n}+a_{2n-2}\paren{\frac{B_t}{\sqrt t}}^{2n-2}+a_0}
+$$
+De donde al aplicar el muestro opcional  para martingalas obtendr’amos que $\esp{T_{a,b}^n}$  queda en funci\'on de:
+ $$\esp{B_{T_{a,b}}^{2n}}, \esp{B_{T_{a,b}}^{2n-2}T_{a,b}},\esp{B_{T_{a,b}}^{2n-4}T_{a,b}^2},\ldots \esp{B_{T_{a,b}}^{2}T_{a,b}^{n-1}}$$
+Luego cada una de estas esperanzas es finita pues depende b\'asicamente de esperanzas que fueron calculadas  de martingalas anteriores. Por lo que concluimos que $T_{a,b}$ tiene todos sus momentos finitos. 
+\end{proof}
 \item Aplique el teorema de muestreo opcional a la martingala $M^\lambda $ al tiempo aleatorio $T_a=\inf\set{t\geq 0:B_t\geq a}$ si $\lambda>0$. Diga por qu\'e es necesaria la \'ultima hip\'otesis y calcule la transformada de Laplace de $T_a$. 
+\begin{proof}
+Primero, ya probamos que $M_t^\lambda$ es martingala, luego $T_a\wedge s$ es tiempo de paro acotado y adem\'as $M_{T_a\wedge s}^\lambda$ es martingala, usando el muestreo opcional obtenemos:
+$$
+\esp{M_{T_a\wedge s}^\lambda}=\esp{M_0^\lambda}=1
+$$
+Pero como $M_{T_a\wedge s}^{\lambda}$ es positiva solo tentemos que encontrar una cota superior al proceso para asegurar que tenemos una martingala acotada, sin embargo notando que si $s\leq T_a$ entonces $M_{T_a\wedge s}^{\lambda}=M_s^{\lambda}=e^{\lambda B_s-\lambda^2s/2} \leq e^{\lambda a}$  y si $s > T_a$ entonces $M_{T_a\wedge s}^{\lambda}=M_{T_a}^{\lambda}=e^{\lambda a -\lambda^2s/2} \leq e^{\lambda a}$ (aqu\'i hacemos uso de la continuidad del proceso $B_t$ asi como del hecho de que $\lambda >0$). Luego entonces hemos probado que $M_{T_a\wedge s}^{\lambda}$  es una martingala acotada, por lo tanto dado que  $M_{T_a\wedge s}^{\lambda} \rightarrow M_{T_a}^{\lambda}$  y usando el teorema de convergencia acotada:
+$$
+1=\esp{M_{T_a\wedge s}^\lambda}\rightarrow \esp{M_{T_a}^{\lambda}}
+$$
+Por lo tanto:
+$$
+\esp{e^{\lambda a-\lambda^2T_a/2} }=1
+$$
+Entonces despejando:
+$$
+\esp{e^{-\lambda^2T_a/2}}=e^{-\lambda a}
+$$
+Para obtener la funci\'on generadora de momentos hacemos el cambio $u=\lambda^2/2$ de donde $\lambda=\sqrt{2u}$  entonces:
+$$
+\esp{e^{-uT_a}}=e^{- a\sqrt{2u}}
+$$
+\end{proof}
 \item Opcional (para subir calificaci\'on en esta u otra tarea): 
 \begin{enumerate}
 \item Modifique el ejercicio para que aplique al proceso Poisson.
 \item Resu\'elva el ejercicio modificado. 
+
+\begin{proof}
+Primero denotaremos $N_t$ como un proceso Poisson de Tasa $\gamma$ lo que implica que $N_t$ sigue una distribuc\'on Poisson($\gamma t$). Luego dado que la funci\'on generadora de momentos de una variable poisson de tasa  $\gamma t$ es:
+$$
+\esp{e^{\lambda N_t}}=e^{\gamma t\paren{e^{\lambda}-1}}
+$$
+Entonces definiremos a $M_t^{\lambda}$ como sigue:
+$$
+M_t^{\lambda}:=e^{\lambda N_t-\gamma t\paren{e^{\lambda}-1}}
+$$
+Probaremos entonces que as’ definida $M_t^{\lambda}$ es martingala respecto a la filtraci\'on can\'œnica $\F_t=\sigma\paren{N_s: s\leq t}$. Sea entonces $s < t$;
+$$
+\espc{M_t^{\lambda}}{\F_s}=\espc{e^{\lambda N_t-\gamma t\paren{e^{\lambda}-1}}}{\F_t}=e^{-\gamma t\paren{e^{\lambda}-1}}\espc{e^{\lambda N_t}}{\F_s}
+$$
+Pero al ser $N_t$ un proces poisson entonces tenemos incrementos independientes y estacionarios por lo tanto:
+$$
+\espc{M_t^{\lambda}}{\F_s}=e^{-\gamma t\paren{e^{\lambda}-1}}\espc{e^{\lambda (N_t-N_s+N_s)}}{\F_s}=e^{-\gamma t\paren{e^{\lambda}-1}+\lambda N_s}\esp{e^{\lambda (N_t-N_s)}}
+$$
+Entonces, como $N_t-N_s \stackrel{d}{=}  N_{t-s} \sim Poisson(\gamma (t-s))$ por lo tanto, dada la expresi\'on para la generadora de momentos de una Poisson se tiene:
+$$
+\esp{e^{\lambda (N_t-N_s)}}=e^{\gamma (t-s)\paren{e^{\lambda}-1}}
+$$
+Sustuyendo se tiene que:
+$$
+\espc{M_t^{\lambda}}{\F_s}=e^{-\gamma t\paren{e^{\lambda}-1}+\lambda N_s}e^{\gamma (t-s)\paren{e^{\lambda}-1}}=e^{\lambda N_s-\gamma s \paren{e^{\lambda}-1}}=M_s^{\lambda}
+$$
+Por lo tanto $M_t^{\lambda}$ es martingala. Luego para probar que la n-\'esima derivada respecto de $\lambda$ es martingala procederemos nuevamente por inducci\'on y por tanto necesitaremos dominar a  $\frac{\partial}{\partial \lambda}M_t^{\lambda}$ para poder llevar a cabo el intercambio de derivada con la esperanza condicional. Derivando tenemos:
+$$
+\abs{\frac{\partial}{\partial \lambda}M_t^{\lambda}}=\abs{M_t^{\lambda}\paren{N_t-\gamma t e^{\lambda}}}\leq M_t^{\lambda}\abs{N_t-\gamma t e^{\lambda}}\leq M_t^{\lambda}N_t + M_t^{\lambda}\gamma t e^{\lambda}
+$$
+Claramente al ser $M_t^{\lambda}$ se sigue que $M_t^{\lambda}\gamma t e^{\lambda} \in L_1$ por lo que solo hay que verificar que  $M_t^{\lambda}N_t \in L_1$, veamos:
+$$
+\esp{M_t^{\lambda}N_t}=\esp{e^{\lambda N_t-\gamma t\paren{e^{\lambda}-1}}N_t}=e^{-\gamma t\paren{e^{\lambda}-1}}\esp{e^{\lambda N_t}N_t}
+$$
+Por tanto hay que verificar que $\esp{e^{\lambda N_t}N_t}$ es finita, recordando que $N_t \sim Poisson(\gamma t)$ tenemos:
+$$
+\esp{e^{\lambda N_t}N_t}=\sum_{x=0}^{\infty}{e^{\lambda x}x \frac{\paren{\gamma t}^x}{x!}e^{-\gamma t}}=e^{-\gamma t+\gamma t e^{\lambda}}\sum_{x=0}^{\infty}{x \frac{\paren{\gamma t e^{\lambda}}^x}{x!}}e^{\gamma t e^{\lambda}}
+$$
+Definiendo a $Y \sim Poisson\paren{\gamma t e^{\lambda}}$ entonces:
+$$
+\esp{e^{\lambda N_t}N_t}=e^{-\gamma t+\gamma t e^{\lambda}}\esp{Y}=e^{-\gamma t+\gamma t e^{\lambda}}\gamma t e^{\lambda} < \infty
+$$
+Por lo tanto hemos verificado que $e^{\lambda N_t}N_t \in L_1$, por lo tanto:
+$$
+\abs{\frac{\partial}{\partial \lambda}M_t^{\lambda}} \leq M_t^{\lambda}N_t + M_t^{\lambda}\gamma t e^{\lambda} \in L_1
+$$
+Lo anterior nos garantiza que podemos llevar a cabo el intercambio entre derivada y esperanza condicional por lo que nuevamente al usar el argumento inductivo se prueba que en efecto:
+$\frac{\partial^n}{\partial \lambda^n}M_t^{\lambda}$ es una martingala (Faltar\'ia argumentar porque la n-\'esima derivada es dominada por una funci\'on integrable)\\
+Ahora definamos la relaci\'on de las martingalas que se generan a partir de la derivaci\'on haciendo $\lambda=0$ con los polinomios de Hermite.
+Demostraremos que en este caso:
+$$
+\left.\frac{\partial^n}{\partial \lambda^n}M_t^{\lambda}\right|_{\lambda=0}=\left.(\gamma t)^{n/2}H_n\paren{\frac{Nt-\gamma t}{\sqrt{\gamma t}}}M_t^{\lambda}\right|_{\lambda=0}
+$$
+\end{proof}
 \end{enumerate}
 \end{enumerate}
 \end{problema}
