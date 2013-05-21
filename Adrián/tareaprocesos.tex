@@ -2730,6 +2730,70 @@ Por lo tanto con h=.3 se puede aproximar a P con 6 decimales.
 \end{lstlisting}
 \end{enumerate}
 \end{problema}
+
+
+\begin{problema}
+Un proceso estoc\'astico $B=\paren{B_t,t\geq 0}$ es un movimiento browniano en ley si y s\'olo si es un proceso gaussiano centrado y $\esp{B_sB_t}=s\wedge t$. 
+\begin{proof}
+Supongamos que $B=\paren{B_t,t\geq 0}$ es un movimiento browniano en ley. Tenemos que demostrar que $(B_{t_1},B_{t_2},...,B_{t_n})$ en vector gausssino con $(t_1<t_2...<t_n)$, como $B$ es un movimiento Browniano sabemos que $(B_{t_1},B_{t_2}-B_{t_1},...,B_{t_n}-B_{t_{n-1}})$ es un vector gaussiano ya que son variables aleatorias normales independientes y cualquier combinaci\'on lineal de normales independientes es normal. Entonces cualquier combinaci\'on lineal la podemes escribir:
+\begin{esn}
+\sum_{i=1}^n \lambda_i B_{t_i}=\sum_{i=1}^{n} \alpha_i (B_{t_{i}}-B_{t_{i-1}})
+\end{esn}
+
+donde $(B_{t_0})=0$.
+
+Por lo tanto $\sum_{i=1}^n \lambda_i B_{t_i}$ se distribuye normal y $\esp{B_{t_i}}=0$.
+
+Por lo tanto $B$ es un proceso gaussiano centrado.
+
+Y ademas como es un movimiento browniano sabemos que $\esp{B_sB_t}=s\wedge t$ por ser movimiento Browniano.
+
+Ahora supongamos que es un proceso gaussiano centrado y $\esp{B_sB_t}=s\wedge t$.
+
+\end{proof}
+\end{problema}
+\begin{problema}
+El objetivo de este problema es construir, a partir de movimientos brownianos en $[0,1]$, al movimiento browniano en $[0,\infty)$.
+\begin{enumerate}
+\item Pruebe que existe un espacio de probabilidad $\ofp$ en el que existe una sucesi\'on $B^1,B^2,\ldots$ de movimientos brownianos en $[0,1]$ independientes. (Sugerencia: utilice la construcci\'on del movimiento browniano de L\'evy  para que la soluci\'on sea corta.)
+\item Defina a $B_t=B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}$ para $t\geq 0$. Pruebe que $B$ es un movimiento browniano. 
+%\item Pruebe que $\paren{B_t}^2-t$ no tiene incrementos independientes. Sugerencia: En el ejercicio anterior identific\'o la distribuci\'on de $\paren{B_t}^2$; calcule la transformada de Laplace conjunta de dos incrementos.
+\end{enumerate}
+\end{problema}
+\begin{problema}
+Pruebe que si $\tilde X$ es una modificaci\'on de $X$ entonces ambos procesos tienen las mismas distribuciones finito-dimensionales. Concluya que si
+ $B$ es un movimiento browniano en ley y $\tilde B$ es una modificaci\'on de $B$ con trayectorias continuas entonces $\tilde B$ es un movimiento browniano. 
+\end{problema}
+\begin{problema}
+Sea\begin{esn}
+M^\lambda_t=e^{\lambda B_t-\lambda^2t/2}.
+\end{esn}
+\begin{enumerate}
+\item Explique y pruebe formalmente por qu\'e, para toda $n\geq 1$, $\partial^n M^\lambda_t/\partial \lambda^n$ es una martingala. 
+\item Sea $\imf{H_n}{x}=\paren{-1}^ne^{x^2/2}\frac{d^n}{dx^n}e^{-x^2/2}$. A $H_n$ se le conoce como en\'esimo polinomio de Hermite. Calc\'ulelo para $n\leq 5$. Pruebe que $H_n$ es un polinomio para toda $n\in\na$ y que $\partial^n M^\lambda_t/\partial \lambda^n=t^{n/2}\imf{H_n}{B_t/\sqrt{t}}M^\lambda_t$. 
+\item Pruebe que $t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$ es una martingala para toda $n$ y calc\'ulela para $n\leq 5$. 
+\item Aplique muestreo opcional a las martingalas anteriores al tiempo aleatorio $T_{a,b}=\min\set{t\geq 0:B_t\in\set{-a,b}}$ (para $a,b>0$) con $n=1,2$ para calcular $\proba{B_{T_{a,b}}=b}$ y $\esp{T_{a,b}}$, �Qu\'e concluye cuando $n=3,4$? ?` Cree que $T_{a,b}$ tenga momentos finitos de cualquier orden? Justifique su respuesta.
+\item Aplique el teorema de muestreo opcional a la martingala $M^\lambda $ al tiempo aleatorio $T_a=\inf\set{t\geq 0:B_t\geq a}$ si $\lambda>0$. Diga por qu\'e es necesaria la \'ultima hip\'otesis y calcule la transformada de Laplace de $T_a$. 
+\item Opcional (para subir calificaci\'on en esta u otra tarea): 
+\begin{enumerate}
+\item Modifique el ejercicio para que aplique al proceso Poisson.
+\item Resu\'elva el ejercicio modificado. 
+\end{enumerate}
+\end{enumerate}
+\end{problema}
+\begin{problema}\mbox{}
+\begin{enumerate}
+\item Al aplicar la desigualdad maximal de Doob sobre los racionales de orden $n$ y pasar al l\'imite conforme $n\to\infty$, pruebe que $\sup_{t\leq }\abs{B_t-B_1}$ es cuadrado integrable.
+\item Pruebe que la sucesi\'on de variables aleatorias\begin{esn}
+\paren{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n},n\in\na}
+\end{esn}son independientes, id\'enticamente distribuidas y de media finita. (Utilice la propiedad de Markov.)
+\item Al utilizar Borel-Cantelli, pruebe que, para cualquier $C>0$ fija\begin{esn}
+\limsup_{n\to\infty}\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}/n\leq C\end{esn} casi seguramente.
+\item Pruebe que $\paren{B_n/n,n\geq 1}$ converge casi seguramente a $0$ y deduzca que\begin{esn}
+\lim_{t\to\infty }B_t/t=0.
+\end{esn}
+\end{enumerate}
+\end{problema}
 %
 %\begin{problema}
 %Sean $\F_1,\F_2,\ldots $ y $\G$ sub\sa s de $\F$. Decimos que $\F_1,\F_2,\ldots$ son condicionalmente independientes dada $\G$ si para cualquier $H_i$ que sea $\F_i$ medible y acotada se tiene que\begin{esn}
