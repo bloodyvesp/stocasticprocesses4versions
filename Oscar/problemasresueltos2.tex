@@ -53,7 +53,7 @@ morekeywords={}
 \newcommand{\reals}{\mathds{R}}
 \newcommand{\entpos}{\mathds{Z}_{+}}
 \newcommand{\prob}{\p}
-\newcommand{\mean}{\esp}
+\newcommand{\mean}{\mathds{E}}
 \newcommand{\mat}[1]{{\bm #1}}
 \newcommand{\nota}[1]{\hspace{5 mm}\mbox{#1}}
 \newcommand{\tres}{\hspace{3 mm}}
@@ -556,13 +556,41 @@ Entonces
 de manera que $\Cp_t\subset\Ll_t$. Si demostramos que $\Ll_t$ es un $\lambda$-sistema, se tendría que $\Ll_t=\sigma (\Cp_t )$; esta prueba es muy sencilla y se ha realizado en repetidas ocasiones; esta vez bastará con utilizar la propiedad de aditividad finita continuidad de la función de probabilidad, sin embargo, la demostración formal será omitida.
 A continuación, tomemos un $C_0'\in \F_t$ fijo. Definamos
 \[\Ll^t:=\{D\in \sigma (\Cp^t)=\F_t : \p (C_0'\cap D) = \p(C_0')\p(D)\}.\]
-Por el resultado anterior, se tiene que $\Cp^t\subset\Ll^t$ y de igual manera, se omite la prueba de que $\Ll^t$ es un $\lambda$-sistema (es prácticamente la misma). Así pues, se concluye que $\Ll_2 = \sigma (\Cp^t ) \F^^t$, lo que quiere decir que para todo $C\in\F_t$ y $D\in\F^t$, se tiene que $\p(C\cap D) = \p (C) \p(D)$, es decir, $X^t$ es independiente de $\F_t$.
-
+Por el resultado anterior, se tiene que $\Cp^t\subset\Ll^t$ y de igual manera, se omite la prueba de que $\Ll^t$ es un $\lambda$-sistema (es prácticamente la misma). Así pues, se concluye que $\Ll_2 = \sigma (\Cp^t ) = \F^t$, lo que quiere decir que para todo $C\in\F_t$ y $D\in\F^t$, se tiene que $\p(C\cap D) = \p (C) \p(D)$, es decir, $X^t$ es independiente de $\F_t$.
 \end{proof}
 Calcular la esperanza y varianza del proceso de Poisson y de Poisson compuesto (en t\'erminos de la intensidad y la distribuci\'on de salto). Probar que si $X$ es
 \begin{esn}
 \esp{e^{iu Z_t}}=e^{-\lambda t\paren{1-\imf{\psi}{u}}}\quad\text{donde}\quad \imf{\psi}{u}=\esp{e^{iu \xi_1}}. 
 \end{esn}
+
+\begin{proof}
+Sea $N_t$ el proceso Poisson de intesidad $\lambda$. Entonces, como $N_t\sim Poi (\lambda t)$, se tiene que
+\[\mean (N_t) = \sum_{i=1}^\infty i e^{\lambda t}\frac{(\lambda t)^i}{i!} = \sum_{i=0}^\infty i e^{\lambda t}\frac{(\lambda t)^{i+1}}{i!} = \lambda t.\]
+De la misma manera,
+\begin{align*}
+\mean(N_t^2) & =\sum_{i=1}^\infty i^2 e^{\lambda t}\frac{(\lambda t)^i}{i!}=\sum_{i=1}^\infty i e^{\lambda t}\frac{(\lambda t)^i}{i-1!}\\
+& = \sum_{i=0}^\infty (i+1) e^{\lambda t}\frac{(\lambda t)^{i+1}}{i!}\\
+& = (\lambda t)\mean (N_t) + (\lambda t) = (\lambda t)^2 + (\lambda t),
+\end{align*}
+y por lo tanto
+\[Var(N_t) = \mean (N_t^2) - \mean (N_t)^2 = (\lambda t)^2 + (\lambda t) - (\lambda t)^2 = \lambda t.\]
+Sea $Z_t$ el proceso Poisson compuesto con saltos $\{\xi_i\}_i\in\nats$ independientes e idénticamente distribuidos, es decir,
+\[Z_t = \sum_{i=1}^{N_t} \xi_i.\]
+Entonces
+\begin{align*}
+\mean (Z_t) & = \mean \left(\sum_{i=1}^{N_t}\xi_i \right) = \mean \left(\sum_{i=1}^{\infty} \xi_i\mathds{1}_{T_i\le t}\right)\\
+& = \sum_{i=1}^{\infty} \mean \left(\xi_i\mathds{1}_{T_i\le t}\right) = \sum_{i=1}^{\infty} \mean (\xi_i)\mean \left(\mathds{1}_{T_i\le t}\right)\nota{(Por independencia)}\\
+& = \sum_{i=1}^{\infty} \mean (\xi_1)\mean \left(\mathds{1}_{T_i\le t}\right)\nota{(Las $\xi_i$'s son v.a.i.i.d.)}\\
+& = \mean(\xi_1) \sum_{i=1}^{\infty} \mean \left(\mathds{1}_{T_i\le t}\right) = \mean(\xi_1) \mean \left(\sum_{i=1}^{\infty}\mathds{1}_{T_i\le t}\right)\\
+& = \mean(\xi_1) \mean \left(N_t\right) = \mean(\xi_1)(\lambda t).
+\end{align*}
+Para calcular su varianza,
+\begin{align*}
+\mean (Z_t^2) & = \mean\left(\mean\left(Z_t^2|N_t\right)\right)\\
+& \nota{(AQUI AQUÍ)}
+\end{align*}
+\end{proof}
+
 
 Sea $N$ un proceso de L\'evy tal que $N_t$ tiene distribuci\'on de par\'ametro $\lambda t$. 
 \begin{enumerate}

@@ -2748,8 +2748,44 @@ Por lo tanto $B$ es un proceso gaussiano centrado.
 
 Y ademas como es un movimiento browniano sabemos que $\esp{B_sB_t}=s\wedge t$ por ser movimiento Browniano.
 
-Ahora supongamos que es un proceso gaussiano centrado y $\esp{B_sB_t}=s\wedge t$.
+Ahora supongamos que es un proceso gaussiano centrado y $\esp{B_sB_t}=s\wedge t$. Luego entonces como $\esp{B_0}=0$ y ya que $\esp{B_sB_t}=s\wedge t$ entonces $\var{B_0}=\esp{B_0B_0}=0$. Por lo tanto $B_0=0$.
+Por el mismo argumento que en la necesidad cualquier combinaci\'on lineal la podemos escrbir de la siguiente manera:
 
+\begin{esn}
+\sum_{i=1}^n \lambda_i B_{t_i}=\sum_{i=1}^{n} \alpha_i (B_{t_{i}}-B_{t_{i-1}}).
+\end{esn}
+
+Por lo tanto los incrementos del proceso gaussiano centrado tambien forman un proceso gaussiano.
+
+
+Ahora para ver que tiene incrementos independientes como estamos en un proceso gaussiano solo nos basta verificar que la correlacion es cero. Sea $t_i<t_j$:
+
+\begin{align}
+\esp{(B_{t_i}-B_{t_{i-1}})(B_{t_j}-B_{t_{j-1}})}&=\esp{B_{t_{i}}B_{t_{j}}-B_{t_{i}}B_{t_{j-1}}-B_{t_{i-1}}B_{t_{j}}+B_{t_{i-1}}B_{t_{j-1}}}\notag \\
+&=\esp{B_{t_{i}}B_{t_{j}}}-\esp{B_{t_{i}}B_{t_{j-1}}}-\esp{B_{t_{i-1}}B_{t_{j}}}+\esp{B_{t_{i-1}}B_{t_{j-1}}}\notag \\
+&=t_i-t_i-t_{i-1}+t_{i-1}\notag \\
+&=0.\notag
+\end{align}
+
+Por lo tanto $B$ tiene incrementos independientes.
+
+Ahora veamos que $B$ tiene incrementos estacionarios, es decir $B_{t+s}-B_t=B_s$ en distribuci\'on. como $B_{t+s}-B_t$ es una combinaci\'on lineal del proceso gaussianos entonces sabemos que es normal. Adem\'as como es un proceso gaussiano sabemos que $\esp{B_{t+s}-B_t}=0$. Ahora calculemos la varianza:
+
+\begin{align}
+\var{B_{t+s}-B_t}&=\esp{(B_{t+s}-B_t)^2}\notag \\
+&=\esp{B_{t+s}B_{t+s}}-\esp{B_{t+s}B_{t}}-\esp{B_{t}B_{t+s}}+\esp{B_{t}B_{t}}\notag \\
+&=t+s-t-t+t\notag \\
+&=s\notag
+\end{align}
+
+Por lo tanto $B_{t+s}-B_t$ se distribuye $N(0,s)$.
+
+Por lo tanto $B_{t+s}-B_t=B_s$ en distribuci\'on.
+
+Para concluir como $B$ es un proceso gaussiano centrado y ademas la $\var{B_t}=\esp{B_tB_t}=t$.
+Por lo tanto $B_t$ se distribuye $N(0,t)$.
+
+Por lo tanto $B$ es un movimiento browniano en ley.
 \end{proof}
 \end{problema}
 \begin{problema}
@@ -2757,12 +2793,85 @@ El objetivo de este problema es construir, a partir de movimientos brownianos en
 \begin{enumerate}
 \item Pruebe que existe un espacio de probabilidad $\ofp$ en el que existe una sucesi\'on $B^1,B^2,\ldots$ de movimientos brownianos en $[0,1]$ independientes. (Sugerencia: utilice la construcci\'on del movimiento browniano de L\'evy  para que la soluci\'on sea corta.)
 \item Defina a $B_t=B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}$ para $t\geq 0$. Pruebe que $B$ es un movimiento browniano. 
+
+\begin{proof}
+Primero notemos que $B_0=0$ ya que $B_0=B_{0}^1=0$.
+
+Utilizaremos el ejercicio anterior para ver que es un movimento browniano. Primero demostraremos que $B_t$ es un proceso gaussiano:
+
+Falta
+
+Ahora veamos que es un proceso gaussiano centrado:
+
+\begin{align}
+\esp{B_t}&=\esp{B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}}\notag \\
+&=\esp{B^1_1}+\cdots+\esp{B^{\floor{t}}_1}+\esp{B^{\ceil{t}}_{t-\floor{t}}} \notag \\
+&=0.
+\end{align}
+
+Calculemos la varianza:
+
+\begin{align}
+\var{B_t}&=\var{B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}}\notag \\
+&=\var{B^1_1}+\cdots+\var{B^{\floor{t}}_1}+\var{B^{\ceil{t}}_{t-\floor{t}}} \notag \\
+&=\floor{t}+t-\floor{t}\notag \\
+&=t\notag
+\end{align}
+
+Por lo tanto $B_t$ se distribuye $N(0,t)$.
+
+Ahora verificaremos que $\esp{B_sB_t}=s\wedge t$:
+
+Si $s=t$ tenemos que $\esp{B_tB_s}=\esp{B_t^2}=t=t\wedge s$.
+Supongamos que $t<s$:
+
+Supongamos primero que $\floor{t}\leq t<s\leq\ceil{t}$. Entonces:
+\begin{align}
+B_t&=B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}\notag \\
+B_s&=B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{s-\floor{t}}\notag
+\end{align}
+
+Utilizando el hecho de que $B^n$ son independientes obtenemos que:
+\begin{align}
+\esp{B_tB_s}&=\esp{(B^1_1)^2}+...+\esp{(B^{\floor{t}}_1)^2}+\esp{B^{\ceil{t}}_{t-\floor{t}}B^{\ceil{t}}_{s-\floor{t}}}\notag \\
+&=\floor{t}+\esp{B^{\ceil{t}}_{t-\floor{t}}B^{\ceil{t}}_{s-\floor{t}}} \notag \\
+&=\floor{t}+(t-\floor{t})\wedge(s-\floor{t}\notag \\
+&=\floor{t}+t-\floor{t} \notag \\
+&=t\notag
+\end{align}
+
+Ahora supongamos que $\floor{t}\leq t\leq\ceil{t}< s$. Entonces:
+
+\begin{align}
+B_t&=B^1_1+...+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}\notag
+B_s&=B^1_1+...+B^{\floor{t}}_1+B^{\ceil{t}}_1+B^{\ceil{t}+1}_1+...+B^{\floor{s}}_1+B^{\ceil{s}}_{s-\floor{s}}\notag \\
+\end{align}
+
+Como $B^n$ son independientes tenemos que:
+\begin{align}
+\esp{B_tB_s}&=\esp{(B^1_1)^2}+...+\esp{(B^{\floor{t}}_1)^2}+\esp{B^{\ceil{t}}_{t-\floor{t}}B^{\ceil{t}}_{1} }\notag \\
+&=\sum_{i=1}^{\floor{t}}\esp{(B^i_1)^2}+t-\floor{t}\notag \\
+&=\floor{t}+t-\floor{t}\notag
+=t\notag
+\end{align}
+
+Por lo tanto $\esp{B_tB_s}=s\wedge t$.
+
+Por lo tanto por el ejercicio anterior obtenemos que $B_t$ es un movimiento browniano en ley.
+
+Y ademas como cada $B^n$ es continua y adem\'as $B_0^n=$ para toda $n\in\na$ entonces $B_t$ es continua.
+
+\end{proof}
 %\item Pruebe que $\paren{B_t}^2-t$ no tiene incrementos independientes. Sugerencia: En el ejercicio anterior identific\'o la distribuci\'on de $\paren{B_t}^2$; calcule la transformada de Laplace conjunta de dos incrementos.
 \end{enumerate}
 \end{problema}
 \begin{problema}
 Pruebe que si $\tilde X$ es una modificaci\'on de $X$ entonces ambos procesos tienen las mismas distribuciones finito-dimensionales. Concluya que si
- $B$ es un movimiento browniano en ley y $\tilde B$ es una modificaci\'on de $B$ con trayectorias continuas entonces $\tilde B$ es un movimiento browniano. 
+ $B$ es un movimiento browniano en ley y $\tilde B$ es una modificaci\'on de $B$ con trayectorias continuas entonces $\tilde B$ es un movimiento browniano.
+
+\begin{proof}
+
+\end{proof}
 \end{problema}
 \begin{problema}
 Sea\begin{esn}
