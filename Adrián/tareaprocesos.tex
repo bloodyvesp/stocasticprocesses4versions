@@ -2871,6 +2871,43 @@ Pruebe que si $\tilde X$ es una modificaci\'on de $X$ entonces ambos procesos ti
 
 \begin{proof}
 
+Sea $0\leq t_1<t_2<t_3...<t_n$. Primeros veamos que $A_n=\{X_{t_1}=\hat{X_{t_1}},X_{t_2}=\hat{X_{t_2}},...,X_{t_n}=\hat{X_{t_n}}\}$ tiene probabilidad 1. Lo haremos por inducci\'on.
+
+Por definición de modificacion de $X$ sabemos que $\proba{A_1}=1$.
+
+Supongamos caso $n=k$, es decir que $\proba{A_k}=1$.
+
+Demostraremos caso $n=k+1$:
+
+\begin{align}
+\proba{A_{k+1}}&=\proba{A_k\cap \{X_{_{k+1}}=\hat{X_{t_{k+1}}}\}}\notag
+\intertext{Como los dos eventos tienen probabilidad 1 entonces:}
+\proba{A_{k+1}}&=1.\notag
+\end{align}
+
+Por lo tanto $\proba{A_n}=1$.
+
+Ahora demostraremos la proposici\'on:
+
+\begin{align}
+&\proba{X_{t_1}\leq x_1,..., X_{t_n}\leq x_n}=\proba{X_{t_1}\leq x_1,..., X_{t_n}\leq x_n,A_n\cup A_n^c}\notag \\
+&=\proba{X_{t_1}\leq x_1,..., X_{t_n}\leq x_n,A_n}+\proba{X_{t_1}\leq x_1,..., X_{t_n}\leq x_n, A_n^c} \notag
+\intertext{Como $\proba{A_n}=1$ entonces $\proba{A_n^c}=0$, entonces:}
+&=\proba{\proba{X_{t_1}\leq x_1,..., X_{t_n}\leq x_n,A_n}} \notag \\
+&=\probac{X_{t_1}\leq x_1,..., X_{t_n}\leq x_n}{A_n}\proba{A_n}\notag \\
+&=\probac{X_{t_1}\leq x_1,..., X_{t_n}\leq x_n}{A_n} \notag \\
+&=\probac{\hat{X_{t_1}}\leq x_1,...,\hat{X_{t_n}}\leq x_n}{A_n} \notag \\
+&=\frac{\proba{\hat{X_{t_1}}\leq x_1,...,\hat{X_{t_n}}\leq x_n,A_n}}{\proba{A_n}}\notag \\
+&=\proba{\hat{X_{t_1}}\leq x_1,...,\hat{X_{t_n}}\leq x_n,A_n} \notag \\
+&=\proba{\hat{X_{t_1}}\leq x_1,...,\hat{X_{t_n}}\leq x_n,A_n}+\proba{\hat{X_{t_1}}\leq x_1,...,\hat{X_{t_n}}\leq x_n,A_n^c}\notag \\
+&=\proba{\hat{X_{t_1}}\leq x_1,...,\hat{X_{t_n}}\leq x_n,A_n\cup A_n^c}\notag \\
+&=\proba{\hat{X_{t_1}}\leq x_1,...,\hat{X_{t_n}}\leq x_n}.\notag
+\end{align}
+
+Por lo tanto ambos procesos tienen las mismas distribuciones finito-dimensionales.
+
+Para demostrar que $\tilde{B}$ es un movimiento browniano sabemos que $B$ es un movimiento browniano entonces B es  un proceso gaussiano centrado tal que  $\esp{B_sB_t}=s \wedge t$. Por lo que acabamos de demostrar tenemos que $\tilde{B}$ es un proceso gaussiano centrado tal que $\esp{\tilde{B_s}\tilde{B_t}}=s \wedge t$. Por lo tanto $\tilde{B}$ es un movimiento browniano en ley con trayectorias continuas. Por lo tanto $\tilde{B}$ es un movimiento browniano.
+
 \end{proof}
 \end{problema}
 \begin{problema}
@@ -2878,7 +2915,8 @@ Sea\begin{esn}
 M^\lambda_t=e^{\lambda B_t-\lambda^2t/2}.
 \end{esn}
 \begin{enumerate}
-\item Explique y pruebe formalmente por qu\'e, para toda $n\geq 1$, $\partial^n M^\lambda_t/\partial \lambda^n$ es una martingala. 
+\item Explique y pruebe formalmente por qu\'e, para toda $n\geq 1$, $\partial^n M^\lambda_t/\partial \lambda^n$ es una martingala.
+
 \item Sea $\imf{H_n}{x}=\paren{-1}^ne^{x^2/2}\frac{d^n}{dx^n}e^{-x^2/2}$. A $H_n$ se le conoce como en\'esimo polinomio de Hermite. Calc\'ulelo para $n\leq 5$. Pruebe que $H_n$ es un polinomio para toda $n\in\na$ y que $\partial^n M^\lambda_t/\partial \lambda^n=t^{n/2}\imf{H_n}{B_t/\sqrt{t}}M^\lambda_t$. 
 \item Pruebe que $t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$ es una martingala para toda $n$ y calc\'ulela para $n\leq 5$. 
 \item Aplique muestreo opcional a las martingalas anteriores al tiempo aleatorio $T_{a,b}=\min\set{t\geq 0:B_t\in\set{-a,b}}$ (para $a,b>0$) con $n=1,2$ para calcular $\proba{B_{T_{a,b}}=b}$ y $\esp{T_{a,b}}$, �Qu\'e concluye cuando $n=3,4$? ?` Cree que $T_{a,b}$ tenga momentos finitos de cualquier orden? Justifique su respuesta.

@@ -587,7 +587,35 @@ Entonces
 Para calcular su varianza,
 \begin{align*}
 \mean (Z_t^2) & = \mean\left(\mean\left(Z_t^2|N_t\right)\right)\\
-& \nota{(AQUI AQUÍ)}
+& = \mean\left(\mean\left(\left(\sum_{i=1}^{N_t} \xi_i\right)^2 | N_t\right)\right)\\
+& = \mean\left(\mean\left(\sum_{j=0}^{\infty}\mathds{1}_{N_t = j}\left(\sum_{i=1}^{j} \xi_i\right)^2 | N_t\right)\right)\\
+& = \mean\left(\sum_{j=0}^{\infty}\mathds{1}_{N_t = j} \mean\left(\left(\sum_{i=1}^{j} \xi_i\right)^2 | N_t\right)\right)\nota{(Por medibilidad y Fubini)}\\
+& = \mean\left(\sum_{j=0}^{\infty}\mathds{1}_{N_t = j} \mean\left(\left(\sum_{i=1}^{j} \xi_i\right)^2 \right)\right)\nota{(Por independencia de los $\xi_i$'s con $N_t$)}\\
+& = \mean\left(\sum_{j=0}^{\infty}\mathds{1}_{N_t = j} \left(Var \left(\sum_{i=1}^{j} \xi_i\right) + \mean \left(\sum_{i=1}^{j} \xi_i\right)^2 \right)\right)\\
+& = \mean\left(\sum_{j=0}^{\infty}\mathds{1}_{N_t = j} \left(j\times Var \left( \xi_1\right) + j^2\times\mean \left(\xi_1\right)^2 \right)\right)\nota{(Por que las $\xi_i$'s son v.a.i.d.d.)}\\
+& = \mean\left(N_t\times Var \left( \xi_1\right) + N_t^2\times\mean \left(\xi_1\right)^2 \right)\\
+& = \mean (N_t) Var \left( \xi_1\right) + \mean (N_t^2)\mean \left(\xi_1\right)^2\\
+& = \mean (N_t) Var \left( \xi_1\right) + (Var(N_t) + \mean (N_t^2))\mean \left(\xi_1\right)^2\\
+& = (\lambda t) Var \left( \xi_1\right) + (\lambda t)\mean \left(\xi_1\right)^2 + (\mean (N_t)\mean \left(\xi_1\right))^2\\
+& = (\lambda t) (\mean(\xi_1^2)) + (\mean (N_t)\mean \left(\xi_1\right))^2,
+\end{align*}
+y por lo tanto,
+\[Var (Z_t) = \mean (Z_t^2) - \mean (Z_t)^2 = (\lambda t) (\mean(\xi_1^2)).\]
+
+Para calcular $\mean (e^{i u Z_t})$, se sigue un procedimiento similar, de manera que
+\begin{align*}
+\mean (e^{i u Z_t}) & = \mean \left(\mean \left(\exp\left(i u \sum_{j=1}^{N_t}\xi_j\right) | N_t \right)\right)\\
+& = \mean \left(\mean \left(\sum_{k=0}^\infty \mathds{1}_{N_t=k}\exp\left(i u \sum_{j=1}^{k}\xi_j\right) | N_t \right)\right)\\
+& = \mean \left(\sum_{k=0}^\infty \mathds{1}_{N_t=k} \mean \left(\exp\left(i u \sum_{j=1}^{k}\xi_j\right) | N_t \right)\right)\\
+&\tres\nota{(Medibilidad y Fubini)}\\
+& = \mean \left(\sum_{k=0}^\infty \mathds{1}_{N_t=k} \mean \left(\exp\left(i u \sum_{j=1}^{k}\xi_j\right) \right)\right)\\
+&\tres\nota{(Independencia con $N_t$)}\\
+& = \mean \left(\sum_{k=0}^\infty \mathds{1}_{N_t=k} \mean \left(\exp\left(i u \xi_1\right) \right)^k\right)\\
+&\tres\nota{(Las $\xi_j$'s son v.a.i.i.d.)}\\
+& = \mean \left( \mean \left(\exp\left(i u \xi_1\right) \right)^{N_t}\right) = \mean(\psi (u)^{N_t})\\
+& = \sum_{i=0}^\infty \psi (u)^i \times e^{-\lambda t}\frac{(\lambda t)^i}{i!}\\
+& = e^{-\lambda t} \sum_{i=0}^\infty  \frac{(\psi (u)\lambda t)^i}{i!}\\
+& = e^{-\lambda t} e^{\psi (u)\lambda t} = e^{-\lambda t( 1 - \psi (u))}
 \end{align*}
 \end{proof}
 
