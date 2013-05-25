@@ -644,6 +644,27 @@ Sea\begin{esn}
 \frac{d}{dt}\imf{P_t}{i,j}=\imf{QP_t}{i,j}=\imf{P_tQ}{i,j},
 \end{equation*}donde $QP_t$ es el producto de las matrices $Q$ y $P_t$.
 \end{problema}
+\begin{proof}
+Elijamos $i,j\in\nats$. Sabemos que
+\[P_r(i,j) = \prob (N_r = j-i) = e^{-\lambda r}\frac{(\lambda r)^{j-i}}{(j-i)!}\]
+cuando $i\le j$ y $0$ en otro caso. Sea entonces $i\le j$.
+Entonces,
+\begin{align*}
+P_{t+s} (i,j) & = e^{-\lambda (t+s)}\frac{(\lambda (t+s))^{j-i}}{(j-i)!}\\
+& = e^{-\lambda (t+s)}\frac{\sum_{l=0}^{j-i} {j-i \choose {l}} t^l s^{j-i-l}}{(j-i)!}\\
+& = e^{-\lambda (t+s)}\sum_{l=0}^{j-i} \frac{t^l s^{j-i-l}}{l! (j-i-l)!}.
+\end{align*}
+Si multiplicamos las matrices $P_t$ y $P_s$, tendríamos que
+\begin{align*}
+(P_t P_s) (i,j) & = \sum_{l=0}^\infty P_t(i,l) P_s(l,j)\\
+& = \sum_{l=i}^j P_t(i,l) P_s(l,j)\\
+& \tres\nota{(Se tiene que $P_t(i,l)=P_s(l,j)=0$ para todo $l<i$ y $j<l$)}\\
+& = \sum_{l=i}^j e^{-\lambda t}\frac{(\lambda t)^{l-i}}{(l-i)!}\times e^{-\lambda s}\frac{(\lambda s)^{j-l}}{(j-l)!}\\
+& = e^{-\lambda (t+s)}\lambda^{j-i} \sum_{l=i}^j \frac{t^{l-i}s^{j-l}}{(l-i)!(j-l)!}\\
+& = e^{-\lambda (t+s)}\lambda^{j-i} \sum_{l'=0}^{j-1} \frac{t^{l'}s^{j-i-l'}}{l'!(j-i-l')!}\nota{(Haciendo $l'=l-i$)}.
+\end{align*}
+Notemos que en el caso $i>j$, los sumandos de (SEÑALAR) son exactamente igual a 0, ya que para todo $l$, se tendrá que $i>l$ o que $j<l$, y en cualquier caso la multiplicación de probabilidades se anula. Por lo tanto se ha comprobado que las entradas $(i,j)$ para todo $i,j\in\nats$ de las matrices $P_{t+s}$ y $P_t P_s$ coinciden y por lo tanto, son idénticas.
+\end{proof}
 
 \begin{problema}[Tomado del examen general de probabilidad del Posgrado en Ciencias Matem\'aticas, UNAM, \href{http://www.posgradomatematicas.unam.mx/contenidoEstatico/archivo/files/pdf/Examenes_Generales/Probabilidad/Probabilidad2011-1.pdf}{Febrero 2011}]
 Una planta de producci\'on toma su energ\'ia de dos generadores. La cantidad de generadores al tiempo $t$ est\'a representado por una cadena de Markov a tiempo continuo $\set{X_t,t\geq 0}$ con espacio de estados $E=\set{0,1,2}$ y matriz infinit\'esimal $Q$ dada por\begin{esn}

@@ -38,8 +38,8 @@ escapeinside={},
 keywordstyle={},
 morekeywords={}
 }
-\title[Problemas de Procesos I]{Problemas de Procesos Estoc\'asticos I\\ Semestre 2013-II\\ Posgrado en Ciencias Matem\'aticas\\ Universidad Nacional Aut\'onoma de M\'exico}
-\author{Ger\'onimo Uribe Bravo}
+\title[Problemas de Procesos I]{Problemas de Procesos Estoc\'asticos I\\ Posgrado en Ciencias Matem\'aticas\\ Universidad Nacional Aut\'onoma de M\'exico\\Tarea 6}
+\author{Antonio Soriano Flores}
 %\address{}
 \usepackage[colorlinks,citecolor=blue,urlcolor=blue]{hyperref} 
 \input{definitions.tex}
@@ -86,7 +86,7 @@ $\Leftarrow:)$  Ahora supongamos que $\paren{B_t,t\geq 0}$  es un proceso gaussi
 $$
 \sum_{i=1}^{n}\lambda_i\paren{B_{t_i}-B_{t_{i-1}}} =\sum_{i=1}^{n}\alpha_iB_{t_i}\sim Normal
 $$ 
-Obtenemos entonces una combinaci\'on lineal de las  $B_{t_i}$'s y por hip\'otesis  es Normal, por lo anterior para verificar la independencia solo tenemos que probar  que la correlaci\'on entre las entradas de este vector son cero. En efecto, tomemos  la entrada $i$ y la entrada $j$ $ (i\neq j)$ de este vector y verifiquemos su correlaci\'on (Recordemos que tenemos un vector gaussiano centrado y por tanto el calculo de la correlaci\'on se reduce  a calcular la esperanza del producto de las variables aleatorias), sin p\'erdida de generalidad supondremos que $i < j$:
+Obtenemos entonces una combinaci\'on lineal de las  $B_{t_i}$'s que por hip\'otesis  es Normal pues $(B_t)$ es un proceso Gaussiano, por lo anterior para verificar la independencia solo tenemos que probar  que la correlaci\'on entre las entradas de este vector son cero. En efecto, tomemos  la entrada $i$ y la entrada $j$ $ (i\neq j)$ de este vector y verifiquemos su correlaci\'on (Recordemos que tenemos un vector gaussiano centrado y por tanto el calculo de la correlaci\'on se reduce  a calcular la esperanza del producto de las variables aleatorias), sin p\'erdida de generalidad supondremos que $i < j$:
 $$
 \esp{\paren{B_{t_i}-B_{t_{i-1}})(B_{t_j}-B_{t_{j-1}}}}=\esp{B_{t_i}B_{t_j}-B_{t_i}B_{t_{j-1}}-B_{t_{i-1}}B_{t_j}+B_{t_{i-1}}B_{t_{j-1}}}
 $$
@@ -95,7 +95,7 @@ $$
 $$
 Por lo tanto se concluye que $(B_{t_i}-B_{t_{i-1}})$  son variables aleatorias normales e independientes por tener correlaci\'on cero.
 \item $B_t \sim Normal(0,t)$. En efecto, pues  tenemos por hip\'otesis que $B_t$ es  v.a. normal centrada por lo tanto $\esp{B_t}=0$ luego como por hip\'otesis  $\esp{B_sB_t}=s\wedge t$ entonces $\var{B_t}=\esp{B_t^2}=\esp{B_tB_t}=t$ por lo tanto $B_t \sim Normal(0,t)$.
-\item $B$ tiene incrementos estacionarios. Tenemos que probar que $B_{t+s}-B_t\stackrel{d}{=} B_s$.   Primero como $B_t \sim N(0,t)$ entonces  $B_{t+s}-B_t$ al ser combinaci\'on de normales tenemos que $B_{t+s}-B_t$ es normal, calc\'ulemos sus par\'ametros.
+\item $B$ tiene incrementos estacionarios. Tenemos que probar que $B_{t+s}-B_t\stackrel{d}{=} B_s$.   Ya sabemos por el inciso anterior que  $B_t \sim N(0,t)$ , por otro lado notemos que  $B_{t+s}-B_t$ al ser combinaci\'on de  de un proceso Gaussiano  se concluye  que $B_{t+s}-B_t$ es normal, solo calculemos sus par\'ametros para verificar la igualdad en verosimilitud:
 $$
 \esp{B_{t+s}-B_t}=\esp{B_{t+s}}-\esp{B_t}=0
 $$
@@ -139,7 +139,7 @@ Para probar que $B_t$ es un movimiento browniano necesitamos verificar las sigui
 $$
 \esp{B_t}=\esp{B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}}=0
 $$
-Lo anterior es valida porque cada $B^m$ es movimiento browniano y por tanto tienen media 0. Por otro lado para obtener la varianza  del proceso al tiempo $t$ se tiene
+Lo anterior es valido porque cada $B^m$ es movimiento browniano y por tanto tienen media 0. Por otro lado para obtener la varianza  del proceso al tiempo $t$ se tiene
  que por la independencia de $B^m$:
  $$
 \var{B_t}=\var{B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}}=\sum_{i=1}^{\floor{t}}\var{B^i_1}+\var{B^{\ceil{t}}_{t-\floor{t}}}
@@ -150,7 +150,16 @@ $$
 $$
 De donde concluimos que en efecto $B_t$ tiene distribuci\'on Normal  de par\'ametros $(0,t)$.
 \end{enumerate}
-Con estos dos puntos hemos demostrado que el proceso $B_t$ es procesos gaussiano centrado, ahora probaremos que adem\'as se cumple la propiedad de que $\esp{B_tB_s}=s\wedge t$. La prueba de esto \'ultimo  se obtendr\'a por casos, si $s=t$ entonces, $\esp{B_tB_s}=\esp{B_t^2}=t=t\wedge s$ por lo tanto se cumple la propiedad, ahora sin perdida de generalidad supongamos que $t<s$.
+Con estos dos puntos hemos demostrado que el proceso $B_t$ es  centrado, para verificar que $B_t$ es proceso Gaussiano tenemos que verificar que para cualquier combinaci\'on lineal de $B_t$ tiene una distribuci\'on normal:
+$$
+\sum_{i=1}^{n}\lambda_i B_{t_i} \sim Normal
+$$
+Sin embargo notemos que esto \'ultimo es cierto por el hecho de que cada $B_{t_i}$  es combinaci—n lineal de movimientos brownianos en $[0,1]$ que por construcci\'on son independientes y con distrubuci\'on Gaussiana. Aqu\'i solo hay que tener cuidado cuando indices $(t_{i_k})_{k=1}^{n_1}$ est\'en contenidos    en un mismo intervalo de la forma $[m,m+1]$ para alg\'un  $m \in \na$, en cuyo caso s\'olo tenemos que recordar  que 
+$
+(B^m_{t-\floor{t_1}},B^m_{t-\floor{t_2}},\ldots,B^m_{t-\floor{t_{n_1}}})
+$
+Es un vector gaussiano pues $B^m$ es un movimiento browniano en $[0,1]$ que adem\'as es independiente de los movimientos browmianos  $(B^n)_{n\neq m}$ \\
+Con todo lo anterior hemos probado que $(B_t)$ es un proceso Gaussiano centrado, ahora probaremos que adem\'as se cumple la propiedad de que $\esp{B_tB_s}=s\wedge t$. La prueba de esto \'ultimo  se obtendr\'a por casos, si $s=t$ entonces, $\esp{B_tB_s}=\esp{B_t^2}=t=t\wedge s$ por lo tanto se cumple la propiedad, ahora sin perdida de generalidad supongamos que $t<s$.
 \begin{itemize}
 \item Caso 1: Supongamos que $\floor{t} \leq t<s\leq \ceil{t}$. En este caso tenemos que:
 $$
@@ -405,7 +414,7 @@ $$
 $$
 Por lo tanto, factorizando $\paren{-1}^{n+1}e^{-x^2/2}$:
 $$
-H_{n+1}(x)=\paren{-1}^ne^{x^2/2}\frac{d^n}{dx^n}e^{-x^2/2}
+H_{n+1}(x)=\paren{-1}^ne^{x^2/2}\frac{d^{n+1}}{dx^{n+1}}e^{-x^2/2}
 $$
 $$
 =\paren{a_nx^{n+1}+a_{n-1}x^{n}+\cdots+a_0x-a_nnx^{n-1}-a_{n-1}(n-1)x^{n-2}-\cdots-a_1}
@@ -440,7 +449,7 @@ Entonces bajo esta definici\'on:
 $$
 \frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}=\frac{\partial^n}{\partial \lambda^n}f(g(\lambda))
 $$
-Afirmaci\'on, bajo las condiciones de este problema se tiene que:
+Afirmaci\'on: bajo las condiciones de este problema se tiene que:
 $$
 \frac{\partial^n}{\partial \lambda^n}f(g(\lambda))=\paren{g^{(1)}(\lambda)}^nf^{(n)}(g(\lambda))
 $$
@@ -677,7 +686,63 @@ Demostraremos que en este caso:
 $$
 \left.\frac{\partial^n}{\partial \lambda^n}M_t^{\lambda}\right|_{\lambda=0}=\left.(\gamma t)^{n/2}H_n\paren{\frac{Nt-\gamma t}{\sqrt{\gamma t}}}M_t^{\lambda}\right|_{\lambda=0}
 $$
-\end{proof}
+(Falta la prueba y al parecer solo funciona con n=1 y 2)\\
+Las martingalas que obtenemos de derivar directamente a $M_t^\lambda$ (no us\'e polin\'omio de Hermite sino que derive directamente $M_t^\lambda$ usando un software para derivar) :
+$$
+N_t-\gamma t
+$$
+$$
+(N_t-\gamma t)^2-\gamma t
+$$
+$$
+(N_t-\gamma t)^3-3(N_t-\gamma t)\gamma t-\gamma t 
+$$
+Luego al definir el tiempo aleatorio $T_{b}=\min\set{t\geq 0:N_t\in\set{b}}$ (para $b \in \na$) y al aplicar el muestreo opcional de Doob a la primer martingala obtenemos:
+$$
+\esp{N_{T_{b}}}- \gamma\esp{T_{b}}=0
+$$
+De donde concluimos que: $$\esp{T_b}=\frac{b}{\gamma}$$
+Observaci\'on: Dado que $N_t$ es proceso Poisson entonces sabemos que los tiempos entre cambio de estados es Exponencial de par\'ametro ($\gamma$) luego entonces al ser el proceso creciente, se tiene que el tiempo de paro  $T_b$ coincide con tiempo que tarda el proceso Poisson en tener $b$ cambios de estados, es decir $T_b$ sigue la misma distribucii\'on que de la suma de $b$ exponenciales independientes,es decir, $T_b$ en este caso sigue una distribuc\'on Gamma$(b,\gamma)$ de donde concluimos que nuestro resultado obtenido v\'ia martingalas coincide con el hecho de que $\esp{T_b}=b/\gamma$.\\
+Tomando ahora la martingala generada a partir de la segunda derivada y tras aplicar el muestro opcional de Doob tenemos los siguiente:
+$$
+\esp{\paren{N_{T_b}-\gamma T_b}^2-\gamma T_b}=0
+$$
+De donde despejando el segundo momento de $T_b$
+$$
+\esp{T_b^2}=\frac{((2b+1)\gamma)\esp{T_b}-b^2}{\gamma^2}=\frac{b(b+1)}{\gamma^2}
+$$
+Lo cual coincide con el segundo momento de una distribuci\'on Gamma$(b,\gamma)$. Finalmente utilizando la tercer martingala  y tras aplicar el muestro opcional de Doob tenemos los siguiente:
+$$
+\esp{(N_{T_b}-\gamma T_b)^3}-\esp{3(N_{T_b}-\gamma T_b)\gamma T_b}-\esp{\gamma T_b}=0 
+$$
+ De donde despejando el tercer momento obtenemos:
+ $$
+ \esp{T_b^3}=\frac{b^3+3\gamma^2(b+1)\esp{T_b^2}-\gamma(3b^2+3b+1)\esp{T_b}}{\gamma^3}
+ $$
+ Al sustituir el segundo y primero obtenemos
+ $$
+ \esp{T_b^3}=\frac{b(b+1)(b+2)}{\gamma^3}
+ $$
+ El cual coincide con el tercer momento de la distribuci\'on  Gamma$(b,\gamma)$. En general vemos que el momento $n$ depende de los primeros $n-1$ momentos y por tanto tiene todos sus momento finitos.\\
+Para terminar con el ejercido ejercicio calcular\'emos la funci\'on generadora de momentos  del tiempo de paro  $T_b$. Para ello ocuparemos la martingala $M_t^\lambda$. Nuevamente haciendo uso del muestro opcional de doob  (Me parece que en este caso no necesitamos que $\lambda>0$ ya que el proceso $N_t$ es creciente)
+$$
+\esp{M_{T_b}^\lambda}=\esp{M_0^\lambda}=1
+$$
+Lo anterior es cierto porque la martingala $M_{T_a\wedge s}^\lambda$ es acotada por $e^{b\lambda}$
+Obtenemos entonces:
+$$
+\esp{e^{b\lambda-\gamma T_b(e^\lambda-1}}=1
+$$
+De donde despejando:
+$$
+\esp{e^{-\gamma T_b(e^{\lambda}-1})}=e^{-b\lambda}=\paren{e^{\lambda}}^{-b}
+$$
+Haciendo el cambio de variable $u=-\gamma \paren{e^{\lambda-1}}$ de donde $e^\lambda=\paren{1-\frac{u}{\gamma}}$. Entonces obtenemos:
+$$
+\esp{e^{uT_b}}=\paren{1-\frac{u}{\gamma}}^{-b}
+$$
+Es decir $T_b$ fine la misma funci\'on generadora de momento que una variable aleatoria con distirbuci\'on Gamma$(b,\gamma)$ lo cual era de esperarse.
+ \end{proof}
 \end{enumerate}
 \end{enumerate}
 \end{problema}
@@ -729,8 +794,18 @@ $$
   $$
   De donde se concluye que tiene media finita. Finalmente para demostrar que son independientes recordemos que al ser $B_t$ movimiento browniano entonces
   $$
-  B_{n+t}-B_n \perp \sigma\paren{B_s: s\leq n}
+ \paren{B_{n+t}-B_n, n \in \na }
   $$ 
+  Son variables aleatorias independientes y adem\'as por la propiedad de markov:
+  $$
+  B_{n+t}-B_n \perp \sigma(B_s: s\leq n)
+  $$
+  Entonces el proceso $\paren{B^n_t=B_{n+t}-B_n, t\in [0,1]}$  tiene trayectorias independientes para cada n, de donde tomando supremos conciu\'imos que en efecto:
+  $$
+  \paren{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n},n\in\na} 
+  $$
+  Son v.a. independientes.
+  
 \end{proof}
 \item Al utilizar Borel-Cantelli, pruebe que, para cualquier $C>0$ fija\begin{esn}
 \limsup_{n\to\infty}\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}/n\leq C\end{esn} casi seguramente.
@@ -776,8 +851,24 @@ Dado que $B_t$ tiene incrementos estacionarios  se sigue que $B_k-B_{k-1}\sim N(
 $$
 \lim_{n \to \infty }\frac{B_n}{n}=\lim_{n \to \infty }\frac{\sum_{k=1}^{n}B_k-B_{k-1}}{n}=0
 $$
-Ahora probaremos que $\lim_{t \to \infty}B_t/t=0$ para ello tomemos $t \in \re^+$ entonces  sabemos excites 
-
+Ahora probaremos que $\lim_{t \to \infty}B_t/t=0$ para ello tomemos $t \in \re^+$ entonces  sabemos existe $n \in \na$ tal que $n\leq t < n+1$ y por tanto existe $s \in [0,1]$ tal que: $t=n+s$. Entonces:
+$$
+\frac{\abs{B_t}}{t}=\frac{\abs{B_n+s}}{n+s} \leq \frac{\abs{B_{n+s}}}{n}= \frac{\abs{B_{n+s}-B_n+B_n}}{n}\leq  \frac{\abs{B_{n+s}-B_n}}{n}+\frac{\abs{B_n}}{n}
+$$
+$$
+\leq  \frac{\sup_{s \in[0,1]}{\abs{B_{n+s}-B_n}}}{n}+\frac{\abs{B_n}}{n}
+$$
+Luego si tomamos l\'imite  $t \to  \infty$ entonces $n \to  \infty$ pues recordemos que $n\leq t < n+1$, entonces:
+\begin{align}
+\limsup_{t\to\infty }\frac{\abs{B_t}}{t} &\leq \limsup_{n \to \infty}\paren{ \frac{\sup_{s \in[0,1]}{\abs{B_{n+s}-B_n}}}{n}+\frac{\abs{B_n}}{n}} \notag\\
+&=\limsup_{n \to \infty}\paren{ \frac{\sup_{s \in[0,1]}{\abs{B_{n+s}-B_n}}}{n}}+\limsup_{n \to \infty}{\frac{\abs{B_n}}{n}} \notag\\
+&=\limsup_{n \to \infty}\paren{ \frac{\sup_{s \in[0,1]}{\abs{B_{n+s}-B_n}}}{n}} < C \quad (c.s)
+\end{align}
+Entonces para toda $C > 0$ se tiene que:
+$$
+0 \leq \limsup_{t\to\infty }\frac{\abs{B_t}}{t}  \leq C 
+$$
+De dondo se concluye que $\lim_{t\to\infty }\frac{\abs{B_t}}{t} =0$
 \end{proof}
 
 \end{enumerate}
