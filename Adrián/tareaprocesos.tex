@@ -2916,7 +2916,79 @@ M^\lambda_t=e^{\lambda B_t-\lambda^2t/2}.
 \end{esn}
 \begin{enumerate}
 \item Explique y pruebe formalmente por qu\'e, para toda $n\geq 1$, $\partial^n M^\lambda_t/\partial \lambda^n$ es una martingala.
+\begin{proof}
+Observemos que $M^\lambda_t$ es martingala.
+\begin{itemize}
+\item Ya que suponemos que estamos en la filtraci\'on can\'onica entonces $M^\lambda_t$ es adaptado
+\item Como $M^\lambda_t=e^{\lambda B_t-\lambda^2t/2} \leq e^{\lambda B_t}$, entonces:
+\begin{esn}
+\esp{M^\lambda_t}\leq \esp{e^{\lambda B_t}}=e^{\frac{t\lambda^2}{2}}.
+\end{esn}
+Por lo tanto $M^\lambda_t$ es integrable.
+\item  Propiedad de juego justo. Sea $s \leq t$:
+\begin{align}
+\espc{M^\lambda_t}{\F_s}&=\espc{e^{\lambda B_t-\lambda^2t/2}}{\F_s}\notag  \\ &=e^{-\lambda^2t/2}\espc{e^{\lambda B_t}}{\F_s} \notag \\
+&=e^{-\lambda^2t/2}\espc{e^{\lambda( B_t- B_s+B_s) }}{\F_s}\notag \\
+&=e^{-\lambda^2t/2+\lambda B_s}\esp{e^{\lambda( B_{t-s}) }}\notag \\
+&==e^{-\lambda^2t/2+\lambda B_s}e^{(t-s)\lambda^2/2}\notag \\
+&=e^{\lambda B_s-s\lambda^2/2}\notag \\
+&=M^\lambda_s \notag
+\end{align}
 
+\end{itemize}
+
+Por lo tanto $M^\lambda_t$ es martingala.
+
+Ahora veamos que $\partial^n M^\lambda_t/\partial \lambda^n$ es martingala, para esto utulizaremos el resultado que nos permite intercambiar la esperanza condicional con la derivada, el cual fue demostrado anterioremente. Utilizando inducci\'on:
+
+Caso n=1:
+
+\begin{itemize}
+\item $\partial M^\lambda_t/\partial \lambda$ es $\F_t$-medible ya que es limite de funciones $\F_t$- medibles.
+\item Verifiquemos que $\partial M^\lambda_t/\partial \lambda$ es integrable:
+\begin{align}
+\abs{\partial M^\lambda_t/\partial \lambda}&=e^{\lambda B_t-\lambda^2t/2}\abs{(B_t-\lambda t)}\notag \\ &\leq e^{\lambda B_t-\lambda^2t/2}\abs{B_t}+e^{\lambda B_t-\lambda^2t/2}\abs{\lambda t}\notag \\
+&\leq e^{\lambda B_t} \abs{B_t}+e^{\lambda B_t} \abs{\lambda t}\notag
+\intertext{Luego entonces:}
+\esp{abs{\partial M^\lambda_t/\partial \lambda}}& \leq \esp{e^{\lambda B_t} \abs{B_t}}+\esp{e^{\lambda B_t} \abs{\lambda t}}\notag \\
+&=\int_{-\infty}^{\infty}\abs{u}e^{\lambda u} \frac{1}{\sqrt{2\pi t}}e^{-\frac{u^2}{2t}}du+\abs{\lambda t}e^{t\lambda^2/2}\notag \\
+&=e^{t\lambda^2/2}\int_{-\infty}^{\infty}\abs{u}\frac{1}{\sqrt{2\pi t}}e^{-\frac{(u-t\lambda)^2}{2t}}du++\abs{\lambda t}e^{t\lambda^2/2}<\infty \notag
+\end{align}
+
+Por lo tanto $\partial M^\lambda_t/\partial \lambda$ es integrable.
+Ademas tambien concluimos $\partial M^\lambda_t/\partial \lambda$ esta dominada por $ e^{\lambda B_t} \abs{B_t}+e^{\lambda B_t} \abs{\lambda t}$ que pertenece a $L_1$.
+
+\item La propiedad de juego justo.Ya que $\partial M^\lambda_t/\partial \lambda$ esta dominada entonces podemos intercambiar la derivada con la esperanza:
+
+\begin{align}
+\espc{\frac{\partial}{\partial \lambda} M^\lambda_t}{\F_s}&=\frac{\partial}{\partial \lambda} \espc{ M^\lambda_t}{\F_s}\notag \\
+&=\frac{\partial}{\partial \lambda}M^\lambda_s \notag
+\end{align}
+
+Por lo tanto satsiface la propiedad de juego justo.
+
+\end{itemize}
+
+Por lo tanto $\frac{\partial}{\partial \lambda} M^\lambda_t$ es martingala.
+
+Ahora supongamos $\frac{\partial^k}{\partial \lambda^k} M^\lambda_t$ es martingala.
+
+Por demostrar $\frac{\partial^{k+1}}{\partial \lambda^{k+1}} M^\lambda_t$ es martingala.
+
+\begin{itemize}
+
+
+\item Supongamos que $\frac{\partial^n}{\partial \lambda^n} M^\lambda_t$ es martingala, por demostrar que  . Dada la hipotesis de inducci\'on tenemos entonces que:
+$$
+\espc{\frac{\partial^{n+1}}{\partial \lambda^{n+1}} M^\lambda_t}{\F_s}=\espc{\frac{\partial}{\partial \lambda}  \frac{\partial^n}{\partial \lambda^n} M^\lambda_t}{\F_s}=^*\frac{\partial}{\partial \lambda} \espc{ \frac{\partial^n}{\partial \lambda^n} M^\lambda_t}{\F_s}
+$$
+$$
+\frac{\partial}{\partial \lambda} \frac{\partial^n}{\partial \lambda^n} M^\lambda_s=\frac{\partial^{n+1}}{\partial \lambda^{n+1}}M^\lambda_s
+$$
+Lo que demostrar\'ia  que $\frac{\partial^{n+1}}{\partial \lambda^{n+1}} M^\lambda_t$ tiene la propiedad de martingala\\
+(*) Faltaria probar que  $\frac{\partial^n}{\partial \lambda^n} M^\lambda_t $ es dominada por una funci\'on integrable para poder sacar el operador derivada de la esperanza condicional
+\end{itemize}
+\end{proof}
 \item Sea $\imf{H_n}{x}=\paren{-1}^ne^{x^2/2}\frac{d^n}{dx^n}e^{-x^2/2}$. A $H_n$ se le conoce como en\'esimo polinomio de Hermite. Calc\'ulelo para $n\leq 5$. Pruebe que $H_n$ es un polinomio para toda $n\in\na$ y que $\partial^n M^\lambda_t/\partial \lambda^n=t^{n/2}\imf{H_n}{B_t/\sqrt{t}}M^\lambda_t$. 
 \item Pruebe que $t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$ es una martingala para toda $n$ y calc\'ulela para $n\leq 5$. 
 \item Aplique muestreo opcional a las martingalas anteriores al tiempo aleatorio $T_{a,b}=\min\set{t\geq 0:B_t\in\set{-a,b}}$ (para $a,b>0$) con $n=1,2$ para calcular $\proba{B_{T_{a,b}}=b}$ y $\esp{T_{a,b}}$, �Qu\'e concluye cuando $n=3,4$? ?` Cree que $T_{a,b}$ tenga momentos finitos de cualquier orden? Justifique su respuesta.
