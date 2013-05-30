@@ -2975,21 +2975,146 @@ Ahora supongamos $\frac{\partial^k}{\partial \lambda^k} M^\lambda_t$ es martinga
 
 Por demostrar $\frac{\partial^{k+1}}{\partial \lambda^{k+1}} M^\lambda_t$ es martingala.
 
+\begin{align}
+\espc{\frac{\partial^{k+1}}{\partial \lambda^{k+1}} M^\lambda_t}{\F_s}&= \espc{\frac{\partial}{\partial \lambda}\frac{\partial^k}{\partial \lambda^k} M^\lambda_t}{\F_s}\notag \\
+&=\frac{\partial}{\partial \lambda} \espc{ \frac{\partial^k}{\partial \lambda^k} M^\lambda_t}{\F_s}\notag \\
+&=\frac{\partial}{\partial \lambda} \frac{\partial^k}{\partial \lambda^k} M^\lambda_s\notag \\
+&=\frac{\partial^{k+1}}{\partial \lambda^{k+1}}M^\lambda_s\notag
+\end{align}
+
+Por lo tanto $\frac{\partial^{n}}{\partial \lambda^{n}} M^\lambda_t$ cumple la propiedad de juego justo.
+
+\end{proof}
+\item Sea $\imf{H_n}{x}=\paren{-1}^ne^{x^2/2}\frac{d^n}{dx^n}e^{-x^2/2}$. A $H_n$ se le conoce como en\'esimo polinomio de Hermite. Calc\'ulelo para $n\leq 5$. Pruebe que $H_n$ es un polinomio para toda $n\in\na$ y que $\partial^n M^\lambda_t/\partial \lambda^n=t^{n/2}\imf{H_n}{B_t/\sqrt{t}}M^\lambda_t$.
+\begin{proof}
+Para $n\leq 5$ tenemos que:
+\begin{align}
+H_0(x)&=1\notag \\
+H_1(x)&=x\notag \\
+H_2(x)&=x^2-1\notag \\
+H_3(x)&=x^3-3x\notag \\
+H_4(x)&=x^4-6x^2+3\notag \\
+H_5(x)&=x^5-10x^3+15x\notag
+\end{align}
+
+Veamos que $H_n$ es un polinomio de grado $n$ para toda $n\in \na$. La demostraci\'on se sea hara por inducci\'on.
+
+Para el caso $n=1$ tenemos que: $H_1(x)=x$. Por lo tanto es un polinomio de grado 1.
+Supongamos caso $n=k$, es decir que $H_k$ es polinomio de grado $k$.
+
+Por demostrar caso $n=k+1$. Por hip\'otesis de incucci\'on tenemos que:
+\begin{align}
+\paren{-1}^k e^{x^2/2}\frac{d^k}{dx^k}e^{-x^2/2}&=(a_k x^k+ a_{k-1}x^{k-1}+...+a_0) \notag
+\intertext{Entonces tenemos que:}
+
+\end{align}
+
 \begin{itemize}
 
-
-\item Supongamos que $\frac{\partial^n}{\partial \lambda^n} M^\lambda_t$ es martingala, por demostrar que  . Dada la hipotesis de inducci\'on tenemos entonces que:
 $$
-\espc{\frac{\partial^{n+1}}{\partial \lambda^{n+1}} M^\lambda_t}{\F_s}=\espc{\frac{\partial}{\partial \lambda}  \frac{\partial^n}{\partial \lambda^n} M^\lambda_t}{\F_s}=^*\frac{\partial}{\partial \lambda} \espc{ \frac{\partial^n}{\partial \lambda^n} M^\lambda_t}{\F_s}
+\frac{d^n}{dx^n}e^{-x^2/2}=\paren{-1}^ne^{-x^2/2}(a_nx^n+a_{n-1}x^{n-1}+\cdots+a_0)
 $$
-$$
-\frac{\partial}{\partial \lambda} \frac{\partial^n}{\partial \lambda^n} M^\lambda_s=\frac{\partial^{n+1}}{\partial \lambda^{n+1}}M^\lambda_s
-$$
-Lo que demostrar\'ia  que $\frac{\partial^{n+1}}{\partial \lambda^{n+1}} M^\lambda_t$ tiene la propiedad de martingala\\
-(*) Faltaria probar que  $\frac{\partial^n}{\partial \lambda^n} M^\lambda_t $ es dominada por una funci\'on integrable para poder sacar el operador derivada de la esperanza condicional
 \end{itemize}
+Derivando la expresi\'on anterior obtenemos:
+$$
+\frac{d^{n+1}}{dx^{n+1}}e^{-x^2/2}=\paren{-1}^ne^{-x^2/2}(a_nnx^{n-1}+a_{n-1}(n-1)x^{n-2}+\cdots+a_1)
+$$
+$$
++\paren{-1}^n(a_nx^n+a_{n-1}x^{n-1}+\cdots+a_0)e^{-x^2/2}(-1x)
+$$
+Por lo tanto, factorizando $\paren{-1}^{n+1}e^{-x^2/2}$:
+$$
+H_{n+1}(x)=\paren{-1}^ne^{x^2/2}\frac{d^{n+1}}{dx^{n+1}}e^{-x^2/2}
+$$
+$$
+=\paren{a_nx^{n+1}+a_{n-1}x^{n}+\cdots+a_0x-a_nnx^{n-1}-a_{n-1}(n-1)x^{n-2}-\cdots-a_1}
+$$
+De donde concluimos que $H_{n+1}(x)$ es en efecto un polinomio de grado $n+1$\\
+Finalmente para terminar este inciso tenemos que ver que $$\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}=\left.t^{n/2}\imf{H_n}{B_t/\sqrt{t}}M^\lambda_t\right|_{\lambda=0}=t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$$
+Para su demostraci\'on consideremos a la funci\'on $f(\lambda)=M_t^{\lambda}$ y desarrollemos el polinomio de taylor alrededor de 0
+\begin{equation}
+f(\lambda)=M_t^{\lambda} =\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}
+\end{equation}
+Por otro lado por la definici\'on de $M_t^\lambda$ tenemos:
+$$
+M_t^\lambda=e^{\lambda B_t-\lambda^2t/2}=e^{-\frac{1}{2}\paren{-2\lambda B_t + \lambda^2t}  }
+$$
+Completamos un trinomio cuadrado en el exponente.
+$$
+=e^{\frac{B_t^2}{2t}-\frac{1}{2}\paren{\frac{B_t^2}{t}-2\lambda B_t + \lambda^2t}  }=e^{\frac{B_t^2}{2t}-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2  }
+$$
+entonces expresando esto \'ultimo como serie de taylor al rededor de $\lambda=0$ obtenemos:
+\begin{equation}
+f(\lambda)=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\left.\frac{\partial^n}{\partial \lambda^n}e^{\frac{B_t^2}{2t}-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}\right|_{\lambda=0}=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}e^{\frac{B_t^2}{2t}}\left.\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}\right|_{\lambda=0}
+\end{equation}
+Nos concentraremos en encontrar una expresi\'on para 
+$$
+\left.\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}\right|_{\lambda=0}
+$$
+Para resolver este problema definamos las siguientes funciones:
+$$
+f(u):=e^{-\frac{u^2}{2}} \quad g(\lambda):=\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}
+$$
+Entonces bajo esta definici\'on:
+$$
+\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}=\frac{\partial^n}{\partial \lambda^n}f(g(\lambda))
+$$
+Afirmaci\'on: bajo las condiciones de este problema se tiene que:
+$$
+\frac{\partial^n}{\partial \lambda^n}f(g(\lambda))=\paren{g^{(1)}(\lambda)}^nf^{(n)}(g(\lambda))
+$$
+Demostraci\'on por inducci\'on:
+\begin{itemize}
+\item Caso $n=1$. Usando regla de la cadena se tiene el resultado:
+$$
+\frac{\partial}{\partial \lambda}f(g(\lambda))=f^{(1)}(g(\lambda))g^{(1)}(\lambda)
+$$
+\item Supongamos que la formula es  v\'alida para $n$ por demostrar que es v\'alida para $n+1$
+$$
+\frac{\partial^{n+1}}{\partial \lambda^{n+1}}f(g(\lambda))=\frac{\partial}{\partial \lambda}\frac{\partial^{n}}{\partial \lambda^{n}}f(g(\lambda))=\frac{\partial}{\partial \lambda}\paren{g^{(1)}(\lambda)}^nf^{(n)}(g(\lambda))
+$$
+$$
+=\paren{g^{(1)}(\lambda)}^n\frac{\partial}{\partial \lambda}f^{(n)}(g(\lambda))+f^{(n)}(g(\lambda))\frac{\partial}{\partial \lambda}\paren{g^{(1)}(\lambda)}^n
+$$
+Sin embargo por la definici\'on de la funci\'on $g$ mostraremos que $\frac{\partial}{\partial \lambda}\paren{g^{(1)}(\lambda)}^n=0$, en efecto pues:
+$$
+\frac{\partial}{\partial \lambda}\paren{g^{(1)}(\lambda)}^n=n\paren{g^{(1)}(\lambda)}^{n-1}g^{(2)}(\lambda)
+$$
+y como $g^{(2)}(\lambda)=\frac{\partial^2}{\partial \lambda^2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}=0$ de donde se sigue que:
+$$
+\frac{\partial^{n+1}}{\partial \lambda^{n+1}}f(g(\lambda))=\paren{g^{(1)}(\lambda)}^n\frac{\partial}{\partial \lambda}f^{(n)}(g(\lambda))=\paren{g^{(1)}(\lambda)}^{n+1}f^{(n+1)}(g(\lambda))
+$$
+Por lo tanto prueba que la f\'ormula es v\'alida para toda $n$ 
+\end{itemize}
+Por lo anterior hemos probado que:
+$$
+\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}=\paren{g^{(1)}(\lambda)}^nf^{(n)}(g(\lambda))=\paren{-\sqrt{t}}^nf^{(n)}\paren{g(\lambda)}
+$$
+Pero notemos que por la definici\'on de $H_n$
+$$
+f^{(n)}(u)=\frac{\partial^n}{\partial \lambda^n}e^{-u^2/2}=(-1)^nH_n(u)e^{-u^2/2}
+$$
+Por lo tanto:
+$$
+\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}=\paren{-\sqrt{t}}^n(-1)^nH_n(g(\lambda))e^{-g(\lambda)^2/2}
+$$
+Sustituyendo  este resultado en la ecuaci\'on (3) obtenemos :
+$$
+f(\lambda)=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}e^{\frac{B_t^2}{2t}}\left.\paren{t}^{n/2}H_n(g(\lambda))e^{-g(\lambda)^2/2}  \right|_{\lambda=0}
+$$
+Pero como $g(0)=B_t/\sqrt{t}$ entonces:
+\begin{equation}
+f(\lambda)=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\paren{t}^{n/2}H_n(B_t/\sqrt{t})
+\end{equation}
+Finalmente por la ecuaci\'on (2) y (4) y la unicidad del polinomio de taylor obtenemos que:
+$$
+\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\paren{t}^{n/2}H_n(B_t/\sqrt{t})=f(\lambda)=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}
+$$
+De donde obtemos el resultado que quer\'iamos probar:
+$$
+\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}=\paren{t}^{n/2}H_n(B_t/\sqrt{t})
+$$
 \end{proof}
-\item Sea $\imf{H_n}{x}=\paren{-1}^ne^{x^2/2}\frac{d^n}{dx^n}e^{-x^2/2}$. A $H_n$ se le conoce como en\'esimo polinomio de Hermite. Calc\'ulelo para $n\leq 5$. Pruebe que $H_n$ es un polinomio para toda $n\in\na$ y que $\partial^n M^\lambda_t/\partial \lambda^n=t^{n/2}\imf{H_n}{B_t/\sqrt{t}}M^\lambda_t$. 
 \item Pruebe que $t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$ es una martingala para toda $n$ y calc\'ulela para $n\leq 5$. 
 \item Aplique muestreo opcional a las martingalas anteriores al tiempo aleatorio $T_{a,b}=\min\set{t\geq 0:B_t\in\set{-a,b}}$ (para $a,b>0$) con $n=1,2$ para calcular $\proba{B_{T_{a,b}}=b}$ y $\esp{T_{a,b}}$, �Qu\'e concluye cuando $n=3,4$? ?` Cree que $T_{a,b}$ tenga momentos finitos de cualquier orden? Justifique su respuesta.
 \item Aplique el teorema de muestreo opcional a la martingala $M^\lambda $ al tiempo aleatorio $T_a=\inf\set{t\geq 0:B_t\geq a}$ si $\lambda>0$. Diga por qu\'e es necesaria la \'ultima hip\'otesis y calcule la transformada de Laplace de $T_a$. 

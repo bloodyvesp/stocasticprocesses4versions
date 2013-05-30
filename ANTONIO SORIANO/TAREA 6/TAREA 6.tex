@@ -51,7 +51,7 @@ Un proceso estoc\'astico $B=\paren{B_t,t\geq 0}$ es un movimiento browniano en l
 
 \end{problema}
 \begin{proof}
-$\Rightarrow:)$ Supongamos que $B=\paren{B_t,t\geq 0}$ es un movimiento browniano en ley por demostrar que $\paren{B_t,t\geq 0}$  es un proceso gaussiano centrado y que ademas $\esp{B_sB_t}=s\wedge t$.\\
+$\Rightarrow:)$ Supongamos que $B=\paren{B_t,t\geq 0}$ es un movimiento browniano en ley por demostrar que $\paren{B_t,t\geq 0}$  es un proceso gaussiano centrado y que ademas $\esp{B_sB_ t}=s\wedge t$.\\
 Primero, para demostrar que $\paren{B_t,t\geq 0}$  es un proceso gaussiano tenemos que ver que el vector ,$\paren{B_{t_1},B_{t_2},\ldots,B_{t_n}}$ donde  $(t_1<t_2,\ldots,<t_n)$ es un vector gaussiano lo que equivale  a probar que cualquier  combinaci\'on lineal sigue una distribuci\'on normal. Pero dado que cualquier combinaci\'on lineal la podemos escribir como:
 $$
 \sum_{i=1}^{n}\lambda_iB_{t_i} =\sum_{i=1}^{n}\alpha_i\paren{B_{t_i}-B_{t_{i-1}}}\sim Normal
@@ -95,7 +95,7 @@ $$
 $$
 Por lo tanto se concluye que $(B_{t_i}-B_{t_{i-1}})$  son variables aleatorias normales e independientes por tener correlaci\'on cero.
 \item $B_t \sim Normal(0,t)$. En efecto, pues  tenemos por hip\'otesis que $B_t$ es  v.a. normal centrada por lo tanto $\esp{B_t}=0$ luego como por hip\'otesis  $\esp{B_sB_t}=s\wedge t$ entonces $\var{B_t}=\esp{B_t^2}=\esp{B_tB_t}=t$ por lo tanto $B_t \sim Normal(0,t)$.
-\item $B$ tiene incrementos estacionarios. Tenemos que probar que $B_{t+s}-B_t\stackrel{d}{=} B_s$.   Ya sabemos por el inciso anterior que  $B_t \sim N(0,t)$ , por otro lado notemos que  $B_{t+s}-B_t$ al ser combinaci\'on de  de un proceso Gaussiano  se concluye  que $B_{t+s}-B_t$ es normal, solo calculemos sus par\'ametros para verificar la igualdad en verosimilitud:
+\item $B$ tiene incrementos estacionarios. Tenemos que probar que $B_{t+s}-B_t\stackrel{d}{=} B_s$.   Ya sabemos por el inciso anterior que  $B_t \sim N(0,t)$ , por otro lado notemos que  $B_{t+s}-B_t$ al ser combinaci\'on de  de un proceso Gaussiano  se concluye  que $B_{t+s}-B_t$ es normal, solo calculemos sus par\'ametros para verificar la igualdad en distribuci\'on:
 $$
 \esp{B_{t+s}-B_t}=\esp{B_{t+s}}-\esp{B_t}=0
 $$
@@ -285,7 +285,7 @@ Entonces:
 $$
 \esp{\abs{M^\lambda_t}}=\esp{M^\lambda_t}\leq \esp{e^{\lambda B_t}}=e^{\frac{t\lambda^2}{2}}
 $$
-La \'ultima igualdad se debe a que est\'amos calculando la generadora de momentos para $B_t$ que sabemos sigue una distribuci\'on Normal$(0,t)$. Lo anterior concluye entonces que $M^\lambda_t $ es integrable finalmente para probar\'a la propiedad de martingala para $M^\lambda_t$ sea $s<t$, entonces:
+La \'ultima igualdad se debe a que est\'amos calculando la generadora de momentos para $B_t$ que sabemos sigue una distribuci\'on Normal$(0,t)$. Lo anterior concluye entonces que $M^\lambda_t $ es integrable finalmente para probar la propiedad de martingala para $M^\lambda_t$ sea $s<t$, entonces:
 $$
 \espc{M^\lambda_t}{\F_s}=\espc{e^{\lambda B_t-\lambda^2t/2}}{\F_s}=e^{-\lambda^2t/2}\espc{e^{\lambda B_t}}{\F_s}
 $$
@@ -687,7 +687,7 @@ $$
 \left.\frac{\partial^n}{\partial \lambda^n}M_t^{\lambda}\right|_{\lambda=0}=\left.(\gamma t)^{n/2}H_n\paren{\frac{Nt-\gamma t}{\sqrt{\gamma t}}}M_t^{\lambda}\right|_{\lambda=0}
 $$
 (Falta la prueba y al parecer solo funciona con n=1 y 2)\\
-Las martingalas que obtenemos de derivar directamente a $M_t^\lambda$ (no us\'e polin\'omio de Hermite sino que derive directamente $M_t^\lambda$ usando un software para derivar) :
+Las martingalas que obtenemos de derivar directamente a $M_t^\lambda$ (no us\'e polin\'omio de Hermite sino que deriv\'e directamente $M_t^\lambda$ usando un software para derivar) :
 $$
 N_t-\gamma t
 $$
@@ -800,7 +800,7 @@ $$
   $$
   B_{n+t}-B_n \perp \sigma(B_s: s\leq n)
   $$
-  Entonces el proceso $\paren{B^n_t=B_{n+t}-B_n, t\in [0,1]}$  tiene trayectorias independientes para cada n, de donde tomando supremos conciu\'imos que en efecto:
+  Entonces los  proceso brownianos restringido a $[0,1)$ dado por: $$\paren{B^n_t=B_{n+t}-B_n, t\in [0,1]}$$  Tiene trayectorias independientes para cada n, de donde tomando supremos conciu\'imos que en efecto:
   $$
   \paren{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n},n\in\na} 
   $$
@@ -822,15 +822,19 @@ Por el inciso anterior del ejercicio sabemos que los $A_n$'s  son independientes
 $$
 \p\paren{\limsup\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}/n\leq C}=1 
 $$
-Lo que terminar\'ia la prueba, nos concentraremos entonces en probar que $$\sum_{n=1}^{\infty}\p(A_n)=\infty$$ Para demostrar esto recordemos que por la desigualdad de Chebyshev y dado que $\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}$ es cuadrado integrable:
+Lo que terminar\'ia la prueba, nos concentraremos entonces en probar que $$\sum_{n=1}^{\infty}\p(A_n)=\infty$$ Para demostrar esto recordemos  la desigualdad de Markov para  la cual nos dice que :
 $$
-\p(A_n^c)=\p\paren{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}> nC}\leq \frac{\esp{\paren{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}}^2}}{(nC)^2}
+\p(\abs{X}>x)\leq \frac{\esp{\abs{X}^r}}{x^r}
 $$
+Dado que $\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}\stackrel{d}{=} \sup_{t\in [0,1]}\abs{B_{t}}$  entonces utilizando la desiguladad de Markov con $r=2$
+\begin{align}
+\p(A_n^c)&=\p\paren{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}> nC}=\p\paren{\sup_{t\in [0,1]}\abs{B_{t}}> nC}\notag \\ &\leq  \frac{\esp{\paren{\sup_{t\in [0,1]}\abs{B_{t}}}^2}}{(nC)^2} \notag
+\end{align}
 Luego entonces:
 $$
-\p(A_n)=1-\p(A_n^c) > 1- \frac{\esp{\paren{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}}^2}}{(nC)^2}
+\p(A_n)=1-\p(A_n^c) > 1-  \frac{\esp{\paren{\sup_{t\in [0,1]}\abs{B_{t}}}^2}}{(nC)^2}
 $$
-Si tomamos limite cuando $n \to \infty$ y recordando que $\p(A_n)\leq 1$ concluimos que:
+Si tomamos limite cuando $n \to \infty$ y recordando que  $\esp{\paren{\sup_{t\in [0,1]}\abs{B_{t}}}^2} < \infty$ concluimos que:
 $$
  \lim_{n \to \infty}\p(A_n)=1  \quad \Rightarrow \sum_{n=1}^{\infty}\p(A_n)=\infty
  $$
