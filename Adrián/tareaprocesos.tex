@@ -2792,16 +2792,20 @@ Por lo tanto $B$ es un movimiento browniano en ley.
 El objetivo de este problema es construir, a partir de movimientos brownianos en $[0,1]$, al movimiento browniano en $[0,\infty)$.
 \begin{enumerate}
 \item Pruebe que existe un espacio de probabilidad $\ofp$ en el que existe una sucesi\'on $B^1,B^2,\ldots$ de movimientos brownianos en $[0,1]$ independientes. (Sugerencia: utilice la construcci\'on del movimiento browniano de L\'evy  para que la soluci\'on sea corta.)
-\item Defina a $B_t=B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}$ para $t\geq 0$. Pruebe que $B$ es un movimiento browniano. 
+
+\begin{proof}
+En la construcci\'on del movimiento Browniano de Levy se utiliza el espacio de probabilidad $\paren{\Omega, \F,\p}$ donde estan definidas las variables aleatorias $\xi_{i,n}$ donde $0\leq i\leq 2^n$, tal que $\xi_{i,n}$ se distribuye Normal(0,1). Sabemos que dicho espacio existe por lo visto en clase. Si tomamos el espacio de probabilidad $\paren{\Omega, \F,\p}$ donde estan definidas las variables aleatorias  $\xi_{i,n}^m$ donde $0\leq i\leq 2^n$ y $m\geq 1$, tal que se distribuyen Normal (0,1) y son independientes. Para cada $m$ podemos construir el movimiento Browniano $B^m$  tal que sea independiente de los otros movimientos Brownianos.
+\end{proof}
+
+\item Defina a $B_t=B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}$ para $t\geq 0$. Pruebe que $B$ es un movimiento browniano.
 
 \begin{proof}
 Primero notemos que $B_0=0$ ya que $B_0=B_{0}^1=0$.
 
-Utilizaremos el ejercicio anterior para ver que es un movimento browniano. Primero demostraremos que $B_t$ es un proceso gaussiano:
-
-Falta
+Utilizaremos el ejercicio anterior para ver que es un movimento browniano. Primero demostraremos que $B_t$ es un proceso gaussiano. Si nos tomamos una combinacion lineal $\sum_{i=1}^n\lambda_i B_{t_i}$ se distribuye normal ya que cada $B_{t_i}$ esta conformado de normanles independientes en el caso en el que $t_{i_k}$ se encuentren en el intervalo $[m,m+1]$ sabemos que $B_{t_{i_1}}^m,...,B_{t_{i_n}}^m$ es un proceso gaussiano ya que $B^m$ es un movimiento Browniano y ademas es independiente de los otros movimientos brownianos. Por lo tanto es un Proceso Gaussiano.
 
 Ahora veamos que es un proceso gaussiano centrado:
+
 
 \begin{align}
 \esp{B_t}&=\esp{B^1_1+\cdots+B^{\floor{t}}_1+B^{\ceil{t}}_{t-\floor{t}}}\notag \\
@@ -3006,118 +3010,154 @@ Por demostrar caso $n=k+1$. Por hip\'otesis de incucci\'on tenemos que:
 \begin{align}
 \paren{-1}^k e^{x^2/2}\frac{d^k}{dx^k}e^{-x^2/2}&=(a_k x^k+ a_{k-1}x^{k-1}+...+a_0) \notag
 \intertext{Entonces tenemos que:}
-
+\frac{d^k}{dx^k}e^{-x^2/2}=\paren{-1}^ne^{-x^2/2}(a_nx^n+a_{k-1}x^{k-1}+...+a_0)
 \end{align}
 
-\begin{itemize}
+Ahora demostraremos caso $n=k+1$. Primero derivaremos la expresi\'on anterior:
+\begin{align}
+\frac{d^{k+1}}{dx^{k+1}}e^{-x^2/2}&=\paren{-1}^k e^{-x^2/2}(a_k kx^{k-1}+a_{k-1}(k-1)x^{k-2}+...+a_1) \notag \\
+&+\paren{-1}^k(a_k x^k+a_{k-1}x^{k-1}+...+a_0)e^{-x^2/2}(-x) \notag
+\intertext{Si factorizamos $\paren{-1}^{k+1}e^{-x^2/2}$, tenemos que:}
+H_{k+1}(x)&=\paren{-1}^k e^{x^2/2}\frac{d^{k+1}}{dx^{k+1}}e^{-x^2/2}\notag \\
+&=\paren{a_k x^{k+1}+a_{k-1}x^{n}+...+a_0x-a_k k x^{k-1}-a_{k-1}(k-1)x^{k-2}-....-a_1} \notag
+\end{align}
 
-$$
-\frac{d^n}{dx^n}e^{-x^2/2}=\paren{-1}^ne^{-x^2/2}(a_nx^n+a_{n-1}x^{n-1}+\cdots+a_0)
-$$
-\end{itemize}
-Derivando la expresi\'on anterior obtenemos:
-$$
-\frac{d^{n+1}}{dx^{n+1}}e^{-x^2/2}=\paren{-1}^ne^{-x^2/2}(a_nnx^{n-1}+a_{n-1}(n-1)x^{n-2}+\cdots+a_1)
-$$
-$$
-+\paren{-1}^n(a_nx^n+a_{n-1}x^{n-1}+\cdots+a_0)e^{-x^2/2}(-1x)
-$$
-Por lo tanto, factorizando $\paren{-1}^{n+1}e^{-x^2/2}$:
-$$
-H_{n+1}(x)=\paren{-1}^ne^{x^2/2}\frac{d^{n+1}}{dx^{n+1}}e^{-x^2/2}
-$$
-$$
-=\paren{a_nx^{n+1}+a_{n-1}x^{n}+\cdots+a_0x-a_nnx^{n-1}-a_{n-1}(n-1)x^{n-2}-\cdots-a_1}
-$$
-De donde concluimos que $H_{n+1}(x)$ es en efecto un polinomio de grado $n+1$\\
-Finalmente para terminar este inciso tenemos que ver que $$\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}=\left.t^{n/2}\imf{H_n}{B_t/\sqrt{t}}M^\lambda_t\right|_{\lambda=0}=t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$$
-Para su demostraci\'on consideremos a la funci\'on $f(\lambda)=M_t^{\lambda}$ y desarrollemos el polinomio de taylor alrededor de 0
-\begin{equation}
-f(\lambda)=M_t^{\lambda} =\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}
-\end{equation}
-Por otro lado por la definici\'on de $M_t^\lambda$ tenemos:
-$$
-M_t^\lambda=e^{\lambda B_t-\lambda^2t/2}=e^{-\frac{1}{2}\paren{-2\lambda B_t + \lambda^2t}  }
-$$
-Completamos un trinomio cuadrado en el exponente.
-$$
-=e^{\frac{B_t^2}{2t}-\frac{1}{2}\paren{\frac{B_t^2}{t}-2\lambda B_t + \lambda^2t}  }=e^{\frac{B_t^2}{2t}-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2  }
-$$
-entonces expresando esto \'ultimo como serie de taylor al rededor de $\lambda=0$ obtenemos:
-\begin{equation}
-f(\lambda)=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\left.\frac{\partial^n}{\partial \lambda^n}e^{\frac{B_t^2}{2t}-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}\right|_{\lambda=0}=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}e^{\frac{B_t^2}{2t}}\left.\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}\right|_{\lambda=0}
-\end{equation}
-Nos concentraremos en encontrar una expresi\'on para 
-$$
-\left.\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}\right|_{\lambda=0}
-$$
-Para resolver este problema definamos las siguientes funciones:
-$$
-f(u):=e^{-\frac{u^2}{2}} \quad g(\lambda):=\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}
-$$
-Entonces bajo esta definici\'on:
-$$
-\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}=\frac{\partial^n}{\partial \lambda^n}f(g(\lambda))
-$$
-Afirmaci\'on: bajo las condiciones de este problema se tiene que:
-$$
-\frac{\partial^n}{\partial \lambda^n}f(g(\lambda))=\paren{g^{(1)}(\lambda)}^nf^{(n)}(g(\lambda))
-$$
-Demostraci\'on por inducci\'on:
-\begin{itemize}
-\item Caso $n=1$. Usando regla de la cadena se tiene el resultado:
-$$
-\frac{\partial}{\partial \lambda}f(g(\lambda))=f^{(1)}(g(\lambda))g^{(1)}(\lambda)
-$$
-\item Supongamos que la formula es  v\'alida para $n$ por demostrar que es v\'alida para $n+1$
-$$
-\frac{\partial^{n+1}}{\partial \lambda^{n+1}}f(g(\lambda))=\frac{\partial}{\partial \lambda}\frac{\partial^{n}}{\partial \lambda^{n}}f(g(\lambda))=\frac{\partial}{\partial \lambda}\paren{g^{(1)}(\lambda)}^nf^{(n)}(g(\lambda))
-$$
-$$
-=\paren{g^{(1)}(\lambda)}^n\frac{\partial}{\partial \lambda}f^{(n)}(g(\lambda))+f^{(n)}(g(\lambda))\frac{\partial}{\partial \lambda}\paren{g^{(1)}(\lambda)}^n
-$$
-Sin embargo por la definici\'on de la funci\'on $g$ mostraremos que $\frac{\partial}{\partial \lambda}\paren{g^{(1)}(\lambda)}^n=0$, en efecto pues:
-$$
-\frac{\partial}{\partial \lambda}\paren{g^{(1)}(\lambda)}^n=n\paren{g^{(1)}(\lambda)}^{n-1}g^{(2)}(\lambda)
-$$
-y como $g^{(2)}(\lambda)=\frac{\partial^2}{\partial \lambda^2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}=0$ de donde se sigue que:
-$$
-\frac{\partial^{n+1}}{\partial \lambda^{n+1}}f(g(\lambda))=\paren{g^{(1)}(\lambda)}^n\frac{\partial}{\partial \lambda}f^{(n)}(g(\lambda))=\paren{g^{(1)}(\lambda)}^{n+1}f^{(n+1)}(g(\lambda))
-$$
-Por lo tanto prueba que la f\'ormula es v\'alida para toda $n$ 
-\end{itemize}
-Por lo anterior hemos probado que:
-$$
-\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}=\paren{g^{(1)}(\lambda)}^nf^{(n)}(g(\lambda))=\paren{-\sqrt{t}}^nf^{(n)}\paren{g(\lambda)}
-$$
-Pero notemos que por la definici\'on de $H_n$
-$$
-f^{(n)}(u)=\frac{\partial^n}{\partial \lambda^n}e^{-u^2/2}=(-1)^nH_n(u)e^{-u^2/2}
-$$
-Por lo tanto:
-$$
-\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}=\paren{-\sqrt{t}}^n(-1)^nH_n(g(\lambda))e^{-g(\lambda)^2/2}
-$$
-Sustituyendo  este resultado en la ecuaci\'on (3) obtenemos :
-$$
-f(\lambda)=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}e^{\frac{B_t^2}{2t}}\left.\paren{t}^{n/2}H_n(g(\lambda))e^{-g(\lambda)^2/2}  \right|_{\lambda=0}
-$$
-Pero como $g(0)=B_t/\sqrt{t}$ entonces:
-\begin{equation}
+Por lo tanto $H_{k+1}$ es un polinomio.
+
+Por lo tanto para toda $n\in\na$ es un polinomio de grado $n$.
+
+Solo nos falta verificar que $\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}=\left.t^{n/2}\imf{H_n}{B_t/\sqrt{t}}M^\lambda_t\right|_{\lambda=0}=t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$. Veamos el polinomio de Taylor  alreededor del $0$:
+
+\begin{align}
+f(\lambda)&=M_t^{\lambda} =\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}\notag
+\intertext{Por la definici\'on de $M_t^\lambda$:}
+M_t^\lambda &=e^{\lambda B_t-\lambda^2t/2}\notag \\
+&=e^{-\frac{1}{2}\paren{-2\lambda B_t + \lambda^2t}}\notag \\
+&=e^{\frac{B_t^2}{2t}-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}\notag
+\intertext{Sustituyendo en el polinomio de Taylor:}
+f(\lambda)&=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\left.\frac{\partial^n}{\partial \lambda^n}e^{\frac{B_t^2}{2t}-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}\right|_{\lambda=0}\notag \\
+&=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}e^{\frac{B_t^2}{2t}}\left.\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}\right|_{\lambda=0}\notag
+\end{align}
+
+Si definimos $g(u)=e^{-\frac{u^2}{2}}$ y $h(\lambda)=\paren{\frac{B_t}{\sqrt{t}}-\lambda\sqrt{t}}$ entonces $\frac{\partial^n}{\partial\lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}-\lambda\sqrt{t}}^2}=\frac{\partial^n}{\partial \lambda^n}g(h(\lambda))$. Por inducci\'on demostraremos que:
+\begin{esn}
+\frac{\partial^n}{\partial \lambda^n}g(h(\lambda))=\paren{h^{(1)}(\lambda)}^n g^{(n)}(h(\lambda))
+\end{esn}
+
+Para el caso $n=1$ tenemos que:
+\begin{esn}
+\frac{\partial}{\partial \lambda}g(h(\lambda))=g^{(1)}(h(\lambda))h^{(1)}(\lambda)
+\end{esn}
+
+Supongamos caso $n=k$. Por demostrar caso $n=k+1$:
+\begin{align}
+\frac{\partial^{k+1}}{\partial \lambda^{k+1}}g(h(\lambda))&=\frac{\partial}{\partial \lambda}\frac{\partial^{k}}{\partial \lambda^{k}}g(h(\lambda))\notag \\
+&=\frac{\partial}{\partial \lambda}\paren{h^{(1)}(\lambda)}^k g^{(k)}(h(\lambda))\notag \\
+&=\paren{h^{(1)}(\lambda)}^k\frac{\partial}{\partial \lambda}g^{(k)}(h(\lambda))+g^{(k)}(h(\lambda))\frac{\partial}{\partial \lambda}\paren{h^{(1)}(\lambda)}^k \notag
+\intertext{Pero $\frac{\partial}{\partial \lambda}\paren{h^{(1)}(\lambda)}^n=0$, entonces:}
+&=\paren{h^{(1)}(\lambda)}^k\frac{\partial}{\partial\lambda}g^{(k)}(h(\lambda))\notag \\
+&=\paren{h^{(1)}(\lambda)}^{k+1}g^{(k+1)}(h(\lambda))\notag
+\end{align}
+
+Por lo tanto $\frac{\partial^n}{\partial \lambda^n}g(h(\lambda))=\paren{h^{(1)}(\lambda)}^n g^{(n)}(h(\lambda))$.
+
+Por lo tanto $\frac{\partial^n}{\partial \lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}- \lambda\sqrt{t}}^2}=\paren{-\sqrt{t}}^n g^{(n)}\paren{h(\lambda)}$.
+
+Utilizando la definici\'on de $H_n$:
+
+\begin{esn}
+\frac{\partial^n}{\partial\lambda^n}e^{-\frac{1}{2}\paren{\frac{B_t}{\sqrt{t}}-\lambda\sqrt{t}}^2}=\paren{-\sqrt{t}}^n(-1)^nH_n(h(\lambda))e^{-h(\lambda)^2/2}
+\end{esn}
+Sustituyendo en el polinomio de Taylor obtenemos que:
+\begin{esn}
 f(\lambda)=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\paren{t}^{n/2}H_n(B_t/\sqrt{t})
-\end{equation}
-Finalmente por la ecuaci\'on (2) y (4) y la unicidad del polinomio de taylor obtenemos que:
-$$
-\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\paren{t}^{n/2}H_n(B_t/\sqrt{t})=f(\lambda)=\sum_{i=0}^{\infty}\frac{\lambda^n}{n!}\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}
-$$
-De donde obtemos el resultado que quer\'iamos probar:
-$$
+\end{esn}
+
+Por lo tanto por la unicidad del Polinomio de Taylor tenemos que:
+
+\begin{esn}
 \left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}=\paren{t}^{n/2}H_n(B_t/\sqrt{t})
-$$
+\end{esn}
+
 \end{proof}
-\item Pruebe que $t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$ es una martingala para toda $n$ y calc\'ulela para $n\leq 5$. 
+\item Pruebe que $t^{n/2}\imf{H_n}{B_t/\sqrt{t}}$ es una martingala para toda $n$ y calc\'ulela para $n\leq 5$.
+\begin{proof}
+Por el inciso 1 sabemos que  $\left.\frac{\partial^n}{\partial \lambda^n} M^\lambda_t\right|_{\lambda=0}$ es martingala entonces $\paren{t}^{n/2}H_n(B_t/\sqrt{t})$ es martingala. Las primeras cinco martingalas son:
+\begin{align}
+B_t\notag\\
+B_t^2-t\notag\\
+B_t^3-3B_tt\notag\\
+B_t^4-6B_t^2t+3t^2\notag\\
+B_t^5-10B_t^3t+15B_tt^2\notag
+\end{align}
+
+\end{proof}
 \item Aplique muestreo opcional a las martingalas anteriores al tiempo aleatorio $T_{a,b}=\min\set{t\geq 0:B_t\in\set{-a,b}}$ (para $a,b>0$) con $n=1,2$ para calcular $\proba{B_{T_{a,b}}=b}$ y $\esp{T_{a,b}}$, �Qu\'e concluye cuando $n=3,4$? ?` Cree que $T_{a,b}$ tenga momentos finitos de cualquier orden? Justifique su respuesta.
-\item Aplique el teorema de muestreo opcional a la martingala $M^\lambda $ al tiempo aleatorio $T_a=\inf\set{t\geq 0:B_t\geq a}$ si $\lambda>0$. Diga por qu\'e es necesaria la \'ultima hip\'otesis y calcule la transformada de Laplace de $T_a$. 
+\begin{proof}
+
+Empezemos con la martingala $B_t$. Sabemos que $T_{a,b} \wedge s$ es tiempo de paro acotado y adem\'as $B_{T_{a,b} \wedge s}$ es martingala acotada entonces tenemos que $\esp{B_{T_{a,b} \wedge s}}=\esp{B_0}=0$.
+Como $B_{T_{a,b} \wedge s}$ es una martingala acotada y  $B_{T_{a,b} \wedge s} \rightarrow B_{T_{a,b}}$ por teorema de la convergencia acotada se obtiene que $\esp{B_{T_{a,b} \wedge s}} \rightarrow \esp{B_{T_{a,b}}}$.
+Por lo tanto $\esp{B_{T_{a,b}}}=\esp{B_0}=0$.
+Luego entonces $\esp{B_{T_{a,b}}}=-a\p(B_{T_{a,b}}=-a)+b\p(B_{T_{a,b}}=b)=0$.
+Por lo tanto $\p(B_{T_{a,b}}=-a)=\frac{b}{a+b}$ y $\p(B_{T_{a,b}}=b)=\frac{a}{a+b}$.
+Si tomamos a la martingala  $B_t^2-t$ de igual manera obtenemos que:
+\begin{align}
+0&=\esp{B_{T_{a,b}}^2-T_{a,b}}=a^2\p(B_{T_{a,b}}=-a)+b^2 \p(B_{T_{a,b}}=b)-\esp{T_{a,b}}\notag
+\intertext{Entonces:}
+\esp{T_{a,b}}&=\frac{a^2b}{a+b}+\frac{b^2a}{a+b}=ab \notag
+\end{align}
+
+Para la martingala  $B_t^3-3B_tt$ al aplicar muestreo opcional tenemos que:
+\begin{align}
+0&=\esp{B_{T_{a,b}}^3-3B_{T_{a,b}}T_{a,b}}\notag \\
+&=\frac{b^3a-a^3b}{a+b}-3\esp{B_{T_{a,b}}T_{a,b}}\notag
+\intertext{Entonces:}
+\esp{B_{T_{a,b}}T_{a,b}}&=\frac{b^3a-a^3b}{3(a+b)}.\notag
+\end{align}
+Pero sabemos que $B_{T_{a,b}}=-a\indi{B_{T_{a,b}}=-a}+b\indi{B_{T_{a,b}}=b}$ entonces:
+\begin{align}
+\frac{b^3a-a^3b}{3(a+b)}&=\esp{B_{T_{a,b}}T_{a,b}}\notag \\ &=-a\esp{T_{a,b}\indi{B_{T_{a,b}}=-a}}+b\esp{T_{a,b}\indi{B_{T_{a,b}}=b}} \notag
+\end{align}
+Tambien sabemos que $T_{a,b}=T_{a,b}\indi{B_{T_{a,b}}=-a}+T_{a,b}\indi{B_{T_{a,b}}=b}$ entonces:
+\begin{align}
+ab&=\esp{T_{a,b}}\notag \\
+&=\esp{T_{a,b}\indi{B_{T_{a,b}}=-a}}+\esp{T_{a,b}\indi{B_{T_{a,b}}=b}}\notag
+\end{align}
+Resolviendo el sistema de ecuaciones:
+\begin{align}
+\esp{T_{a,b}\indi{B_{T_{a,b}}=b}}&=\frac{b^3a-a^3b}{3(a+b)}+\frac{a^2b}{a+b}\notag \\
+\esp{T_{a,b}\indi{B_{T_{a,b}}=-a}}<6=ab-\frac{b^3a-a^3b}{3(a+b)}-\frac{a^2b}{a+b}\notag
+\end{align}
+
+Para la martingala $B_t^4-6B_t^2t+3t^2$ obtenemos que:
+\begin{align}
+0&=\esp{B_{T_{a,b}}^4-6B_{T_{a,b}}^2{T_{a,b}}+3T_{a,b}^2}\notag
+\intertext{Entonces:}
+\esp{T_{a,b}^2}&=2\esp{B_{T_{a,b}}^2{T_{a,b}}}-\frac{a^4b+b^4a}{3(a+b)} \notag
+\end{align}
+Pero sabemos que $B_{T_{a,b}}^2=a^2\indi{B_{T_{a,b}}=-a}+b^2\indi{B_{T_{a,b}}=b}$
+Por lo tanto;
+\begin{esn}
+\esp{B_{T_{a,b}}^2{T_{a,b}}}=a^2\paren{ab-\frac{b^3a-a^3b}{3(a+b)}-\frac{a^2b}{a+b}}+b^2\paren{\frac{b^3a-a^3b}{3(a+b)}+\frac{a^2b}{a+b}}.
+\end{esn}
+
+Por lo tanto:
+\begin{esn}
+\esp{T_{a,b}^2}=2\paren{a^2\paren{ab-\frac{b^3a-a^3b}{3(a+b)}-\frac{a^2b}{a+b}}+b^2\paren{\frac{b^3a-a^3b}{3(a+b)}+\frac{a^2b}{a+b}}
+} -\frac{a^4b+b^4a}{3(a+b)}.
+\end{esn}
+
+\end{proof}
+\item Aplique el teorema de muestreo opcional a la martingala $M^\lambda $ al tiempo aleatorio $T_a=\inf\set{t\geq 0:B_t\geq a}$ si $\lambda>0$. Diga por qu\'e es necesaria la \'ultima hip\'otesis y calcule la transformada de Laplace de $T_a$.
+\begin{proof}
+Sabemos que $T_a\wedge s$ es tiempo de paro acotado por el muestreo opcional tenemos que $\esp{M_{T_a\wedge s}^\lambda}=\esp{M_0^\lambda}=1$. Utilizando la hip\'otesis $\lambda>0$, si $s\leq T_a$ entonces $M_{T_a\wedge s}^{\lambda}=M_s^{\lambda}=e^{\lambda B_s-\lambda^2s/2} \leq e^{\lambda a}$  y si $s > T_a$ entonces $M_{T_a\wedge s}^{\lambda}=M_{T_a}^{\lambda}=e^{\lambda a -\lambda^2s/2} \leq e^{\lambda a}$. Por lo tanto $M_{T_a\wedge s}^{\lambda}$  es una martingala acotada. Por lo tanto dado que  $M_{T_a\wedge s}^{\lambda} \rightarrow M_{T_a}^{\lambda}$ por el teorema de convergencia acotada $1=\esp{M_{T_a\wedge s}^\lambda}\rightarrow \esp{M_{T_a}^{\lambda}}$.
+Por lo tanto $\esp{e^{\lambda a-\lambda^2T_a/2} }=1$.
+
+Por lo tanto $\esp{e^{-\lambda^2T_a/2}}=e^{-\lambda a}$
+
+Haciendo el cambio de varibale $u=\lambda^2/2$ entonces $\esp{e^{-uT_a}}=e^{- a\sqrt{2u}}$.
+\end{proof}
+
 \item Opcional (para subir calificaci\'on en esta u otra tarea): 
 \begin{enumerate}
 \item Modifique el ejercicio para que aplique al proceso Poisson.
@@ -3128,14 +3168,68 @@ $$
 \begin{problema}\mbox{}
 \begin{enumerate}
 \item Al aplicar la desigualdad maximal de Doob sobre los racionales de orden $n$ y pasar al l\'imite conforme $n\to\infty$, pruebe que $\sup_{t\leq }\abs{B_t-B_1}$ es cuadrado integrable.
+\begin{proof}
+
+Definamos para cada $n\in \na$ a la martingala a tiempo discreto $\paren{B^n_k : k \in D_n}$ donde $D_n$ es la partici\'on di\'adica, es decir $D_n=\set{\frac{k}{2n}: k=0,1..., n}$. Ya que el valor absoluto una funci\'on convexa sabemos que $\paren{\abs{B^n_k} : k \in D_n}$ es una sub-martingala. Al aplicar la desigualdad maximal de Doob obtenemos que:
+\begin{align}
+\|\max_{k\in D_n}\abs{B^n_k} \|_2&\leq\frac{2}{2-1}\|\abs{B^n_1}\|_2\notag
+\intertext{De aqui obtenemos que:}
+\esp{(\max_{k\in D_n}\abs{B^n_k})^2} &\leq 4\esp{\abs{B^n_1}^2}=4(\var{B_1})=4\notag
+\end{align}
+Ahora como sabemos que $\max_{k\in D_n}\abs{B^n_k}$ es una sucesi\'on creciente de eventos que converge a $\sup_{t\in [0,1]}\abs{B_t}$ casi seguramente entonces por teorema de convergencia mon\'otona tenemos que:
+\begin{esn}
+\esp{\paren{\sup_{t\in [0,1]}\abs{B_t}}^2}=\lim_{n\rightarrow \infty}\esp{(\max_{k\in D_n}\abs{B _k})^2} \leq 4
+\end{esn}
+Por lo tanto $\sup_{t\leq }\abs{B_t-B_1}$ es cuadrado integrable.
+\end{proof}
 \item Pruebe que la sucesi\'on de variables aleatorias\begin{esn}
 \paren{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n},n\in\na}
 \end{esn}son independientes, id\'enticamente distribuidas y de media finita. (Utilice la propiedad de Markov.)
+\begin{proof}
+
+Sabemos que $B_{n+t}-B_n=B_t$ en distribuci\'on entonces $\abs{B_{n+t}-B_n}=\abs{B_t}$ en distribuci\'on. Como la funci\'on m\'aximo es una funci\'on medible y en nuestro caso es igual al supremo obtnenemos que $\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}=\sup_{t\in [0,1]}\abs{B_{t}}$ en distribuci\'on. Por lo tanto $\paren{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n},n\in\na}$ son identicamente distribuidas.
+
+Utilizando el inciso anterior y el hecho que $\paren{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n},n\in\na}$ son identicamente distribuidas tenemos que:
+\begin{esn}
+\esp{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}}=\esp{ \sup_{t\in [0,1]}\abs{B_{t}} }<\infty
+\end{esn}
+
+Por lo tanto $\paren{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n},n\in\na}$ tiene media finita.
+
+Ahora veamos que $\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}$, $n\in\na$ son independientes. Sabemos que $B_{n+t}-B_n, n \in \na$ son procesos estoc\'asticos independientes al ser $B$ un movimiento Browniano.Utilizando la propiedad de Markov sabemos que $B_{n+t}-B_n$ es independiente a $\sigma(B_s: s\leq n)$ para cada $n\in \na$. Tomando los supremos obtenemos que $\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}$, $n\in\na$ son variable aleatorias independientes.
+\end{proof}
 \item Al utilizar Borel-Cantelli, pruebe que, para cualquier $C>0$ fija\begin{esn}
 \limsup_{n\to\infty}\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}/n\leq C\end{esn} casi seguramente.
+\begin{proof}
+
+
+
+\end{proof}
 \item Pruebe que $\paren{B_n/n,n\geq 1}$ converge casi seguramente a $0$ y deduzca que\begin{esn}
 \lim_{t\to\infty }B_t/t=0.
 \end{esn}
+\begin{proof}
+Notando que $B_n=B_n-B_{n-1}+B_{n-1}-B_{n-2}+\ldots+B_2-B_1+B_1-B_0$ y tambi\'en que $B_k-B_{k-1}$ se distribuye $N(0,1)$, utilizando la ley fuerte de los grandes n\'umeros obtenemos que $\lim_{n \to \infty }\frac{B_n}{n}=\lim_{n \to \infty }\frac{\sum_{k=1}^{n}B_k-B_{k-1}}{n}=0$.
+
+Para todo $t\in\re^+$ podemos encontrar $n\in\na$ y $s\in [0,1]$ tal que $t=n+s$. Entonces:
+\begin{align}
+\frac{\abs{B_t}}{t}&=\frac{\abs{B_n+s}}{n+s}\notag \\
+& \leq \frac{\abs{B_{n+s}}}{n}\notag \\
+&=\frac{\abs{B_{n+s}-B_n+B_n}}{n}\notag \\
+&\leq \frac{\abs{B_{n+s}-B_n}}{n}+\frac{\abs{B_n}}{n}\notag \\
+&\leq \frac{\sup_{s \in[0,1]}{\abs{B_{n+s}-B_n}}}{n}+\frac{\abs{B_n}}{n} \notag
+\end{align}
+
+Tomando $\limsup$ y utilizando el inciso anterior:
+\begin{align}
+\limsup_{t\to\infty }\frac{\abs{B_t}}{t} &\leq \limsup_{n \to \infty}\paren{ \frac{\sup_{s \in[0,1]}{\abs{B_{n+s}-B_n}}}{n}+\frac{\abs{B_n}}{n}} \notag\\
+&=\limsup_{n \to \infty}\paren{ \frac{\sup_{s \in[0,1]}{\abs{B_{n+s}-B_n}}}{n}}+\limsup_{n \to \infty}{\frac{\abs{B_n}}{n}} \notag\\
+&=\limsup_{n \to \infty}\paren{ \frac{\sup_{s \in[0,1]}{\abs{B_{n+s}-B_n}}}{n}} < C \notag
+\end{align}
+Por lo tanto para toda $C > 0$ $0\leq\limsup_{t\to\infty }\frac{\abs{B_t}}{t}\leq C $.
+
+Por lo tanto $\lim_{t\to\infty }\frac{\abs{B_t}}{t} =0$.
+\end{proof}
 \end{enumerate}
 \end{problema}
 %
