@@ -2934,7 +2934,7 @@ Por lo tanto $M^\lambda_t$ es integrable.
 \espc{M^\lambda_t}{\F_s}&=\espc{e^{\lambda B_t-\lambda^2t/2}}{\F_s}\notag  \\ &=e^{-\lambda^2t/2}\espc{e^{\lambda B_t}}{\F_s} \notag \\
 &=e^{-\lambda^2t/2}\espc{e^{\lambda( B_t- B_s+B_s) }}{\F_s}\notag \\
 &=e^{-\lambda^2t/2+\lambda B_s}\esp{e^{\lambda( B_{t-s}) }}\notag \\
-&==e^{-\lambda^2t/2+\lambda B_s}e^{(t-s)\lambda^2/2}\notag \\
+&=e^{-\lambda^2t/2+\lambda B_s}e^{(t-s)\lambda^2/2}\notag \\
 &=e^{\lambda B_s-s\lambda^2/2}\notag \\
 &=M^\lambda_s \notag
 \end{align}
@@ -3126,7 +3126,7 @@ ab&=\esp{T_{a,b}}\notag \\
 Resolviendo el sistema de ecuaciones:
 \begin{align}
 \esp{T_{a,b}\indi{B_{T_{a,b}}=b}}&=\frac{b^3a-a^3b}{3(a+b)}+\frac{a^2b}{a+b}\notag \\
-\esp{T_{a,b}\indi{B_{T_{a,b}}=-a}}<6=ab-\frac{b^3a-a^3b}{3(a+b)}-\frac{a^2b}{a+b}\notag
+\esp{T_{a,b}\indi{B_{T_{a,b}}=-a}}&=ab-\frac{b^3a-a^3b}{3(a+b)}-\frac{a^2b}{a+b}\notag
 \end{align}
 
 Para la martingala $B_t^4-6B_t^2t+3t^2$ obtenemos que:
@@ -3202,8 +3202,19 @@ Ahora veamos que $\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}$, $n\in\na$ son independien
 \limsup_{n\to\infty}\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}/n\leq C\end{esn} casi seguramente.
 \begin{proof}
 
+Sea $A_n=\set{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}/n\leq C}$. Utilizando la desigualdad de Markov obtenemos que:
+\begin{align}
+\proba{A_n^c}&=\proba{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}/n> C}\notag \\
+&=\proba{\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}> nC}\notag \\
+&=\proba{\sup_{t\in [0,1]}\abs{B_{t}}> nC}\notag \\
+&\leq \frac{\esp{\paren{\sup_{t\in [0,1]} \abs{B_{t}}}}^2}{\paren{nc}^2}\notag
+\intertext{Entonces:}
+\sum_{n=1}^\infty \proba{A_n^c} &\leq \sum_{n=1}^\infty \frac{\esp{\paren{\sup_{t\in [0,1]} \abs{B_{t}}}}^2}{\paren{nc}^2}<\infty \notag
+\end{align}
 
+Por lo tanto por Borel-Cantelli obtenenemos que $\proba{\limsup A_n^c}=0$.
 
+Por lo tanto $\limsup_{n\to\infty}\sup_{t\in [0,1]}\abs{B_{n+t}-B_n}/n\leq C$ casi seguramente.
 \end{proof}
 \item Pruebe que $\paren{B_n/n,n\geq 1}$ converge casi seguramente a $0$ y deduzca que\begin{esn}
 \lim_{t\to\infty }B_t/t=0.
